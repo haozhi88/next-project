@@ -12,16 +12,15 @@ const useStyles = makeStyles({
   card: {
     width: 345,
     borderRadius:16,
-    boxShadow: "3px 3px 3px 3px #6699cc",
     marginTop: "10px",
-    border: "1px solid #6699cc",
+    border: "1px solid #1589FF", 
   },
   media: {
     height: 200,
   },
   contentText: {
     color:"#4c4c4c",
-    fontSize: "18px"
+    fontSize: "15px"
   }
 });
 
@@ -49,8 +48,8 @@ export default function MediaCard() {
       </CardActionArea>
       <CardActions style={{padding:"0px"}}>
       <ButtonGroup fullWidth aria-label="full width button group" >
-          <Button style={{ backgroundColor:"#90ee90" , color:"#393333", fontSize: "16px"}}>Accept</Button>
-          <Button style={{ backgroundColor:"#f08080", color:"#393333", fontSize: "16px"}}>Decline</Button>
+          <Button style={{ backgroundColor:"#f08080", color:"#721C24", fontSize: "16px"}}>Decline</Button>
+          <Button style={{ backgroundColor:"#90ee90" , color:"#155724", fontSize: "16px"}}>Accept</Button>
         </ButtonGroup>
       </CardActions>
     </Card>

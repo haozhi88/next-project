@@ -10,7 +10,6 @@ export default function SignUpInputForm({ userSignUp, setUserSignUp }) {
         <TextField
           id="username-input"
           label="Username"
-          style={{ margin: 8 }}
           placeholder="Username"
           fullWidth
           margin="normal"
@@ -33,7 +32,6 @@ export default function SignUpInputForm({ userSignUp, setUserSignUp }) {
         <TextField
           id="email-input"
           label="Email"
-          style={{ margin: 8 }}
           placeholder="Email"
           fullWidth
           margin="normal"
@@ -56,7 +54,6 @@ export default function SignUpInputForm({ userSignUp, setUserSignUp }) {
         <TextField
           id="password-input"
           label="Password"
-          style={{ margin: 8 }}
           placeholder="Password"
           fullWidth
           margin="normal"

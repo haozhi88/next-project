@@ -10,7 +10,6 @@ export default function SignInInputForm({ userSignIn, setUserSignIn }) {
         <TextField
           id="username-input"
           label="Username"
-          style={{ margin: 8 }}
           placeholder="Username"
           fullWidth
           margin="normal"
@@ -32,7 +31,6 @@ export default function SignInInputForm({ userSignIn, setUserSignIn }) {
         <TextField
           id="password-input"
           label="Password"
-          style={{ margin: 8 }}
           placeholder="Password"
           fullWidth
           margin="normal"

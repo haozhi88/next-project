@@ -23,8 +23,8 @@ export default function RatingPage({ parentRouteTo }) {
       </div>   
       <div style={ContainerStyles}>
         <ButtonGroup fullWidth aria-label="full width button group" style={{ position: "fixed", bottom: "0", height:"7vh"}}>
-          <Button onClick={() => parentRouteTo(route.close)} style={{ padding:"10px", backgroundColor:"#f08080" , color:"#393333", fontSize: "16px", borderRadius: 0}}>Cancel</Button>
-          <Button onClick={() => parentRouteTo(route.close)} style={{ padding:"10px",backgroundColor:"#5cb3ff", color:"#393333", fontSize: "16px", borderRadius: 0}}>Submit</Button>
+          <Button onClick={() => parentRouteTo(route.close)} style={{ backgroundColor:"#f08080", color:"#721C24", fontSize: "16px", borderRadius: 0}}>Cancel</Button>
+          <Button onClick={() => parentRouteTo(route.close)} style={{ backgroundColor:"#5CB3FF", color:"#004085", fontSize: "16px", borderRadius: 0}}>Submit</Button>
         </ButtonGroup>
       </div>
     </>

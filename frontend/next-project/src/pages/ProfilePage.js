@@ -61,11 +61,11 @@ export default function ProfilePage() {
               className={classes.bigAvatar}
             />
           </div>
-          <CardHeader style={{ textAlign: "center" }} title="Name" />
-          <CardContent>
+          <CardHeader style={{ textAlign: "center" }} title="Username" />
+          <div style={{   margin:"5px", borderRadius: 16, border: "1px solid #1589FF", color:"#393333",}}>
+          <CardContent style={{ color:"#393333"}}>
             <Typography
               variant="subtitle1"
-              color="textSecondary"
               component="p"
               align="center"
             >
@@ -76,7 +76,6 @@ export default function ProfilePage() {
             </Box>
             <Typography
               variant="subtitle1"
-              color="textSecondary"
               component="p"
               align="center"
             >
@@ -86,42 +85,39 @@ export default function ProfilePage() {
               <Rating name="read-only" value={teachRating} readOnly />
             </Box>
           </CardContent>
-          <CardContent>
+          <CardContent style={{ color:"#393333"}}>
             <Typography
               variant="subtitle1"
-              color="textPrimary"
               component="p"
               align="justify"
             >
-              <strong>Email</strong>
+              <strong>Email:</strong>
             </Typography>
             <Typography
               variant="body2"
-              color="textSecondary"
               component="p"
               align="justify"
             >
               Email
             </Typography>
           </CardContent>
-          <CardContent>
+          <CardContent style={{ color:"#393333"}}>
             <Typography
               variant="subtitle1"
-              color="textSecondary"
               component="p"
               align="justify"
             >
-              <strong>Skills</strong>
+              <strong>Skills:</strong>
             </Typography>
             <Typography
               variant="body2"
-              color="textPrimary"
               component="p"
               align="justify"
             >
               Skills
             </Typography>
           </CardContent>
+          </div>
         </Card>
       </div>
     </>

@@ -11,10 +11,10 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     height: "22vh",
     width: "98vw",
-    borderRadius: 8,
-    border: "1px solid #d3d3d3",
-    color:"#4c4c4c",
-    fontSize:"12px"
+    borderRadius: 16,
+    border: "1px solid #1589FF", 
+    color:"#393333",
+    fontSize:"10px"
   },
   cover: {
     width: 151

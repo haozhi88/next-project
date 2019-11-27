@@ -3,10 +3,7 @@ import axios from "axios";
 /* Functions */
 
 export const generateData = () => {
-  editprofile();
-  // getAllUsers();
-  // getUser(8);
-  // signUpUser();
+  getAllLessons();
 };
 
 export const signin = () => {
@@ -26,6 +23,18 @@ export const editprofile = () => {
   const email = "1@email.com";
   const password = "123";
   updateUser(id, name, email, password);
+};
+
+/* Token Config */
+
+export const getTokenConfig = () => {
+  const token = localStorage.getItem("userToken");
+  const config = {
+    headers: {
+      Authorization: "Bearer " + token
+    }
+  };
+  return config;
 };
 
 /* Session */
@@ -66,7 +75,7 @@ export const getUser = id => {
     .get(`http://127.0.0.1:5000/api/v1/users/${id}`)
     .then(result => {
       const user = result.data;
-      console.log(result);
+      console.log(user);
     })
     .catch(error => {
       console.log("ERROR: ", error);
@@ -74,12 +83,7 @@ export const getUser = id => {
 };
 
 export const updateUser = (id, username, useremail, userpassword) => {
-  const token = localStorage.getItem("userToken");
-  const config = {
-    headers: {
-      Authorization: "Bearer " + token
-    }
-  };
+  const config = getTokenConfig();
 
   axios
     .post(
@@ -108,6 +112,61 @@ export const signUpUser = () => {
     })
     .then(result => {
       console.log(result.data.data);
+    })
+    .catch(error => {
+      console.log("ERROR: ", error);
+    });
+};
+
+/* Lessons */
+export const getAllLessons = () => {
+  axios
+    .get(`http://127.0.0.1:5000/api/v1/lessons/`)
+    .then(result => {
+      const lessons = result.data;
+      console.log(lessons);
+    })
+    .catch(error => {
+      console.log("ERROR: ", error);
+    });
+};
+
+/* Skills */
+
+export const generateSkillList = () => {
+  createSkill("Computer Science");
+  createSkill("Cooking");
+  createSkill("Literature");
+  createSkill("Biology");
+  createSkill("Chemistry");
+  createSkill("Physics");
+  createSkill("Language");
+  createSkill("Mathematics");
+  createSkill("Information Technology");
+  createSkill("Travel");
+  createSkill("Geography");
+  createSkill("Health and Fitness");
+};
+
+export const createSkill = skill => {
+  axios
+    .post(`http://127.0.0.1:5000/api/v1/skills/create`, {
+      skill: skill
+    })
+    .then(result => {
+      console.log(result.data.data);
+    })
+    .catch(error => {
+      console.log("ERROR: ", error);
+    });
+};
+
+export const getAllSkills = () => {
+  axios
+    .get(`http://127.0.0.1:5000/api/v1/skills/`)
+    .then(result => {
+      const skills = result.data;
+      console.log(skills);
     })
     .catch(error => {
       console.log("ERROR: ", error);

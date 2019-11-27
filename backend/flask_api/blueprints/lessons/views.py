@@ -1,10 +1,10 @@
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_api.util.helpers import upload_file_to_s3
 from flask_api.util.response import *
 from models.user import User
 from models.lesson import Lesson
 from models.skill import Skill
-from helpers import upload_file_to_s3
 
 lessons_api_blueprint = Blueprint('lessons_api', __name__)
 
@@ -22,9 +22,7 @@ def create():
        return error_401("Unauthorized action")
 
     # Retrieve data from json
-
     data = request.get_json()
-    print(data)
 
     title = data['title'] 
     description = data['description'] 
@@ -34,22 +32,20 @@ def create():
         teach = False
     else:
         return error_401("Invalid teach input")
-    skill_tags = data['skill_tags'] # TODO: decide later how to handle #### Added bracket here too
+    skill = data['skill']
 
     # Check title and description and then create new lesson
     if title and description:
-
-        lesson = Lesson(title=title, description=description, teach=teach, owner=user)
-
-        print(lesson) 
+        lesson = Lesson(title=title, description=description, teach=teach, owner=user, skill=skill)
         if lesson.save():
             lesson = {
                 'id': lesson.id,
-                'title': title,
-                'description': description,
-                'rating': 0,
-                'teach': teach,
-                'owner': user.id
+                'title': lesson.title,
+                'description': lesson.description,
+                'rating': lesson.rating,
+                'teach': lesson.teach,
+                'owner': lesson.owner_id,
+                'skill': lesson.skill_id
             }
             return success_201("New lesson created successfully", lesson) 
         else:
@@ -58,15 +54,7 @@ def create():
         return error_401("Invalid title or description")
 
 @lessons_api_blueprint.route('/', methods=['GET'])
-@jwt_required
 def index():
-    # Check if user exists and signed in
-    jwt_user = get_jwt_identity()
-
-    user = User.get_or_none(User.name == jwt_user)
-    if not user:
-        return error_401("Unauthorized action")
-
     # Retrieve lessons from database
     lessons = [ 
         {
@@ -85,17 +73,8 @@ def index():
         return error_404("No lessons found")
 
 @lessons_api_blueprint.route('/<lesson_id>', methods=['GET'])
-@jwt_required
 def show(lesson_id):
-    # Check if user exists and signed in
-    jwt_user = get_jwt_identity()
-    user = User.get_or_none(User.name == jwt_user)
-
-    if not user:
-       return error_401("Unauthorized action")
-
     # Retrieve particular lesson from database
-    # lesson = Lesson.select().where(Lesson.id == lesson_id)
     lesson = Lesson.get_or_none(Lesson.id == lesson_id)
 
     if lesson:
@@ -105,7 +84,8 @@ def show(lesson_id):
             'description': lesson.description,
             'rating': lesson.rating,
             'teach': lesson.teach,
-            'owner': lesson.owner.id
+            'owner': lesson.owner_id,
+            'skill': lesson.skill_id
         }
         return success_200(data)
     else:
@@ -126,11 +106,10 @@ def update(lesson_id):
         return error_401("Unauthorized action")
 
     # Retrieve data from json
-
     data = request.get_json()
-
     title = data['title']
     description = data['description']
+
     # Check title and description and then create new lesson
     if title and description:
         lesson = Lesson.update(title=title, description=description).where(Lesson.id==lesson_id).execute()
@@ -142,7 +121,6 @@ def update(lesson_id):
         return error_401("Invalid title or description")
 
 @lessons_api_blueprint.route('/search_lessons', methods=['GET'])
-# @jwt_required
 def search_lessons():
 
     search_value = request.args['search_value']
@@ -150,7 +128,6 @@ def search_lessons():
 
     list_of_skills = []
     final_lessons_list = []
-    
     
     split_search_value = search_value.split(" ")
 
@@ -160,7 +137,6 @@ def search_lessons():
                 if (word in lesson.title) or (word in lesson.skill): #if a word from the split search string is part of the lesson title, append it to a list
                     final_lessons_list.append(lesson)
     
-    
     data = [
         {'lesson': {
             'id': lesson.id,
@@ -169,14 +145,11 @@ def search_lessons():
             'owner': lesson.owner_id
         }} for lesson in final_lessons_list
     ]
-
     return success_201('success testing', data)
-
     
 @lessons_api_blueprint.route('/add_image', methods=['POST'])
 @jwt_required
 def add_image():
-
     jwt_user = get_jwt_identity()
     user = User.get_or_none(User.name == jwt_user) 
 

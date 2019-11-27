@@ -6,11 +6,11 @@ import { Container, TextField } from "@material-ui/core";
 // const useStyles = makeStyles({
 //   textInput: {
 //     color: "red",
-//     borderColor: "green", 
+//     borderColor: "green",
 //   }
 // });
 
-export default function CreateLessonPage() {
+export default function CreateLessonPage({ lessonInput, setLessonInput }) {
   // const classes = useStyles();
 
   return (
@@ -20,7 +20,7 @@ export default function CreateLessonPage() {
         <TextField
           id="outlined-full-width"
           label="Title"
-          style={{  }}
+          style={{}}
           placeholder="Title"
           fullWidth
           margin="normal"
@@ -28,35 +28,42 @@ export default function CreateLessonPage() {
             shrink: true
           }}
           variant="outlined"
+          type="title"
+          value={lessonInput.title}
+          onChange={e =>
+            setLessonInput({
+              title: e.target.value,
+              description: lessonInput.description,
+              skill: lessonInput.skill
+            })
+          }
         />
 
         {/* Description */}
         <TextField
           id="outlined-full-width"
           label="Description"
-          style={{  }}
+          style={{}}
           placeholder="Description"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true  
-          }}
-          variant="outlined"
-        />
-
-        {/* Skills */}
-        <TextField
-          id="outlined-full-width"
-          label="Skills"
-          style={{  }}
-          placeholder="Skills"
           fullWidth
           margin="normal"
           InputLabelProps={{
             shrink: true
           }}
           variant="outlined"
+          type="title"
+          value={lessonInput.description}
+          onChange={e =>
+            setLessonInput({
+              title: lessonInput.title,
+              description: e.target.value,
+              skill: lessonInput.skill
+            })
+          }
         />
+
+        {/* Skills */}
+        {/* TODO: Let user select */}
       </Container>
     </>
   );

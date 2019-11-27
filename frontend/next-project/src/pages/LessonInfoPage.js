@@ -32,6 +32,9 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  cardContent:{
+    color:"#4c4c4c",
   }
 }));
 
@@ -39,7 +42,7 @@ export default function LessonInfoPage() {
   const classes = useStyles();
   return (
     <>
-      <Card>
+      <Card className={classes.card}>
         <CardMedia
           className={classes.media}
           image="https://miro.medium.com/max/1272/1*M9le42saJxWlOYyYvhKtPA.jpeg"
@@ -55,10 +58,9 @@ export default function LessonInfoPage() {
           title="Machine Learning"
           subheader="November 25, 2019"
         />
-        <CardContent>
+        <CardContent className={classes.cardContent}>
           <Typography
             variant="subtitle1"
-            color="textSecondary"
             component="p"
             align="justify"
           >
@@ -66,7 +68,6 @@ export default function LessonInfoPage() {
           </Typography>
           <Typography
             variant="body2"
-            color="textSecondary"
             component="p"
             align="justify"
           >
@@ -90,18 +91,16 @@ export default function LessonInfoPage() {
             human-level AI.
           </Typography>
         </CardContent>
-        <CardContent>
+        <CardContent className={classes.cardContent}>
           <Typography
             variant="subtitle1"
-            color="textSecondary"
             component="p"
             align="justify"
           >
-            <strong>Author</strong>
+            <strong>Author:</strong>
           </Typography>
           <Typography
             variant="body2"
-            color="textSecondary"
             component="p"
             align="justify"
           >
@@ -111,7 +110,6 @@ export default function LessonInfoPage() {
         <CardContent>
           <Typography
             variant="subtitle1"
-            color="textSecondary"
             component="p"
             align="justify"
           >
@@ -119,7 +117,6 @@ export default function LessonInfoPage() {
           </Typography>
           <Typography
             variant="body2"
-            color="textSecondary"
             component="p"
             align="justify"
           >

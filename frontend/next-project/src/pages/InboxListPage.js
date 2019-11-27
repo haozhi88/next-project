@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     height: "14vh",
     width: "96vw",
     borderRadius:16,
-    boxShadow: "5px 5px 5px 5px #6699cc",
+    boxShadow: "3px 3px 3px 3px #6699cc",
     marginTop: "10px",
     border: "1px solid #6699cc"
   },
@@ -48,7 +48,7 @@ export default function InboxListCard() {
           </div>
           <Divider orientation="vertical" />
           <div>
-            <CardContent align="left">
+            <CardContent style={{ color:"#393333" }} align="left">
               <Typography>Username</Typography>
               <Typography>Message: Hello World!</Typography>
             </CardContent>

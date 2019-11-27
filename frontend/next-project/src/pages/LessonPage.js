@@ -12,7 +12,8 @@ const ContainerStyles = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  width: "100%"
+  width: "100%",
+  paddingTop: "5px",
 };
 
 export default function LessonPage() {
@@ -29,11 +30,11 @@ export default function LessonPage() {
   return (
     <>
       <div style={ContainerStyles}>
-        <LessonInfoPage />
-        <ButtonGroup fullWidth aria-label="full width button group">
-          <Button onClick={() => routeTo(route.todo)}>Bookmark</Button>
-          <Button onClick={() => routeTo(route.todo)}>Chat</Button>
-          <Button onClick={() => routeTo(route.createEventPage)}>
+        <LessonInfoPage/>
+        <ButtonGroup fullWidth aria-label="full width button group" style={{ bottom:0 , height:"7vh"}}>
+          <Button style={{backgroundColor:"#ffd700", color:"#393333", fontSize: "14px", borderRadius: 0}} onClick={() => routeTo(route.todo)}>Bookmark</Button>
+          <Button style={{backgroundColor:"#5CB3FF", color:"#393333", fontSize: "14px", borderRadius: 0}} onClick={() => routeTo(route.todo)}>Chat</Button>
+          <Button style={{backgroundColor:"#90ee90", color:"#393333", fontSize: "14px", borderRadius: 0}} onClick={() => routeTo(route.createEventPage)}>
             Request
           </Button>
         </ButtonGroup>

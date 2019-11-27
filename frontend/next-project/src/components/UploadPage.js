@@ -29,8 +29,8 @@ const getColor = (props) => {
   border-radius: 2px;
   border-color: ${props => getColor(props)};
   border-style: dashed;
-  background-color: #fafafa;
-  color: #bdbdbd;
+  background-color: #a8a8a8;
+  color: white;
   outline: none;
   transition: border .24s ease-in-out;
 `;
@@ -113,7 +113,7 @@ const getColor = (props) => {
       
     ));
     return (
-      <div>
+      <div style={{ width:'90vw'}}>
           <Container>
               <section className="container">
               <div {...getRootProps({ className: "dropzone" })}>

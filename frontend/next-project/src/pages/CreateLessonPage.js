@@ -13,7 +13,8 @@ const ContainerStyles = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  width: "100%"
+  width: "100vw",
+  paddingTop: "10px"
 };
 
 export default function CreateLessonPage({ parentRouteTo, teach }) {
@@ -37,9 +38,9 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
          setUploadFile={setUploadFile}
         />
         <LessonInputForm />
-        <ButtonGroup fullWidth aria-label="full width button group">
-          <Button onClick={() => parentRouteTo(route.close)}>Cancel</Button>
-          <Button onClick={() => routeTo(route.todo)}>Create</Button>
+        <ButtonGroup fullWidth aria-label="full width button group" style={{position:"fixed", bottom:0 , height:"7vh"}}>
+          <Button style={{backgroundColor:"#f08080", color:"#393333", fontSize: "16px", borderRadius: 0}} onClick={() => parentRouteTo(route.close)}>Cancel</Button>
+          <Button style={{backgroundColor:"#5CB3FF", color:"#393333", fontSize: "16px", borderRadius: 0}} onClick={() => parentRouteTo(route.close)} onClick={() => routeTo(route.todo)}>Create</Button>
         </ButtonGroup>
       </div>
       <DialogPage

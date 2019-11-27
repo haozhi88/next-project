@@ -1,8 +1,18 @@
 /* Import package components */
 import React from "react";
 import { Container, TextField } from "@material-ui/core";
+// import { makeStyles } from '@material-ui/core/styles';
+
+// const useStyles = makeStyles({
+//   textInput: {
+//     color: "red",
+//     borderColor: "green", 
+//   }
+// });
 
 export default function CreateLessonPage() {
+  // const classes = useStyles();
+
   return (
     <>
       <Container maxWidth="sm">
@@ -10,7 +20,7 @@ export default function CreateLessonPage() {
         <TextField
           id="outlined-full-width"
           label="Title"
-          style={{ margin: 8 }}
+          style={{  }}
           placeholder="Title"
           fullWidth
           margin="normal"
@@ -24,12 +34,12 @@ export default function CreateLessonPage() {
         <TextField
           id="outlined-full-width"
           label="Description"
-          style={{ margin: 8 }}
+          style={{  }}
           placeholder="Description"
           fullWidth
           margin="normal"
           InputLabelProps={{
-            shrink: true
+            shrink: true  
           }}
           variant="outlined"
         />
@@ -38,7 +48,7 @@ export default function CreateLessonPage() {
         <TextField
           id="outlined-full-width"
           label="Skills"
-          style={{ margin: 8 }}
+          style={{  }}
           placeholder="Skills"
           fullWidth
           margin="normal"

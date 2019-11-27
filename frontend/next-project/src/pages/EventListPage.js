@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   card: {
     width: 345,
     borderRadius:16,
-    boxShadow: "5px 5px 5px 5px #6699cc",
+    boxShadow: "3px 3px 3px 3px #6699cc",
     marginTop: "10px",
     border: "1px solid #6699cc",
   },

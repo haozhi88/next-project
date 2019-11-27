@@ -76,7 +76,9 @@ export default function TopNav() {
                   <ListItemIcon>
                     <AccountCircleIcon style={{ fontSize: "88px" , color: "#1589FF" }}/>
                   </ListItemIcon>
-                  <ListItemText  secondary="Login/Signup" />
+                  <ListItemText style={{ color:"#393333", fontSize: "14px"}} >
+                  Username
+                </ListItemText >
               </ListItem>
               </ListSubheader>
           }>
@@ -85,49 +87,65 @@ export default function TopNav() {
                 <ListItemIcon>
                   <ExitToAppIcon style={iconColor}/>
                 </ListItemIcon>
-                <ListItemText secondary="Login/Signup" />
+                <ListItemText style={{ color:"#393333", fontSize: "14px"}} >
+                  Sign In / Sign Out
+                </ListItemText >
               </ListItem>
               <ListItem button onClick={() => routeTo(route.learnListPage)}>
                 <ListItemIcon>
                   <MenuBookIcon style={iconColor}/>
                 </ListItemIcon>
-                <ListItemText secondary="Lesson" />
+                <ListItemText style={{ color:"#393333", fontSize: "14px"}} >
+                  Lesson
+                </ListItemText >
               </ListItem>
               <ListItem button onClick={() => routeTo(route.teachListPage)}>
                 <ListItemIcon>
                   <PeopleIcon style={iconColor}/>
                 </ListItemIcon>
-                <ListItemText secondary="Teach" />
+                <ListItemText style={{ color:"#393333", fontSize: "14px"}} >
+                  Teach
+                </ListItemText >
               </ListItem>
               <ListItem button onClick={() => routeTo(route.eventListPage)}>
                 <ListItemIcon>
                   <EventIcon style={iconColor} />
                 </ListItemIcon>
-                <ListItemText secondary="Event" />
+                <ListItemText style={{ color:"#393333", fontSize: "14px"}} >
+                  Events
+                </ListItemText >
               </ListItem>
               <ListItem button onClick={() => routeTo(route.bookmarkListPage)}>
                 <ListItemIcon>
                   <BookmarkIcon style={iconColor}/>
                 </ListItemIcon>
-                <ListItemText secondary="Bookmark List" />
+                <ListItemText style={{ color:"#393333", fontSize: "14px"}} >
+                  Bookmark List
+                </ListItemText >
               </ListItem>
               <ListItem button onClick={() => routeTo(route.inboxListPage)}>
                 <ListItemIcon>
                   <InboxIcon style={iconColor}/>
                 </ListItemIcon>
-                <ListItemText secondary="Inbox" />
+                <ListItemText style={{ color:"#393333", fontSize: "14px"}} >
+                  Inbox
+                </ListItemText >
               </ListItem>
               <ListItem button>
                 <ListItemIcon>
                   <SettingsIcon style={iconColor}/>
                 </ListItemIcon>
-                <ListItemText secondary="Settings" />
+                <ListItemText style={{ color:"#393333", fontSize: "14px"}} >
+                  Settings
+                </ListItemText >
               </ListItem>
               <ListItem button>
                 <ListItemIcon>
                   <InfoIcon style={iconColor}/>
                 </ListItemIcon>
-                <ListItemText secondary="About us" />
+                <ListItemText style={{ color:"#393333", fontSize: "14px"}} >
+                  About Us
+                </ListItemText >
               </ListItem>         
             </List>
           </Grid>

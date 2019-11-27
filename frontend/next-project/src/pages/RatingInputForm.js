@@ -1,5 +1,5 @@
 /* Import package components */
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
   FormControl,
@@ -12,8 +12,8 @@ import {
   Typography
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import purple from "@material-ui/core/colors/purple";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 
 const useStyles = makeStyles(theme => ({
@@ -25,35 +25,34 @@ const useStyles = makeStyles(theme => ({
 const theme = createMuiTheme({
   palette: {
     primary: { main: purple[500] }, // Purple and green play nicely together.
-    secondary: { main: '#1589FF' }, // This is just green.A700 as hex.
-  },
+    secondary: { main: "#1589FF" } // This is just green.A700 as hex.
+  }
 });
 
-export default function RatingInputForm() {
+export default function RatingInputForm({ userReview, setUserReview }) {
   const classes = useStyles();
-
-  // For rating
-  const [rating, setRating] = useState(2);
-
-  // For recommend
-  const [recommend, setRecommend] = React.useState("true");
-  const handleChange = event => {
-    setRecommend(event.target.value);
-  };
-
   return (
     <>
       <MuiThemeProvider theme={theme}>
         <Container maxWidth="sm">
           {/* Rating */}
-          <div style={{position: "relative", bottom:"70px"}}>
-          <Typography component="legend" at>Please rate and write to us below, Thank you!</Typography>
+          <div style={{ position: "relative", bottom: "70px" }}>
+            <Typography>
+              Please rate and write to us below, Thank you!
+            </Typography>
             <Rating
               name="customized-empty"
-              value={rating}
+              value={userReview.rating}
               precision={0.5}
               emptyIcon={<StarBorderIcon fontSize="inherit" />}
-              style={{fontSize:"50px"}}
+              style={{ fontSize: "50px" }}
+              onChange={(e, newValue) =>
+                setUserReview({
+                  rating: newValue,
+                  recommend: userReview.recommend,
+                  comment: userReview.comment
+                })
+              }
             />
           </div>
           {/* Feedback */}
@@ -68,6 +67,15 @@ export default function RatingInputForm() {
               shrink: true
             }}
             variant="outlined"
+            type="text"
+            value={userReview.comment}
+            onChange={e =>
+              setUserReview({
+                rating: userReview.rating,
+                recommend: userReview.recommend,
+                comment: e.target.value
+              })
+            }
           />
 
           {/* Recommend */}
@@ -78,12 +86,18 @@ export default function RatingInputForm() {
             <RadioGroup
               aria-label="Recommend"
               name="recommend"
-              value={recommend}
-              onChange={handleChange}
+              value={userReview.recommend}
+              onChange={e => {
+                setUserReview({
+                  rating: userReview.rating,
+                  recommend: e.target.value,
+                  comment: userReview.comment
+                });
+              }}
               color="secondary"
             >
-              <FormControlLabel value="true" control={<Radio />} label="Yes" />
-              <FormControlLabel value="false" control={<Radio />} label="No" />
+              <FormControlLabel value="True" control={<Radio />} label="Yes" />
+              <FormControlLabel value="False" control={<Radio />} label="No" />
             </RadioGroup>
           </FormControl>
         </Container>

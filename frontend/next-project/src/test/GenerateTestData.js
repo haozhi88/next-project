@@ -2,14 +2,13 @@ import axios from "axios";
 import { getApiRoute } from "../global";
 
 /* Functions */
-
 export const generateData = () => {
-  getAllUsers();
+  getAllEvents();
+  // createEvent(4, 13, ); // confirm datetime format with Pi Han
 };
 
 /* Token Config */
-
-export const getTokenConfig = () => {
+const getTokenConfig = () => {
   const token = localStorage.getItem("userToken");
   const config = {
     headers: {
@@ -20,7 +19,6 @@ export const getTokenConfig = () => {
 };
 
 /* Session */
-
 export const signInUser = (username, userpassword) => {
   axios
     .post(`${getApiRoute("sessions/signin")}`, {
@@ -39,7 +37,6 @@ export const signInUser = (username, userpassword) => {
 };
 
 /* User */
-
 export const getAllUsers = () => {
   axios
     .get(`${getApiRoute("users/")}`)
@@ -65,8 +62,6 @@ export const getUser = id => {
 };
 
 export const updateUser = (id, username, useremail, userpassword) => {
-  const config = getTokenConfig();
-
   axios
     .post(
       `${getApiRoute("users/")}${id}`,
@@ -75,7 +70,7 @@ export const updateUser = (id, username, useremail, userpassword) => {
         email: useremail,
         password: userpassword
       },
-      config
+      getTokenConfig()
     )
     .then(result => {
       console.log(result.data.data);
@@ -114,7 +109,6 @@ export const getAllLessons = () => {
 };
 
 /* Skills */
-
 export const generateSkillList = () => {
   createSkill("Computer Science");
   createSkill("Cooking");
@@ -149,6 +143,34 @@ export const getAllSkills = () => {
     .then(result => {
       const skills = result.data;
       console.log(skills);
+    })
+    .catch(error => {
+      console.log("ERROR: ", error);
+    });
+};
+
+/* Lessons */
+export const getAllEvents = () => {
+  axios
+    .get(`${getApiRoute("events/")}`, getTokenConfig())
+    .then(result => {
+      const events = result.data;
+      console.log(events);
+    })
+    .catch(error => {
+      console.log("ERROR: ", error);
+    });
+};
+
+export const createEvent = (lesson_id, user_id, start_datetime) => {
+  axios
+    .post(`${getApiRoute("events/create/")}`, {
+      lesson_id: lesson_id,
+      user_id: user_id,
+      start_datetime: start_datetime
+    })
+    .then(result => {
+      console.log(result.data.data);
     })
     .catch(error => {
       console.log("ERROR: ", error);

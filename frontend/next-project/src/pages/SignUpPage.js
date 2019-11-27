@@ -32,11 +32,7 @@ function SignUpPage({ parentRouteTo }) {
   const handleSignUp = () => {
     // console.log(userSignUp);
     axios
-      .post(`${getApiRoute("users/signup")}`, {
-        name: userSignUp.name,
-        email: userSignUp.email,
-        password: userSignUp.password
-      })
+      .post(`${getApiRoute("users/signup")}`, userSignUp)
       .then(result => {
         const id = result.data.data.id;
         const name = result.data.data.name;
@@ -57,15 +53,41 @@ function SignUpPage({ parentRouteTo }) {
   return (
     <>
       <div style={ContainerStyles}>
-      <h1 style={{ color:"#393333"}}>Sign Up an account</h1>
+        <h1 style={{ color: "#393333" }}>Sign Up an account</h1>
         <SignUpInputForm
           userSignUp={userSignUp}
           setUserSignUp={setUserSignUp}
         />
-        <a href="#" onClick={() => parentRouteTo(route.signinPage)} >Have an account? Sign In now!</a>
-        <ButtonGroup fullWidth aria-label="full width button group" style={{ position:"absolute", bottom:0 , height:"7vh"}}>
-          <Button style={{backgroundColor:"#f08080", color:"#721C24", fontSize: "16px", borderRadius: 0}} onClick={() => parentRouteTo(route.close)}>Cancel</Button>
-          <Button style={{backgroundColor:"#5CB3FF", color:"#004085", fontSize: "16px", borderRadius: 0}} onClick={handleSignUp}>Sign Up</Button>
+        <a href="#" onClick={() => parentRouteTo(route.signinPage)}>
+          Have an account? Sign In now!
+        </a>
+        <ButtonGroup
+          fullWidth
+          aria-label="full width button group"
+          style={{ position: "absolute", bottom: 0, height: "7vh" }}
+        >
+          <Button
+            style={{
+              backgroundColor: "#f08080",
+              color: "#721C24",
+              fontSize: "16px",
+              borderRadius: 0
+            }}
+            onClick={() => parentRouteTo(route.close)}
+          >
+            Cancel
+          </Button>
+          <Button
+            style={{
+              backgroundColor: "#5CB3FF",
+              color: "#004085",
+              fontSize: "16px",
+              borderRadius: 0
+            }}
+            onClick={handleSignUp}
+          >
+            Sign Up
+          </Button>
         </ButtonGroup>
       </div>
     </>

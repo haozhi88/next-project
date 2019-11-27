@@ -17,7 +17,7 @@ export default function SignInInputForm({ userSignIn, setUserSignIn }) {
             shrink: true
           }}
           variant="outlined"
-          type="name"
+          type="text"
           value={userSignIn.name}
           onChange={e =>
             setUserSignIn({

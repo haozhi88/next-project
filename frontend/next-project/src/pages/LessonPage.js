@@ -31,10 +31,10 @@ export default function LessonPage() {
     <>
       <div style={ContainerStyles}>
         <LessonInfoPage/>
-        <ButtonGroup fullWidth aria-label="full width button group" style={{ bottom:0 , height:"7vh"}}>
+        <ButtonGroup fullWidth aria-label="full width button group" style={{ position:"relative ",bottom:0 , height:"7vh"}}>
           <Button style={{backgroundColor:"#ffd700", color:"#393333", fontSize: "14px", borderRadius: 0}} onClick={() => routeTo(route.todo)}>Bookmark</Button>
-          <Button style={{backgroundColor:"#5CB3FF", color:"#393333", fontSize: "14px", borderRadius: 0}} onClick={() => routeTo(route.todo)}>Chat</Button>
-          <Button style={{backgroundColor:"#90ee90", color:"#393333", fontSize: "14px", borderRadius: 0}} onClick={() => routeTo(route.createEventPage)}>
+          <Button style={{backgroundColor:"#5CB3FF", color:"#004085", fontSize: "14px", borderRadius: 0}} onClick={() => routeTo(route.todo)}>Chat</Button>
+          <Button style={{backgroundColor:"#90ee90", color:"#155724", fontSize: "14px", borderRadius: 0}} onClick={() => routeTo(route.createEventPage)}>
             Request
           </Button>
         </ButtonGroup>

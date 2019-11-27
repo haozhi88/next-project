@@ -14,7 +14,10 @@ import { red } from "@material-ui/core/colors";
 /* CSS Styles */
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345
+    maxWidth: 345,
+    borderRadius: 16,
+    border: "1px solid #1589FF", 
+    color:"#393333",
   },
   media: {
     height: 0,

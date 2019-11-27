@@ -18,9 +18,8 @@ const useStyles = makeStyles(theme => ({
     height: "14vh",
     width: "96vw",
     borderRadius:16,
-    boxShadow: "3px 3px 3px 3px #6699cc",
     marginTop: "10px",
-    border: "1px solid #6699cc"
+    border: "1px solid #1589FF", 
   },
   cover: {
     width: 151
@@ -44,11 +43,11 @@ export default function InboxListCard() {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card className={classes.card}>
           <div style={{ padding: "5px" }}>
-            <AccountCircleIcon style={{ color: "#5CB3FF", fontSize: "96px" }} />
+            <AccountCircleIcon style={{ color: "#1589FF", fontSize: "94px" }} />
           </div>
           <Divider orientation="vertical" />
           <div>
-            <CardContent style={{ color:"#393333" }} align="left">
+            <CardContent style={{ color:"#393333", fontSize: "10px" }} align="left">
               <Typography>Username</Typography>
               <Typography>Message: Hello World!</Typography>
             </CardContent>

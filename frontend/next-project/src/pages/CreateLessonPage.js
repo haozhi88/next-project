@@ -77,12 +77,12 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
         <ButtonGroup
           fullWidth
           aria-label="full width button group"
-          style={{ position: "fixed", bottom: 0, height: "7vh" }}
+          style={{ position: "absolute", bottom: 0, height: "7vh" }}
         >
           <Button
             style={{
               backgroundColor: "#f08080",
-              color: "#393333",
+              color: "#721C24",
               fontSize: "16px",
               borderRadius: 0
             }}
@@ -93,7 +93,7 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
           <Button
             style={{
               backgroundColor: "#5CB3FF",
-              color: "#393333",
+              color: "#004085",
               fontSize: "16px",
               borderRadius: 0
             }}

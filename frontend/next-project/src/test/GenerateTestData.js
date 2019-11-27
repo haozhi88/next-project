@@ -1,28 +1,10 @@
 import axios from "axios";
+import { getApiRoute } from "../global";
 
 /* Functions */
 
 export const generateData = () => {
-  getAllLessons();
-};
-
-export const signin = () => {
-  const name = "111";
-  const password = "123";
-  signInUser(name, password);
-};
-
-export const signout = () => {
-  localStorage.removeItem("userToken");
-  localStorage.removeItem("userData");
-};
-
-export const editprofile = () => {
-  const id = "8";
-  const name = "1";
-  const email = "1@email.com";
-  const password = "123";
-  updateUser(id, name, email, password);
+  getUser(8);
 };
 
 /* Token Config */
@@ -41,7 +23,7 @@ export const getTokenConfig = () => {
 
 export const signInUser = (username, userpassword) => {
   axios
-    .post(`http://127.0.0.1:5000/api/v1/sessions/signin`, {
+    .post(`${getApiRoute("sessions/")}signin`, {
       name: username,
       password: userpassword
     })
@@ -60,7 +42,7 @@ export const signInUser = (username, userpassword) => {
 
 export const getAllUsers = () => {
   axios
-    .get(`http://127.0.0.1:5000/api/v1/users/`)
+    .get(`${getApiRoute("users/")}`)
     .then(result => {
       const users = result.data;
       console.log(users);
@@ -72,7 +54,7 @@ export const getAllUsers = () => {
 
 export const getUser = id => {
   axios
-    .get(`http://127.0.0.1:5000/api/v1/users/${id}`)
+    .get(`${getApiRoute("users/")}${id}`)
     .then(result => {
       const user = result.data;
       console.log(user);
@@ -87,7 +69,7 @@ export const updateUser = (id, username, useremail, userpassword) => {
 
   axios
     .post(
-      `http://127.0.0.1:5000/api/v1/users/${id}`,
+      `${getApiRoute("users/")}${id}`,
       {
         name: username,
         email: useremail,
@@ -105,7 +87,7 @@ export const updateUser = (id, username, useremail, userpassword) => {
 
 export const signUpUser = () => {
   axios
-    .post(`http://127.0.0.1:5000/api/v1/users/signup`, {
+    .post(`${getApiRoute("users/")}signup`, {
       name: "5",
       email: "5@email.com",
       password: "123"
@@ -121,7 +103,7 @@ export const signUpUser = () => {
 /* Lessons */
 export const getAllLessons = () => {
   axios
-    .get(`http://127.0.0.1:5000/api/v1/lessons/`)
+    .get(`${getApiRoute("lessons/")}`)
     .then(result => {
       const lessons = result.data;
       console.log(lessons);
@@ -150,7 +132,7 @@ export const generateSkillList = () => {
 
 export const createSkill = skill => {
   axios
-    .post(`http://127.0.0.1:5000/api/v1/skills/create`, {
+    .post(`${getApiRoute("skills/create/")}`, {
       skill: skill
     })
     .then(result => {
@@ -163,7 +145,7 @@ export const createSkill = skill => {
 
 export const getAllSkills = () => {
   axios
-    .get(`http://127.0.0.1:5000/api/v1/skills/`)
+    .get(`${getApiRoute("skills/")}`)
     .then(result => {
       const skills = result.data;
       console.log(skills);

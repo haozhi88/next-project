@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Button, ButtonGroup } from "@material-ui/core";
-import { route } from "../global";
+import { route, getApiRoute } from "../global";
 
 /* Import app components */
 import DialogPage from "../components/DialogPage";
@@ -37,16 +37,21 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
   };
   const handleCreate = () => {
     console.log(lessonInput);
+    // Create formdata of image
+    let formData = new FormData();
+    formData.append("image", userFile);
+
+    // Prepare token
     const token = localStorage.getItem("userToken");
     const config = {
       headers: {
         Authorization: "Bearer " + token
       }
     };
-    console.log(config);
     axios
       .post(
-        `http://127.0.0.1:5000/api/v1/lessons/create`,
+        `${getApiRoute("lessons/create")}`,
+        // formData,
         {
           title: lessonInput.title,
           description: lessonInput.description,

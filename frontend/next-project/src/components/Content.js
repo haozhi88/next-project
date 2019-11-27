@@ -3,14 +3,15 @@ import React, { useState } from "react";
 import { Grid, Button } from "@material-ui/core";
 import { route } from "../global";
 import useStores from "../hooks/useStores";
+import { observer } from "mobx-react";
 
 /* Import app components */
 import DialogPage from "../components/DialogPage";
-import { generateData, signin, signout } from "../test/GenerateTestData";
+import { generateData, signout } from "../test/GenerateTestData";
 
-export default function Content() {
+function Content() {
   const {
-    userStore: { currentUser }
+    userStore: { currentUser, logout }
   } = useStores();
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -80,6 +81,18 @@ export default function Content() {
         <Button
           variant="outlined"
           color="primary"
+          onClick={() => {
+            localStorage.removeItem("userToken");
+            localStorage.removeItem("userData");
+            console.log("sign out successfully");
+            logout();
+          }}
+        >
+          Sign Out
+        </Button>
+        <Button
+          variant="outlined"
+          color="primary"
           onClick={() => routeTo(route.profilePage)}
         >
           Profile
@@ -122,9 +135,6 @@ export default function Content() {
         <Button variant="outlined" color="primary" onClick={generateData}>
           Test AXIOS
         </Button>
-        <Button variant="outlined" color="primary" onClick={signout}>
-          Sign Out
-        </Button>
       </Grid>
       <DialogPage
         routeTo={routeTo}
@@ -134,3 +144,5 @@ export default function Content() {
     </>
   );
 }
+
+export default observer(Content);

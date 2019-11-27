@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Button, ButtonGroup } from "@material-ui/core";
-import { route } from "../global";
+import { route, getApiRoute } from "../global";
 import useStores from "../hooks/useStores";
 import { observer } from "mobx-react";
 
@@ -31,7 +31,7 @@ function SignUpPage({ parentRouteTo }) {
   const handleSignUp = () => {
     // console.log(userSignUp);
     axios
-      .post(`http://127.0.0.1:5000/api/v1/users/signup`, {
+      .post(`${getApiRoute("users/signup")}`, {
         name: userSignUp.name,
         email: userSignUp.email,
         password: userSignUp.password

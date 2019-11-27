@@ -3,7 +3,7 @@ from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from flask_api.util.response import *
 from models.user import User
-from models.request import Request
+from models.event import Event
 
 import datetime
 
@@ -26,7 +26,7 @@ def create():
         user_id = event_info['user_id']
         start_datetime = event_info['start_datetime']
 
-        query = Request(lesson = lesson_id , user= user_id, start_datetime = start_datetime, status='Pending')
+        query = Event(lesson = lesson_id , user= user_id, start_datetime = start_datetime, status='Pending')
 
         if query.save():
             data = {
@@ -59,7 +59,7 @@ def index():
             'start_datetime': event.start_datetime,
             'rating': event.rating,
             'comment': event.comment
-        } for event in Request.select().where(Request.user_id == user.id)
+        } for event in Event.select().where(Event.user_id == user.id)
     ]
 
     return success_201("List of all current user's events", data)
@@ -71,7 +71,7 @@ def show(event_id):
     jwt_identity = get_jwt_identity()
     user = User.get_or_none(User.name == jwt_identity)
     if user: 
-        event = Request.get_or_none(Request.id == event_id)
+        event = Event.get_or_none(Event.id == event_id)
         
         data ={
             'id': event.id,
@@ -101,8 +101,8 @@ def update_datetime(event_id):
     if user:
         user_update = request.get_json()
         new_datetime = user_update['start_datetime'] 
-        event = Request.get_or_none(event_id == Request.id)
-        query = Request.update(start_datetime = new_datetime).where(Request.id == event_id)
+        event = Event.get_or_none(event_id == Event.id)
+        query = Event.update(start_datetime = new_datetime).where(Event.id == event_id)
         if query.execute():
             data = {
                 'id': event.id,
@@ -133,9 +133,9 @@ def update_status(event_id):
 
         user_update = request.get_json()
         new_status = user_update['status'] 
-        event = Request.get_or_none(event_id == Request.id)
+        event = Event.get_or_none(event_id == Event.id)
 
-        query = Request.update(status = new_status).where(Request.id == event_id)
+        query = Event.update(status = new_status).where(Event.id == event_id)
         if query.execute():
             data = {
                 'id': event.id,
@@ -163,9 +163,13 @@ def update_review(event_id):
     if user:
         user_update = request.get_json()
         new_rating = user_update['rating']
+        if (str(user_update['recommend']) == "True"):
+            new_recommend = True
+        elif (str(user_update['recommend']) == "False"):
+            new_recommend = False        
         new_comment = user_update['comment']
-        event = Request.get_or_none(event_id == Request.id)
-        query = Request.update(rating = new_rating, comment=new_comment).where(Request.id == event_id)
+        event = Event.get_or_none(event_id == Event.id)
+        query = Event.update(rating = new_rating, comment=new_comment).where(Event.id == event_id)
         if query.execute():
             data = {
                 'id': event.id,
@@ -174,7 +178,8 @@ def update_review(event_id):
                 'status': event.status,
                 'start_datetime': event.start_datetime,
                 'rating': event.rating,
-                'comment': event.comment
+                'comment': event.comment,
+                'comment': event.recommend
             }
             return success_201(f'Rating and comment of event {event.id} updated succesfully', data)
         else:

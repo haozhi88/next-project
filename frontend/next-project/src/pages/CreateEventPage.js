@@ -24,6 +24,15 @@ export default function CreateEventPage({ parentRouteTo }) {
     setRouteOption(option);
   };
 
+  /* CSS Styles */
+  const ContainerStyles = {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "100%"
+  };
+
   /* Date Picker */
   const [selectedDate, setSelectedDate] = useState(new Date());
   const handleDateChange = date => {
@@ -33,32 +42,37 @@ export default function CreateEventPage({ parentRouteTo }) {
   return (
     <>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <KeyboardDatePicker
-          margin="normal"
-          id="date-picker-dialog"
-          label="Select Date"
-          format="MM/dd/yyyy"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            "aria-label": "change date"
-          }}
-        />
-        <KeyboardTimePicker
-          margin="normal"
-          id="time-picker"
-          label="Select Time"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            "aria-label": "change time"
-          }}
-        />
+        <div style={{position: "relative", top: "150px"}}>
+          <KeyboardDatePicker
+            margin="normal"
+            id="date-picker-dialog"
+            label="Select Date"
+            format="MM/dd/yyyy"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change date"
+            }}
+          />
+          <KeyboardTimePicker
+            margin="normal"
+            id="time-picker"
+            label="Select Time"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change time"
+            }}
+          />
+        </div>
+  
         <br />
-        <ButtonGroup fullWidth aria-label="full width button group">
-          <Button onClick={() => parentRouteTo(route.close)}>Cancel</Button>
-          <Button onClick={() => routeTo(route.todo)}>Submit</Button>
-        </ButtonGroup>
+        <div style={ContainerStyles}>
+          <ButtonGroup fullWidth aria-label="full width button group" style={{ position: "fixed", bottom: "0", height:"7vh"}}>
+            <Button onClick={() => parentRouteTo(route.close)}  style={{ padding:"10px", backgroundColor:"#f08080" , color:"#393333", fontSize: "16px", borderRadius: 0}}>Cancel</Button>
+            <Button onClick={() => routeTo(route.todo)} style={{ padding:"10px",backgroundColor:"#5cb3ff", color:"#393333", fontSize: "16px", borderRadius: 0}}>Submit</Button>
+          </ButtonGroup>
+        </div>
       </MuiPickersUtilsProvider>
       <DialogPage
         routeTo={routeTo}

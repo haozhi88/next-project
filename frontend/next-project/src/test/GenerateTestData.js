@@ -4,7 +4,7 @@ import { getApiRoute } from "../global";
 /* Functions */
 
 export const generateData = () => {
-  getUser(8);
+  getAllUsers();
 };
 
 /* Token Config */
@@ -23,7 +23,7 @@ export const getTokenConfig = () => {
 
 export const signInUser = (username, userpassword) => {
   axios
-    .post(`${getApiRoute("sessions/")}signin`, {
+    .post(`${getApiRoute("sessions/signin")}`, {
       name: username,
       password: userpassword
     })

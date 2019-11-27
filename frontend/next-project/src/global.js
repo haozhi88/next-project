@@ -1,3 +1,9 @@
+/* Configurations */
+const LOCAL = true;
+const localRoute = "http://127.0.0.1:5000/api/v1/";
+const serverRoute = "https://meetmymentor02.herokuapp.com/api/v1/";
+
+/* Constants */
 export const route = {
   close: 0,
   inboxListPage: 1,
@@ -36,11 +42,6 @@ export const subTitle = [
   "Todo" //15
 ];
 
-const LOCAL = true;
-const localRoute = "http://127.0.0.1:5000/";
-const serverRoute = "https://meetmymentor02.herokuapp.com/api/v1/users/";
-const apiPath = "api/v1/";
-
 export const getApiRoute = route => {
-  return (LOCAL ? localRoute : serverRoute) + apiPath + route;
+  return (LOCAL ? localRoute : serverRoute) + route;
 };

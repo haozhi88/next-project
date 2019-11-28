@@ -15,7 +15,8 @@ const ContainerStyles = {
   flexDirection: "column",
   alignItems: "center",
   width: "100%",
-  paddingTop: "3%"
+  paddingTop: "3%",
+  overflow: "auto",
 };
 
 function SignUpPage({ parentRouteTo }) {
@@ -53,18 +54,18 @@ function SignUpPage({ parentRouteTo }) {
   return (
     <>
       <div style={ContainerStyles}>
-        <h1 style={{ color: "#393333" }}>Sign Up an account</h1>
+        <h1 style={{ color: "#393333" }}>Create an account</h1>
         <SignUpInputForm
           userSignUp={userSignUp}
           setUserSignUp={setUserSignUp}
         />
-        <a href="#" onClick={() => parentRouteTo(route.signinPage)}>
+        <a href="#" onClick={() => parentRouteTo(route.signinPage)} style={{ fontSize:"15px",marginTop:"25px" }}>
           Have an account? Sign In now!
         </a>
         <ButtonGroup
           fullWidth
           aria-label="full width button group"
-          style={{ position: "absolute", bottom: 0, height: "7vh" }}
+          style={{ position: "absolute", bottom: 0, height: "60px" }}
         >
           <Button
             style={{

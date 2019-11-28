@@ -15,7 +15,7 @@ import DialogPage from "../components/DialogPage";
 const useStyles = makeStyles(theme => ({
   card: {
     display: "flex",
-    height: "14vh",
+    height: "120px",
     width: "96vw",
     borderRadius:16,
     marginTop: "10px",

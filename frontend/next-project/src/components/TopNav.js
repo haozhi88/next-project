@@ -122,9 +122,6 @@ export default function TopNav() {
       ]
     }
   }
-  console.log(currentUser.loggedIn)
-  console.log(currentUser.profilePicture)
-  console.log(currentUser.id)
   return (
     <>
       <AppBar position="static" style={{ backgroundColor: "#1589FF"}}>

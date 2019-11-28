@@ -7,6 +7,7 @@ export const generateData = () => {
   getAllUsers();
   getAllLessons();
   getAllSkills();
+  getUser(3)
   // getAllEvents();
   // generateSkillList();
   // generateLessonList();

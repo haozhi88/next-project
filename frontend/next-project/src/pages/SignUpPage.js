@@ -38,12 +38,13 @@ function SignUpPage({ parentRouteTo }) {
         const id = result.data.data.id;
         const name = result.data.data.name;
         const profile_picture = result.data.data.profile_picture;
+        const email = result.data.data.email;
         const access_token = result.data.data.access_token;
         console.log(result);
         console.log("sign up successfully");
         localStorage.setItem("userToken", access_token);
         localStorage.setItem("userData", JSON.stringify(name));
-        login(name, id, profile_picture);
+        login(name, id, profile_picture, email);
         parentRouteTo(route.close);
       })
       .catch(error => {

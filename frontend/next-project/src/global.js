@@ -1,5 +1,5 @@
 /* Configurations */
-const LOCAL = false;
+const LOCAL = true;
 const localRoute = "http://127.0.0.1:5000/api/v1/";
 const serverRoute = "https://meetmymentor02.herokuapp.com/api/v1/";
 

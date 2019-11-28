@@ -8,8 +8,8 @@ import peewee as pw
 class Event(BaseModel):
     lesson = pw.ForeignKeyField(Lesson, backref='events', on_delete='CASCADE')
     user = pw.ForeignKeyField(User, backref='events', on_delete='CASCADE')
-    status = pw.CharField(default='Pending')
-    rating = pw.IntegerField(null=True)
+    status = pw.CharField(default='pending')
+    rating = pw.IntegerField(default=0)
     start_datetime = pw.DateTimeField(null=False)
     comment = pw.CharField(null=True)
     recommend = pw.BooleanField(default = False)

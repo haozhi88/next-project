@@ -9,7 +9,7 @@ import {
   Grid,
   List, ListSubheader, ListItem, ListItemIcon, ListItemText
 } from "@material-ui/core";
-import { Menu } from "@material-ui/icons";
+import { Menu, ContactSupportOutlined } from "@material-ui/icons";
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import InboxIcon from '@material-ui/icons/Inbox';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -23,6 +23,8 @@ import { route } from "../global";
 
 /* Import app components */
 import DialogPage from "../components/DialogPage";
+import useStores from "../hooks/useStores";
+import { makeStyles } from "@material-ui/styles";
 
 const iconColor ={
   color: '#5CB3FF',
@@ -33,7 +35,17 @@ const backGround ={
   color: '#C2DFFF'
 }
 
+const useStyles = makeStyles(theme => ({
+  bigAvatar: {
+    width: 80,
+    height: 80,
+  },
+}));
+
 export default function TopNav() {
+  const {
+    userStore: { currentUser, logout }
+  } = useStores(); 
   const [open, setOpen] = useState(false);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -45,7 +57,74 @@ export default function TopNav() {
     }
     setRouteOption(option);
   };
+  const classes = useStyles()
+  //profile picture if currentUser loggedIn
+  function profilePicture(){
+    if (currentUser.loggedIn){
+        return [
+            <ListSubheader component="div" id="nested-list-subheader" style={backGround} >
+            <ListItem button>
+              <ListItemIcon>
+                  <Avatar id={currentUser.id} src={currentUser.profile_picture} className={classes.bigAvatar}/>
+              </ListItemIcon>
+              <ListItemText style={{ color:"#393333", fontSize: "14px", margin:"15px"}} >
+                {currentUser.name}
+              </ListItemText >
+          </ListItem>
+          </ListSubheader>
+        ]
+    }
+    else {
+        return [
+            <ListSubheader component="div" id="nested-list-subheader" style={backGround} >
+              <ListItem button >
+                <ListItemIcon>
+                  <AccountCircleIcon style={{ fontSize: "88px" , color: "#1589FF" }}/>  
+                </ListItemIcon>
+              <ListItemText style={{ color:"#393333", fontSize: "14px", margin:"15px" }} >
+                Username
+            </ListItemText >
+          </ListItem>
+          </ListSubheader>           
+        ]
+    }
+  } 
 
+  //sign in button if currentUser logged in
+  function signInButton(){
+    if (currentUser.loggedIn){
+      return [
+        <ListItem button  onClick={() => {
+          localStorage.removeItem("userToken");
+          localStorage.removeItem("userData");
+          console.log("sign out successfully"); 
+          logout()   
+          }}>
+            <ListItemIcon>
+              <ExitToAppIcon style={iconColor}/>
+            </ListItemIcon>
+            <ListItemText style={{ color:"#393333", fontSize: "14px"}} >
+              Sign Out
+            </ListItemText >
+        </ListItem>            
+      ]
+    }
+    else {
+      return [
+        <ListItem button onClick={() => routeTo(route.signinPage)}>
+            <ListItemIcon>
+              <ExitToAppIcon style={iconColor}/>
+            </ListItemIcon>
+            <ListItemText style={{ color:"#393333", fontSize: "14px"}} >
+              Sign Up / Login
+            </ListItemText >
+        </ListItem>
+      ]
+    }
+  }
+  console.log(currentUser.loggedIn)
+  console.log(currentUser.profilePicture)
+  console.log(currentUser.id)
   return (
     <>
       <AppBar position="static" style={{ backgroundColor: "#1589FF"}}>
@@ -55,7 +134,7 @@ export default function TopNav() {
           </IconButton>
           <div style={{ flexGrow: 1 }} />
           {/* <Avatar onClick={() => routeTo(route.profilePage)}>S</Avatar> */}
-                    <IconButton color="inherit" onClick={() => routeTo(route.profilePage)}>
+            <IconButton color="inherit" onClick={() => routeTo(route.profilePage)}>
             <AccountCircleIcon style={{ fontSize: "33px" }} />
           </IconButton>
         </Toolbar>
@@ -70,27 +149,9 @@ export default function TopNav() {
           <br /><br /><br />
           <Grid container direction="column">
           <List component="nav" aria-labelledby="nested-list-subheader"
-            subheader={
-              <ListSubheader component="div" id="nested-list-subheader" style={backGround} >
-                <ListItem button >
-                  <ListItemIcon>
-                    <AccountCircleIcon style={{ fontSize: "88px" , color: "#1589FF" }}/>
-                  </ListItemIcon>
-                  <ListItemText style={{ color:"#393333", fontSize: "14px"}} >
-                  Username
-                </ListItemText >
-              </ListItem>
-              </ListSubheader>
-          }>
+            subheader={profilePicture()}>
             <br />
-            <ListItem button onClick={() => routeTo(route.signinPage)}>
-                <ListItemIcon>
-                  <ExitToAppIcon style={iconColor}/>
-                </ListItemIcon>
-                <ListItemText style={{ color:"#393333", fontSize: "14px"}} >
-                  Sign In / Sign Out
-                </ListItemText >
-              </ListItem>
+              {signInButton()}
               <ListItem button onClick={() => routeTo(route.learnListPage)}>
                 <ListItemIcon>
                   <MenuBookIcon style={iconColor}/>

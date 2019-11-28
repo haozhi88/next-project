@@ -3,8 +3,18 @@ import { getApiRoute } from "../global";
 
 /* Functions */
 export const generateData = () => {
-  getAllEvents();
-  // createEvent(4, 13, ); // confirm datetime format with Pi Han
+  getVersion();
+  getAllUsers();
+  getAllLessons();
+  getAllSkills();
+  // getAllEvents();
+  // generateSkillList();
+  // generateLessonList();
+
+  // working
+  // createLesson("Machine Learning", "no description", "True", 3);
+  // signUpUser("test1112", "test1112@email.com", "123");
+  // createEvent(4, 13, "2019-11-26 14:58:03.603560");
 };
 
 /* Token Config */
@@ -80,15 +90,27 @@ export const updateUser = (id, username, useremail, userpassword) => {
     });
 };
 
-export const signUpUser = () => {
+export const signUpUser = (newName, newEmail, newPassword) => {
   axios
     .post(`${getApiRoute("users/")}signup`, {
-      name: "5",
-      email: "5@email.com",
-      password: "123"
+      name: newName,
+      email: newEmail,
+      password: newPassword
     })
     .then(result => {
       console.log(result.data.data);
+    })
+    .catch(error => {
+      console.log("ERROR: ", error);
+    });
+};
+
+export const getVersion = () => {
+  axios
+    .get(`${getApiRoute("users/version")}`)
+    .then(result => {
+      const version = result.data;
+      console.log(result);
     })
     .catch(error => {
       console.log("ERROR: ", error);
@@ -102,6 +124,49 @@ export const getAllLessons = () => {
     .then(result => {
       const lessons = result.data;
       console.log(lessons);
+    })
+    .catch(error => {
+      console.log("ERROR: ", error);
+    });
+};
+
+export const generateLessonList = () => {
+  // signInUser("lee", "123");
+  // createLesson("Guitar", "Teach you how to play guitar in 5 mins", "True", 1);
+  // createLesson("Coding", "Teach you how to code in 5 seconds", "True", 1);
+  // createLesson(
+  //   "Dancing",
+  //   "Want to learn how to dance like Michael Jackson",
+  //   "False",
+  //   1
+  // );
+  // signInUser("desmond", "123");
+  // createLesson("Singing", "Teach you how to sing with your nose", "True", 2);
+  // signInUser("melissa", "123");
+  // createLesson("Sleeping", "No need to teach", "True", 3);
+  // createLesson("Dota", "Want to learn how to play Dota", "False", 3);
+  // createLesson(
+  //   "Football",
+  //   "Want to learn how to kick freekick like David Beckham",
+  //   "False",
+  //   3
+  // );
+};
+
+export const createLesson = (newtitle, newdescription, newteach, newskill) => {
+  axios
+    .post(
+      `${getApiRoute("lessons/create")}`,
+      {
+        title: newtitle,
+        description: newdescription,
+        teach: newteach,
+        skill: newskill
+      },
+      getTokenConfig()
+    )
+    .then(result => {
+      console.log(result.data.data);
     })
     .catch(error => {
       console.log("ERROR: ", error);
@@ -124,10 +189,10 @@ export const generateSkillList = () => {
   createSkill("Health and Fitness");
 };
 
-export const createSkill = skill => {
+export const createSkill = newSkill => {
   axios
-    .post(`${getApiRoute("skills/create/")}`, {
-      skill: skill
+    .post(`${getApiRoute("skills/create")}`, {
+      skill: newSkill
     })
     .then(result => {
       console.log(result.data.data);
@@ -149,12 +214,12 @@ export const getAllSkills = () => {
     });
 };
 
-/* Lessons */
+/* Events */
 export const getAllEvents = () => {
   axios
     .get(`${getApiRoute("events/")}`, getTokenConfig())
     .then(result => {
-      const events = result.data;
+      const events = result.data.data;
       console.log(events);
     })
     .catch(error => {
@@ -162,13 +227,17 @@ export const getAllEvents = () => {
     });
 };
 
-export const createEvent = (lesson_id, user_id, start_datetime) => {
+export const createEvent = (newLessonId, newUserId, newStartDatetime) => {
   axios
-    .post(`${getApiRoute("events/create/")}`, {
-      lesson_id: lesson_id,
-      user_id: user_id,
-      start_datetime: start_datetime
-    })
+    .post(
+      `${getApiRoute("events/create")}`,
+      {
+        lesson_id: newLessonId,
+        user_id: newUserId,
+        start_datetime: newStartDatetime
+      },
+      getTokenConfig()
+    )
     .then(result => {
       console.log(result.data.data);
     })

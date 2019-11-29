@@ -42,13 +42,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function LessonInfoPage() {
-  const [distance, setDistance] = useState(null)
   const classes = useStyles();
-
-useEffect(() => {
-  Axios.get(`${getApiRoute("lessons/")}`, )
-})
-
 
   return (
     <>

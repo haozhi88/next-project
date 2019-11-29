@@ -5,13 +5,12 @@ import { route } from "../global";
 /* Import app components */
 import InboxListPage from "../pages/InboxListPage";
 import EventListPage from "../pages/EventListPage";
-import LearnListPage from "../pages/LearnListPage";
+import LessonListPage from "../pages/LessonListPage";
 import SignInPage from "../pages/SignInPage";
 import SignUpPage from "../pages/SignUpPage";
 import ProfilePage from "../pages/ProfilePage";
 import LessonPage from "../pages/LessonPage";
 import BookmarksPage from "../pages/BookmarksPage";
-import TeachListPage from "../pages/TeachListPage";
 import CreateEventPage from "../pages/CreateEventPage";
 import CreateLessonPage from "../pages/CreateLessonPage";
 import RatingPage from "../pages/RatingPage";
@@ -35,9 +34,9 @@ export default function SubContent({ routeTo, routeOption, args }) {
       case route.eventListPage:
         return <EventListPage parentRouteTo={routeTo} />;
       case route.teachListPage:
-        return <TeachListPage parentRouteTo={routeTo} />;
+        return <LessonListPage parentRouteTo={routeTo} teach={true} />;
       case route.learnListPage:
-        return <LearnListPage parentRouteTo={routeTo} />;
+        return <LessonListPage parentRouteTo={routeTo} teach={false} />;
       case route.bookmarkListPage:
         return <BookmarksPage parentRouteTo={routeTo} />;
       case route.signinPage:

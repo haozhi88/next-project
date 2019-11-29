@@ -25,13 +25,13 @@ const ContainerStyles = {
   textAlign: "center"
 };
 
-export default function SubContent({ routeTo, routeOption }) {
+export default function SubContent({ routeTo, routeOption, args }) {
   function renderView() {
     switch (routeOption) {
       case route.close:
         return <p>todo: close</p>;
       case route.inboxListPage:
-        return <InboxListPage parentRouteTo={routeTo} />;
+        return <InboxListPage parentRouteTo={routeTo} args={args}/>;
       case route.eventListPage:
         return <EventListPage parentRouteTo={routeTo} />;
       case route.teachListPage:
@@ -47,7 +47,7 @@ export default function SubContent({ routeTo, routeOption }) {
       case route.profilePage:
         return <ProfilePage parentRouteTo={routeTo} />;
       case route.lessonPage:
-        return <LessonPage parentRouteTo={routeTo} />;
+        return <LessonPage parentRouteTo={routeTo} args={args}/>;
       case route.createLearnPage:
         return <CreateLessonPage parentRouteTo={routeTo} teach={false} />;
       case route.createTeachPage:

@@ -42,7 +42,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function LessonInfoPage() {
+  const [distance, setDistance] = useState(null)
   const classes = useStyles();
+
+useEffect(() => {
+  Axios.get(`${getApiRoute("lessons/")}`, )
+})
+
+
   return (
     <>
       <Card className={classes.card}>
@@ -124,6 +131,23 @@ export default function LessonInfoPage() {
             align="justify"
           >
             coding, algorithm
+          </Typography>
+        </CardContent>
+
+        <CardContent>
+          <Typography
+            variant="subtitle1"
+            component="p"
+            align="justify"
+          >
+            <strong>Distance</strong>
+          </Typography>
+          <Typography
+            variant="body2"
+            component="p"
+            align="justify"
+          >
+            Replace me
           </Typography>
         </CardContent>
       </Card>

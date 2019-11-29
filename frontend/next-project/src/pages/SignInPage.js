@@ -16,13 +16,15 @@ const ContainerStyles = {
   alignItems: "center",
   width: "100%",
   paddingTop: "3%",
-  overflow: "auto",
+  overflow: "auto"
 };
 
 function SignInPage({ parentRouteTo }) {
   const [userSignIn, setUserSignIn] = useState({
     name: "",
-    password: ""
+    password: "",
+    latitude: "",
+    longtitude: ""
   });
 
   const {
@@ -30,6 +32,21 @@ function SignInPage({ parentRouteTo }) {
   } = useStores();
 
   const handleSignIn = () => {
+    // to get user's current location
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        console.log(position.coords);
+        setUserSignIn({
+          name: "",
+          password: "",
+          latitude: position.coords["latitude"],
+          longtitude: position.coords["longitude"]
+        });
+      },
+      error => console.log(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+
     // console.log(userSignIn);
     axios
       .post(`${getApiRoute("sessions/signin")}`, userSignIn)
@@ -58,7 +75,11 @@ function SignInPage({ parentRouteTo }) {
           userSignIn={userSignIn}
           setUserSignIn={setUserSignIn}
         />
-        <a href="#" onClick={() => parentRouteTo(route.signupPage)} style={{ fontSize:"15px",marginTop:"25px" }}>
+        <a
+          href="#"
+          onClick={() => parentRouteTo(route.signupPage)}
+          style={{ fontSize: "15px", marginTop: "25px" }}
+        >
           No account? Sign up now!
         </a>
         <ButtonGroup

@@ -132,6 +132,13 @@ function Content() {
         >
           Rating
         </Button>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => routeTo(route.versionPage)}
+        >
+          APP Version
+        </Button>
         <Button variant="outlined" color="primary" onClick={generateData}>
           Test AXIOS
         </Button>

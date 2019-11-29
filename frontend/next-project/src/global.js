@@ -1,9 +1,11 @@
 /* Configurations */
 const LOCAL = true;
-const localRoute = "http://127.0.0.1:5000/api/v1/";
-const serverRoute = "https://meetmymentor02.herokuapp.com/api/v1/";
+const LOCAL_ROUTE = "http://127.0.0.1:5000/api/v1/";
+const SERVER_ROUTE = "https://meetmymentor02.herokuapp.com/api/v1/";
 
 /* Constants */
+export const VERSION = 1;
+
 export const route = {
   close: 0,
   inboxListPage: 1,
@@ -20,7 +22,8 @@ export const route = {
   createEventPage: 12,
   ratingPage: 13,
   eventPage: 14,
-  todo: 15
+  versionPage: 15,
+  todo: 16
 };
 
 export const subTitle = [
@@ -39,9 +42,10 @@ export const subTitle = [
   "Create Event", //12
   "Rating", //13
   "Event", //14
-  "Todo" //15
+  "Version", //15
+  "Todo" //16
 ];
 
 export const getApiRoute = route => {
-  return (LOCAL ? localRoute : serverRoute) + route;
+  return (LOCAL ? LOCAL_ROUTE : SERVER_ROUTE) + route;
 };

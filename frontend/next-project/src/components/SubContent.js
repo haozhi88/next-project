@@ -16,6 +16,7 @@ import CreateEventPage from "../pages/CreateEventPage";
 import CreateLessonPage from "../pages/CreateLessonPage";
 import RatingPage from "../pages/RatingPage";
 import EventPage from "../pages/EventPage";
+import VersionPage from "../pages/VersionPage";
 
 /* CSS Styles */
 const ContainerStyles = {
@@ -58,6 +59,8 @@ export default function SubContent({ routeTo, routeOption }) {
         return <RatingPage parentRouteTo={routeTo} />;
       case route.eventPage:
         return <EventPage parentRouteTo={routeTo} />;
+      case route.versionPage:
+        return <VersionPage parentRouteTo={routeTo} />;
       case route.todo:
         return <p>todo: please complete this component/page</p>;
       default:

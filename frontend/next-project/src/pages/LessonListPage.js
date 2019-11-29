@@ -6,14 +6,14 @@ import SearchBar from "../components/SearchBar";
 import ListCard from "../components/ListCard";
 import { getApiRoute } from "../global";
 
-export default function LessonListPage({props, teach}) {
+export default function LessonListPage({ teach }) {
   const [lessonsData, setLessonsData] = useState({
     datas: []
   });
 
   useEffect(() => {
     axios
-      .get(`${getApiRoute("lessons/")}`, {teach:teach})
+      .get(`${getApiRoute("lessons/filter?")}teach=${teach}`)
       .then(result => {
         console.log(result.data);
         setLessonsData({
@@ -30,10 +30,13 @@ export default function LessonListPage({props, teach}) {
       <div style={{ width: "100vw" }}>
         <SearchBar />
       </div>
-      <div style={{ marginTop: "10px", display: "grid", justifyContent: "center" }} id="cardBox">
-        {lessonsData.datas.map(lesson => 
-          <ListCard lesson={lesson} key={lesson.id}/>
-        )}
+      <div
+        style={{ marginTop: "10px", display: "grid", justifyContent: "center" }}
+        id="cardBox"
+      >
+        {lessonsData.datas.map(lesson => (
+          <ListCard lesson={lesson} key={lesson.id} />
+        ))}
       </div>
     </div>
   );

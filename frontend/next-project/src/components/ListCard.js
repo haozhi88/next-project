@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -19,11 +19,11 @@ const useStyles = makeStyles(theme => ({
     fontSize: "10px"
   },
   cover: {
-    width: '40vw'
+    width: "40vw"
   }
 }));
 
-export default function ListCard({lesson}) {
+export default function ListCard({ lesson }) {
   const classes = useStyles();
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -37,28 +37,28 @@ export default function ListCard({lesson}) {
   };
   return (
     <>
-    <Card className={classes.card} onClick={() => routeTo(route.lessonPage)}>
-      <CardMedia
-        className={classes.cover}
-        image="https://desmond-nextagram.s3-ap-southeast-1.amazonaws.com/cat4.png"
-        title="Live from space album cover"
-      />
-      <div>
-        <CardContent align="left" style={{ width:"60vw"}}>
-          <Typography>Title: {lesson.title}</Typography>
-          <Typography>Author: {lesson.owner}</Typography>
-          <Typography>Skill: Computer Science</Typography>
-          <Typography>Lesson Rating:</Typography>
-          <Rating name="read-only" value={lesson.value} readOnly />
-        </CardContent>
-      </div>
-    </Card>
-    <DialogPage
+      <Card className={classes.card} onClick={() => routeTo(route.lessonPage)}>
+        <CardMedia
+          className={classes.cover}
+          image={lesson.image_url}
+          title="Lesson image"
+        />
+        <div>
+          <CardContent align="left" style={{ width: "60vw" }}>
+            <Typography>Title: {lesson.title}</Typography>
+            <Typography>Author: {lesson.owner}</Typography>
+            <Typography>Skill: Computer Science</Typography>
+            <Typography>Lesson Rating:</Typography>
+            <Rating name="read-only" value={lesson.value} readOnly />
+          </CardContent>
+        </div>
+      </Card>
+      <DialogPage
         routeTo={routeTo}
         routeOption={routeOption}
         dialogOpen={dialogOpen}
       />
-    <br/>
+      <br />
     </>
   );
 }

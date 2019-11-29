@@ -7,7 +7,7 @@ import { observer } from "mobx-react";
 
 /* Import app components */
 import DialogPage from "../components/DialogPage";
-import { generateData, signout } from "../test/GenerateTestData";
+import { generateData } from "../test/GenerateTestData";
 
 function Content() {
   const {

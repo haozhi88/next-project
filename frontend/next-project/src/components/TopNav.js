@@ -13,7 +13,7 @@ import {
   ListItemIcon,
   ListItemText
 } from "@material-ui/core";
-import { Menu, ContactSupportOutlined } from "@material-ui/icons";
+import { Menu } from "@material-ui/icons";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import InboxIcon from "@material-ui/icons/Inbox";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";

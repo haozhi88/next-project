@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Rating from "@material-ui/lab/Rating";
+import { route } from "../global";
+import DialogPage from "../components/DialogPage";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -12,37 +14,51 @@ const useStyles = makeStyles(theme => ({
     height: "180px",
     width: "98vw",
     borderRadius: 16,
-    border: "1px solid #1589FF", 
-    color:"#393333",
-    fontSize:"10px"
+    border: "1px solid #1589FF",
+    color: "#393333",
+    fontSize: "10px"
   },
   cover: {
-    width: 151
+    width: '40vw'
   }
 }));
 
-export default function ListCard() {
+export default function ListCard({lesson}) {
   const classes = useStyles();
-  const value = 2;
-
+  const [routeOption, setRouteOption] = useState(route.close);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const routeTo = option => {
+    if (option === route.close) {
+      setDialogOpen(false);
+    } else {
+      setDialogOpen(true);
+    }
+    setRouteOption(option);
+  };
   return (
-    <div style={{ display: "flex", justifyContent:"center"}}>
-    <Card className={classes.card}>
+    <>
+    <Card className={classes.card} onClick={() => routeTo(route.lessonPage)}>
       <CardMedia
         className={classes.cover}
         image="https://desmond-nextagram.s3-ap-southeast-1.amazonaws.com/cat4.png"
         title="Live from space album cover"
       />
       <div>
-        <CardContent align="left">
-          <Typography>Title: Some Lesson</Typography>
-          <Typography>Author: Someone</Typography>
-          <Typography>Skill Categories: Computer Science</Typography>
+        <CardContent align="left" style={{ width:"60vw"}}>
+          <Typography>Title: {lesson.title}</Typography>
+          <Typography>Author: {lesson.owner}</Typography>
+          <Typography>Skill: Computer Science</Typography>
           <Typography>Lesson Rating:</Typography>
-          <Rating name="read-only" value={value} readOnly />
+          <Rating name="read-only" value={lesson.value} readOnly />
         </CardContent>
       </div>
     </Card>
-    </div>
+    <DialogPage
+        routeTo={routeTo}
+        routeOption={routeOption}
+        dialogOpen={dialogOpen}
+      />
+    <br/>
+    </>
   );
 }

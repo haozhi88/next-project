@@ -56,21 +56,56 @@ def create():
 @lessons_api_blueprint.route('/', methods=['GET'])
 def index():
     # Retrieve lessons from database
-    lessons = [ 
-        {
-            'id': lesson.id,
-            'title': lesson.title,
-            'description': lesson.description,
-            'rating': lesson.rating,
-            'owner': lesson.owner_id,
-            'teach': lesson.teach
-        } for lesson in Lesson.select()
-    ]
 
-    if lessons:
-        return success_200(lessons)
-    else:
-        return error_404("No lessons found")
+
+     # Check for valid json
+    if not request.is_json:
+       return error_401("Reponse is not JSON")
+
+    # Check if user exists and signed in
+    jwt_user = get_jwt_identity()
+    user = User.get_or_none(User.name == jwt_user)
+    if not user:
+       return error_401("Unauthorized action")
+
+    # Retrieve data from json
+    data = request.get_json()
+
+    teach_or_learn = data['teach']
+
+    if teach_or_learn:
+        lessons = [ 
+            {
+                'id': lesson.id,
+                'title': lesson.title,
+                'description': lesson.description,
+                'rating': lesson.rating,
+                'owner': lesson.owner_id,
+                'teach': lesson.teach
+            } for lesson in Lesson.select().where(Lesson.teach)
+        ]
+        if lessons:
+            return success_200(lessons)
+        else:
+            return error_404("No lessons found")
+            
+    elif not teach_or_learn:
+        lessons = [ 
+            {
+                'id': lesson.id,
+                'title': lesson.title,
+                'description': lesson.description,
+                'rating': lesson.rating,
+                'owner': lesson.owner_id,
+                'teach': lesson.teach
+            } for lesson in Lesson.select().where(not Lesson.teach)
+        ]
+        if lessons:
+            return success_200(lessons)
+        else:
+            return error_404("No lessons found")
+
+    
 
 @lessons_api_blueprint.route('/<lesson_id>', methods=['GET'])
 def show(lesson_id):

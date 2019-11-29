@@ -6,6 +6,8 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import { getApiRoute } from "../global";
+import MicIcon from '@material-ui/icons/Mic';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SearchBar() {
   const classes = useStyles();
-
+  const [record, setRecord]=useState(false);
   const [searchValue, setSearchValue] = useState("");
   const searchLessons = event => {
     event.preventDefault();
@@ -91,7 +93,7 @@ export default function SearchBar() {
         onSubmit={e => searchLessons(e)}
         component="form"
         className={classes.root}
-        style={{ width: "100vw", border: "1px solid #1589FF" }}
+        style={{ width: "100vw", border: "1px solid #1589FF" , borderRadius:"0px" }}
       >
         <InputBase
           value={searchValue}
@@ -100,32 +102,40 @@ export default function SearchBar() {
           placeholder="Search"
           inputProps={{ "aria-label": "search google maps" }}
         />
-        {searchValue ? (
-          <IconButton
+        <IconButton
             type="submit"
             className={classes.iconButton}
             aria-label="search"
           >
             <SearchIcon />
           </IconButton>
-        ) : (
-          <button
+            <Divider orientation="vertical" />
+        {record ? (
+          <IconButton
+            type="submit"
+            className={classes.iconButton}
+            aria-label="search"
             onClick={e => {
-              startRecording(e);
+              stopRecording(e);
+              setRecord(false)
             }}
           >
-            voice test
-          </button>
+            <MicIcon style={{color:"1589FF"}} />
+          </IconButton>
+        ) : (
+          <IconButton
+            type="submit"
+            className={classes.iconButton}
+            aria-label="search"
+            onClick={e => {
+              startRecording(e);
+              setRecord(true)
+            }}
+          >
+            <MicIcon />
+          </IconButton>
         )}
       </Paper>
-      <button
-        onClick={e => {
-          stopRecording(e);
-        }}
-      >
-        End recording
-      </button>
-      {/* Can delete this button later ^. It's only for testing purposes */}
     </div>
   );
 }

@@ -75,43 +75,22 @@ def index():
     data = request.get_json()
     teach_or_learn = data['teach']
 
-    if teach_or_learn:
-
-        lessons = [ 
-            {
-                'id': lesson.id,
-                'title': lesson.title,
-                'description': lesson.description,
-                'rating': lesson.rating,
-                'owner_id': lesson.owner_id,
-                'teach': lesson.teach,
-                'skill_id': lesson.skill_id,
-                'image_url': lesson.image_url
-            } for lesson in Lesson.select().where(Lesson.teach)
-        ]
-        if lessons:
-            return success_200(lessons)
-        else:
-            return error_404("No lessons found")
-
-    elif not teach_or_learn:
-
-        lessons = [ 
-            {
-                'id': lesson.id,
-                'title': lesson.title,
-                'description': lesson.description,
-                'rating': lesson.rating,
-                'owner_id': lesson.owner_id,
-                'teach': lesson.teach,
-                'skill_id': lesson.skill_id,
-                'image_url': lesson.image_url
-            } for lesson in Lesson.select().where(not Lesson.teach)
-        ]
-        if lessons:
-            return success_200(lessons)
-        else:
-            return error_404("No lessons found")
+    lessons = [ 
+        {
+            'id': lesson.id,
+            'title': lesson.title,
+            'description': lesson.description,
+            'rating': lesson.rating,
+            'owner_id': lesson.owner_id,
+            'teach': lesson.teach,
+            'skill_id': lesson.skill_id,
+            'image_url': lesson.image_url
+        } for lesson in Lesson.select().where(Lesson.teach == teach_or_learn)
+    ]
+    if lessons:
+        return success_200(lessons)
+    else:
+        return error_404("No lessons found")
 
     
 

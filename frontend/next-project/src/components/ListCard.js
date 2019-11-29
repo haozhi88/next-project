@@ -46,8 +46,8 @@ export default function ListCard({ lesson }) {
         <div>
           <CardContent align="left" style={{ width: "60vw" }}>
             <Typography>Title: {lesson.title}</Typography>
-            <Typography>Author: {lesson.owner}</Typography>
-            <Typography>Skill: Computer Science</Typography>
+            <Typography>Author: {lesson.owner_name}</Typography>
+            <Typography>Skill: {lesson.skill_name}</Typography>
             <Typography>Lesson Rating:</Typography>
             <Rating name="read-only" value={lesson.value} readOnly />
           </CardContent>

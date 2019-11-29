@@ -52,7 +52,9 @@ def create():
                 'rating': lesson.rating,
                 'teach': lesson.teach,
                 'owner_id': lesson.owner_id,
+                'owner_name': lesson.owner.name,
                 'skill_id': lesson.skill_id,
+                'skill_name': lesson.skill.name,
                 'image_url': lesson.image_url
             }
             return success_201("New lesson created successfully", lesson) 
@@ -71,8 +73,10 @@ def index():
             'description': lesson.description,
             'rating': lesson.rating,
             'owner_id': lesson.owner_id,
+            'owner_name': lesson.owner.name,
             'teach': lesson.teach,
             'skill_id': lesson.skill_id,
+            'skill_name': lesson.skill.name,
             'image_url': lesson.image_url
         } for lesson in Lesson.select()
     ]
@@ -97,8 +101,10 @@ def index_with_filter():
             'description': lesson.description,
             'rating': lesson.rating,
             'owner_id': lesson.owner_id,
+            'owner_name': lesson.owner.name,
             'teach': lesson.teach,
             'skill_id': lesson.skill_id,
+            'skill_name': lesson.skill.name,
             'image_url': lesson.image_url
         } for lesson in Lesson.select().where(Lesson.teach == teach_option)
     ]
@@ -117,7 +123,9 @@ def show(lesson_id):
             'rating': lesson.rating,
             'teach': lesson.teach,
             'owner_id': lesson.owner_id,
+            'owner_name': lesson.owner.name,
             'skill_id': lesson.skill_id,
+            'skill_name': lesson.skill.name,
             'image_url': lesson.image_url
         }
         return success_200(data)

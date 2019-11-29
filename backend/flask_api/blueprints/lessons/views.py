@@ -94,7 +94,7 @@ def index():
         else:
             return error_404("No lessons found")
 
-  elif not teach_or_learn:
+    elif not teach_or_learn:
 
         lessons = [ 
             {

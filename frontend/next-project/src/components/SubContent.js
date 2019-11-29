@@ -25,41 +25,90 @@ const ContainerStyles = {
   textAlign: "center"
 };
 
-export default function SubContent({ routeTo, routeOption, args }) {
+export default function SubContent({ routeTo, routeOption, routeArgs }) {
   function renderView() {
     switch (routeOption) {
       case route.close:
         return <p>todo: close</p>;
       case route.inboxListPage:
-        return <InboxListPage parentRouteTo={routeTo} args={args}/>;
+        return (
+          <InboxListPage parentRouteTo={routeTo} parentRouteArgs={routeArgs} />
+        );
       case route.eventListPage:
-        return <EventListPage parentRouteTo={routeTo} />;
+        return (
+          <EventListPage parentRouteTo={routeTo} parentRouteArgs={routeArgs} />
+        );
       case route.teachListPage:
-        return <LessonListPage parentRouteTo={routeTo} teach={true} />;
+        return (
+          <LessonListPage
+            parentRouteTo={routeTo}
+            parentRouteArgs={routeArgs}
+            teach={true}
+          />
+        );
       case route.learnListPage:
-        return <LessonListPage parentRouteTo={routeTo} teach={false} />;
+        return (
+          <LessonListPage
+            parentRouteTo={routeTo}
+            parentRouteArgs={routeArgs}
+            teach={false}
+          />
+        );
       case route.bookmarkListPage:
-        return <BookmarksPage parentRouteTo={routeTo} />;
+        return (
+          <BookmarksPage parentRouteTo={routeTo} parentRouteArgs={routeArgs} />
+        );
       case route.signinPage:
-        return <SignInPage parentRouteTo={routeTo} />;
+        return (
+          <SignInPage parentRouteTo={routeTo} parentRouteArgs={routeArgs} />
+        );
       case route.signupPage:
-        return <SignUpPage parentRouteTo={routeTo} />;
+        return (
+          <SignUpPage parentRouteTo={routeTo} parentRouteArgs={routeArgs} />
+        );
       case route.profilePage:
-        return <ProfilePage parentRouteTo={routeTo} />;
+        return (
+          <ProfilePage parentRouteTo={routeTo} parentRouteArgs={routeArgs} />
+        );
       case route.lessonPage:
-        return <LessonPage parentRouteTo={routeTo} args={args}/>;
+        return (
+          <LessonPage parentRouteTo={routeTo} parentRouteArgs={routeArgs} />
+        );
       case route.createLearnPage:
-        return <CreateLessonPage parentRouteTo={routeTo} teach={false} />;
+        return (
+          <CreateLessonPage
+            parentRouteTo={routeTo}
+            parentRouteArgs={routeArgs}
+            teach={false}
+          />
+        );
       case route.createTeachPage:
-        return <CreateLessonPage parentRouteTo={routeTo} teach={true} />;
+        return (
+          <CreateLessonPage
+            parentRouteTo={routeTo}
+            parentRouteArgs={routeArgs}
+            teach={true}
+          />
+        );
       case route.createEventPage:
-        return <CreateEventPage parentRouteTo={routeTo} />;
+        return (
+          <CreateEventPage
+            parentRouteTo={routeTo}
+            parentRouteArgs={routeArgs}
+          />
+        );
       case route.ratingPage:
-        return <RatingPage parentRouteTo={routeTo} />;
+        return (
+          <RatingPage parentRouteTo={routeTo} parentRouteArgs={routeArgs} />
+        );
       case route.eventPage:
-        return <EventPage parentRouteTo={routeTo} />;
+        return (
+          <EventPage parentRouteTo={routeTo} parentRouteArgs={routeArgs} />
+        );
       case route.versionPage:
-        return <VersionPage parentRouteTo={routeTo} />;
+        return (
+          <VersionPage parentRouteTo={routeTo} parentRouteArgs={routeArgs} />
+        );
       case route.todo:
         return <p>todo: please complete this component/page</p>;
       default:

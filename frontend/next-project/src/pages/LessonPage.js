@@ -13,10 +13,10 @@ const ContainerStyles = {
   flexDirection: "column",
   alignItems: "center",
   width: "100%",
-  paddingTop: "5px",
+  paddingTop: "5px"
 };
 
-export default function LessonPage() {
+export default function LessonPage({ parentRouteArgs }) {
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
   const routeTo = option => {
@@ -30,11 +30,47 @@ export default function LessonPage() {
   return (
     <>
       <div style={ContainerStyles}>
-        <LessonInfoPage/>
-        <ButtonGroup fullWidth aria-label="full width button group" style={{ position:"relative ",bottom:0 , height:"7vh"}}>
-          <Button style={{backgroundColor:"#ffd700", color:"#393333", fontSize: "14px", borderRadius: 0}} onClick={() => routeTo(route.todo)}>Bookmark</Button>
-          <Button style={{backgroundColor:"#5CB3FF", color:"#004085", fontSize: "14px", borderRadius: 0}} onClick={() => routeTo(route.todo)}>Chat</Button>
-          <Button style={{backgroundColor:"#90ee90", color:"#155724", fontSize: "14px", borderRadius: 0}} onClick={() => routeTo(route.createEventPage)}>
+        <LessonInfoPage lesson={parentRouteArgs} />
+        <ButtonGroup
+          fullWidth
+          aria-label="full width button group"
+          style={{
+            position: "relative ",
+            bottom: 0,
+            height: "7vh"
+          }}
+        >
+          <Button
+            style={{
+              backgroundColor: "#ffd700",
+              color: "#393333",
+              fontSize: "14px",
+              borderRadius: 0
+            }}
+            onClick={() => routeTo(route.todo)}
+          >
+            Bookmark
+          </Button>
+          <Button
+            style={{
+              backgroundColor: "#5CB3FF",
+              color: "#004085",
+              fontSize: "14px",
+              borderRadius: 0
+            }}
+            onClick={() => routeTo(route.todo)}
+          >
+            Chat
+          </Button>
+          <Button
+            style={{
+              backgroundColor: "#90ee90",
+              color: "#155724",
+              fontSize: "14px",
+              borderRadius: 0
+            }}
+            onClick={() => routeTo(route.createEventPage)}
+          >
             Request
           </Button>
         </ButtonGroup>

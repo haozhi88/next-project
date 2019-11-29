@@ -1,16 +1,16 @@
 /* Import package components */
 import React, { useState, useEffect } from "react";
 import { route } from "../global";
-
+import axios from "axios";
 /* Import app components */
 import DialogPage from "../components/DialogPage";
 import SearchBar from "../components/SearchBar";
 import ListCard from "../components/ListCard";
+import { getApiRoute } from "../global";
 
-export default function LearnListPage(props) {
+export default function LessonListPage({props, teach}) {
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
-  
   const routeTo = option => {
     if (option === route.close) {
       setDialogOpen(false);
@@ -20,33 +20,38 @@ export default function LearnListPage(props) {
     setRouteOption(option);
   };
 
-  const [lessonsList, setLessonsList] = useState(null)
-  useEffect(() => {
-    axios.get(`${getApiRoute("/lessons")}`).then(response => {
-      console.log(response)
-      setLessonsList(response)
-      // check what is response. Response should be all lesson data. Use the data to show the relevant info on lessonpage and lessoncard 
-    })
-  },[])
+  const [lessonsData, setLessonsData] = useState({
+    datas: []
+  });
 
+  useEffect(() => {
+    axios
+      .get(`${getApiRoute("lessons/")}`, {teach:teach})
+      .then(result => {
+        console.log(result.data);
+        setLessonsData({
+          datas: result.data
+        });
+      })
+      .catch(error => {
+        console.log("ERROR: ", error);
+      });
+  }, []);
 
   return (
     <div>
       <div style={{ width: "100vw" }}>
         <SearchBar />
       </div>
-      <div
-      style={{ marginTop: "10px"}}
-        id="cardBox"
-        onClick={() => routeTo(route.lessonPage)}
-      >
-        <ListCard />
+      <div style={{ marginTop: "10px", display: "grid", justifyContent: "center" }} id="cardBox">
+        {lessonsData.datas.map(lesson => 
+          <ListCard lesson={lesson} key={lesson.id}/>
+        )}
       </div>
       <DialogPage
         routeTo={routeTo}
         routeOption={routeOption}
         dialogOpen={dialogOpen}
-        args={args}
       />
     </div>
   );

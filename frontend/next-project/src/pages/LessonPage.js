@@ -16,7 +16,7 @@ const ContainerStyles = {
   paddingTop: "5px",
 };
 
-export default function LessonPage({args}) {
+export default function LessonPage() {
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
   const routeTo = option => {

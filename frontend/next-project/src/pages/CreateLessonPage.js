@@ -36,10 +36,13 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
     setRouteOption(option);
   };
   const handleCreate = () => {
-    console.log(lessonInput);
-    // Create formdata of image
+    // Create formdata
     let formData = new FormData();
-    formData.append("image", userFile);
+    formData.append("title", lessonInput.title);
+    formData.append("description", lessonInput.description);
+    formData.append("skill", lessonInput.skill);
+    formData.append("teach", teach);
+    formData.append("image", userFile[0]);
 
     // Prepare token
     const token = localStorage.getItem("userToken");
@@ -49,17 +52,7 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
       }
     };
     axios
-      .post(
-        `${getApiRoute("lessons/create")}`,
-        // formData,
-        {
-          title: lessonInput.title,
-          description: lessonInput.description,
-          skill: lessonInput.skill,
-          teach: teach
-        },
-        config
-      )
+      .post(`${getApiRoute("lessons/create")}`, formData, config)
       .then(result => {
         // const id = result.data.data.id;
         console.log(result);

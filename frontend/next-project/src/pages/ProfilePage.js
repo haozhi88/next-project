@@ -1,5 +1,5 @@
 /* Import package components */
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Card,
@@ -11,6 +11,11 @@ import {
 } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Rating from "@material-ui/lab/Rating";
+import axios from "axios";
+
+/* Import app components */
+import { getApiRoute } from "../global"
+import useStores from "../hooks/useStores";
 
 /* CSS Styles */
 const ContainerStyles = {
@@ -45,6 +50,21 @@ export default function ProfilePage() {
   const classes = useStyles();
   const learnRating = 4;
   const teachRating = 4;
+
+  const {
+    userStore: { currentUser, logout }
+  } = useStores(); 
+  // useEffect((  
+  //   axios
+  //   .get(`${getApiRoute("users/")}${id}`)
+  //   .then(result => {
+  //     const user = result.data;
+  //     console.log(user);
+  //   })
+  //   .catch(error => {
+  //     console.log("ERROR: ", error);
+  //   });) => { 
+  // })
   return (
     <>
       <div style={ContainerStyles}>
@@ -55,13 +75,18 @@ export default function ProfilePage() {
             title="Name"
           /> */}
           <div style={{ display:"flex", justifyContent:"center", marginTop:"10px"}}>
-            <Avatar
+            {/* <Avatar
               alt="Lee"
               src="http://nextagram-lee.s3.amazonaws.com/ironman.jpg"
               className={classes.bigAvatar}
-            />
+            /> */}
+            <Avatar
+              alt={currentUser.name}
+              src={currentUser.profile_picture}
+              className={classes.bigAvatar}
+            />            
           </div>
-          <CardHeader style={{ textAlign: "center" }} title="Username" />
+          <CardHeader style={{ textAlign: "center" }} title={currentUser.name} />
           <div style={{   margin:"5px", borderRadius: 16, border: "1px solid #1589FF", color:"#393333",}}>
           <CardContent style={{ color:"#393333"}}>
             <Typography
@@ -98,7 +123,7 @@ export default function ProfilePage() {
               component="p"
               align="justify"
             >
-              Email
+              {currentUser.email}
             </Typography>
           </CardContent>
           <CardContent style={{ color:"#393333"}}>

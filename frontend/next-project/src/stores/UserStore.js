@@ -5,15 +5,17 @@ class UserStore {
     name: "none",
     id: -1,
     profile_picture: "",
+    email: "",
     loggedIn: false
   };
 
-  login = (name, id, profile_picture) => {
+  login = (name, id, profile_picture, email) => {
     // Just hardcode for now to demonstrate function
     // Use axios call later
     this.currentUser.name = name;
     this.currentUser.id = id;
     this.currentUser.profile_picture = profile_picture;
+    this.currentUser.email = email;
     this.currentUser.loggedIn = true;
   };
 
@@ -23,6 +25,7 @@ class UserStore {
     this.currentUser.name = "none";
     this.currentUser.id = -1;
     this.currentUser.profile_picture = "";
+    this.currentUser.email = "";
     this.currentUser.loggedIn = false;
   };
 }

@@ -1,12 +1,13 @@
 import axios from "axios";
-import { getApiRoute } from "../global";
+import { getApiRoute, VERSION } from "../global";
 
 /* Functions */
 export const generateData = () => {
   getVersion();
-  getAllUsers();
-  getAllLessons();
-  getAllSkills();
+  // getAllUsers();
+  // getAllLessons();
+  // getAllSkills();
+  // getUser(3);
   // getAllEvents();
   // generateSkillList();
   // generateLessonList();
@@ -99,18 +100,6 @@ export const signUpUser = (newName, newEmail, newPassword) => {
     })
     .then(result => {
       console.log(result.data.data);
-    })
-    .catch(error => {
-      console.log("ERROR: ", error);
-    });
-};
-
-export const getVersion = () => {
-  axios
-    .get(`${getApiRoute("users/version")}`)
-    .then(result => {
-      const version = result.data;
-      console.log(result);
     })
     .catch(error => {
       console.log("ERROR: ", error);
@@ -243,5 +232,19 @@ export const createEvent = (newLessonId, newUserId, newStartDatetime) => {
     })
     .catch(error => {
       console.log("ERROR: ", error);
+    });
+};
+
+/* Versions */
+export const getVersion = () => {
+  axios
+    .get(`${getApiRoute("versions/")}`)
+    .then(result => {
+      const version = "v" + VERSION + "." + result.data; // v{frontend ver}.{backend ver}
+      return version;
+    })
+    .catch(error => {
+      console.log("ERROR: ", error);
+      return "Version Error";
     });
 };

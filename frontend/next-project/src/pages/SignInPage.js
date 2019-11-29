@@ -16,15 +16,13 @@ const ContainerStyles = {
   alignItems: "center",
   width: "100%",
   paddingTop: "3%",
-  overflow: "auto"
+  overflow: "auto",
 };
 
 function SignInPage({ parentRouteTo }) {
   const [userSignIn, setUserSignIn] = useState({
     name: "",
-    password: "",
-    latitude: "",
-    longtitude: ""
+    password: ""
   });
 
   const {
@@ -32,21 +30,6 @@ function SignInPage({ parentRouteTo }) {
   } = useStores();
 
   const handleSignIn = () => {
-    // to get user's current location
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        console.log(position.coords);
-        setUserSignIn({
-          name: "",
-          password: "",
-          latitude: position.coords["latitude"],
-          longtitude: position.coords["longitude"]
-        });
-      },
-      error => console.log(error.message),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
-
     // console.log(userSignIn);
     axios
       .post(`${getApiRoute("sessions/signin")}`, userSignIn)
@@ -54,12 +37,13 @@ function SignInPage({ parentRouteTo }) {
         const id = result.data.data.id;
         const name = result.data.data.name;
         const profile_picture = result.data.data.profile_picture;
+        const email = result.data.data.email;
         const access_token = result.data.data.access_token;
         // console.log(result);
         console.log("sign in successfully");
         localStorage.setItem("userToken", access_token);
         localStorage.setItem("userData", JSON.stringify(name));
-        login(name, id, profile_picture);
+        login(name, id, profile_picture, email);
         parentRouteTo(route.close);
       })
       .catch(error => {
@@ -75,11 +59,7 @@ function SignInPage({ parentRouteTo }) {
           userSignIn={userSignIn}
           setUserSignIn={setUserSignIn}
         />
-        <a
-          href="#"
-          onClick={() => parentRouteTo(route.signupPage)}
-          style={{ fontSize: "15px", marginTop: "25px" }}
-        >
+        <a href="#" onClick={() => parentRouteTo(route.signupPage)} style={{ fontSize:"15px",marginTop:"25px" }}>
           No account? Sign up now!
         </a>
         <ButtonGroup

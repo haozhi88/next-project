@@ -64,17 +64,6 @@ def create():
 @lessons_api_blueprint.route('/', methods=['GET'])
 def index():
     # Retrieve lessons from database
-    jwt_user = get_jwt_identity()
-    user = User.get_or_none(User.name == jwt_user)
-    if not user:
-        return error_401("Unauthorized action")
-    
-    if not request.is_json():
-        return error_401("Request is not JSON")
-    
-    data = request.get_json()
-    teach_or_learn = data['teach']
-
     lessons = [ 
         {
             'id': lesson.id,
@@ -85,14 +74,13 @@ def index():
             'teach': lesson.teach,
             'skill_id': lesson.skill_id,
             'image_url': lesson.image_url
-        } for lesson in Lesson.select().where(Lesson.teach == teach_or_learn)
+        } for lesson in Lesson.select()
     ]
+
     if lessons:
         return success_200(lessons)
     else:
         return error_404("No lessons found")
-
-    
 
 @lessons_api_blueprint.route('/<lesson_id>', methods=['GET'])
 def show(lesson_id):

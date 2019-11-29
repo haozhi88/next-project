@@ -10,7 +10,7 @@ const SlideTransition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DialogPage({ routeTo, routeOption, dialogOpen, args }) {
+export default function DialogPage({ routeTo, routeOption, dialogOpen }) {
   return (
     <>
       <Dialog
@@ -19,7 +19,7 @@ export default function DialogPage({ routeTo, routeOption, dialogOpen, args }) {
         TransitionComponent={SlideTransition}
       >
         <SubTopNav routeTo={routeTo} routeOption={routeOption} />
-        <SubContent routeTo={routeTo} routeOption={routeOption} args={args}/>
+        <SubContent routeTo={routeTo} routeOption={routeOption} />
       </Dialog>
     </>
   );

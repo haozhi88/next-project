@@ -3,16 +3,15 @@ import { getApiRoute, VERSION } from "../global";
 
 /* Functions */
 export const generateData = () => {
-  getVersion();
+  // getVersion();
   // getAllUsers();
-  // getAllLessons();
+  getAllLessons();
   // getAllSkills();
   // getUser(3);
   // getAllEvents();
   // generateSkillList();
   // generateLessonList();
-
-  // working
+  // getAllLessonsWithFilter(false);
   // createLesson("Machine Learning", "no description", "True", 3);
   // signUpUser("test1112", "test1112@email.com", "123");
   // createEvent(4, 13, "2019-11-26 14:58:03.603560");
@@ -110,6 +109,18 @@ export const signUpUser = (newName, newEmail, newPassword) => {
 export const getAllLessons = () => {
   axios
     .get(`${getApiRoute("lessons/")}`)
+    .then(result => {
+      const lessons = result.data;
+      console.log(lessons);
+    })
+    .catch(error => {
+      console.log("ERROR: ", error);
+    });
+};
+
+export const getAllLessonsWithFilter = teach => {
+  axios
+    .get(`${getApiRoute("lessons/filter?")}teach=${teach}`)
     .then(result => {
       const lessons = result.data;
       console.log(lessons);

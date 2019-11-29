@@ -13,7 +13,7 @@ class Lesson(BaseModel):
     teach = pw.BooleanField(default = False)
     owner = pw.ForeignKeyField(User, on_delete='CASCADE', backref='lessons')
     skill = pw.ForeignKeyField(Skill, on_delete='CASCADE', backref='lessons')
-    image = pw.CharField(null=True)
+    image = pw.CharField(default="empty.jpg")
 
     @hybrid_property
     def image_url(self):

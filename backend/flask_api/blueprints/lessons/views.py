@@ -76,11 +76,33 @@ def index():
             'image_url': lesson.image_url
         } for lesson in Lesson.select()
     ]
+    return success_200(lessons)
 
-    if lessons:
-        return success_200(lessons)
+@lessons_api_blueprint.route('/filter', methods=['GET'])
+def index_with_filter():
+    # Retrieve arguments
+    teach = request.args.get('teach')
+    if (teach == "true"):
+        teach_option = True
+    elif (teach == "false"):
+        teach_option = False
     else:
-        return error_404("No lessons found")
+        return error_401("Invalid teach input")
+
+    # Retrieve lessons from database
+    lessons = [ 
+        {
+            'id': lesson.id,
+            'title': lesson.title,
+            'description': lesson.description,
+            'rating': lesson.rating,
+            'owner_id': lesson.owner_id,
+            'teach': lesson.teach,
+            'skill_id': lesson.skill_id,
+            'image_url': lesson.image_url
+        } for lesson in Lesson.select().where(Lesson.teach == teach_option)
+    ]
+    return success_200(lessons)
 
 @lessons_api_blueprint.route('/<lesson_id>', methods=['GET'])
 def show(lesson_id):
@@ -153,13 +175,13 @@ def search_lessons():
         data = [
             {
                 'id': lesson.id,
-                'title' = lesson.title,
-                'description' = lesson.description,
-                'rating' = lesson.rating,
-                'teach' = lesson.teach,
-                'owner' = lesson.owner,
-                'skill' = lesson.skill,
-                'image' = lesson.image
+                'title' : lesson.title,
+                'description' : lesson.description,
+                'rating' : lesson.rating,
+                'teach' : lesson.teach,
+                'owner' : lesson.owner,
+                'skill' : lesson.skill,
+                'image' : lesson.image
             } for lesson in final_lessons_list
         ]
         return success_201('success testing', data)

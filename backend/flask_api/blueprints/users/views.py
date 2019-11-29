@@ -6,19 +6,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 users_api_blueprint = Blueprint('users_api', __name__)
 
-@users_api_blueprint.route('/', methods=['GET'])
-def index():
-    # Return list of users' details
-    users = [ 
-        {
-            'id': user.id,
-            'name': user.name,
-            'email': user.email,
-            'profile_picture': user.profile_picture
-        } for user in User.select()
-    ]
-    return success_200(users)
-
 @users_api_blueprint.route('/signup', methods=['POST'])
 def new():
     # Check for valid json
@@ -58,6 +45,19 @@ def new():
             return error_401('Create account failed!')
     else:
         return error_401('Invalid input!')
+
+@users_api_blueprint.route('/', methods=['GET'])
+def index():
+    # Return list of users' details
+    users = [ 
+        {
+            'id': user.id,
+            'name': user.name,
+            'email': user.email,
+            'profile_picture': user.profile_picture
+        } for user in User.select()
+    ]
+    return success_200(users)
 
 @users_api_blueprint.route('/<user_id>', methods=['GET'])
 def show(user_id):

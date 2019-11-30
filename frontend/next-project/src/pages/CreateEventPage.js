@@ -11,7 +11,7 @@ import {
 import { route, getApiRoute } from "../global";
 import useStores from "../hooks/useStores";
 import { observer } from "mobx-react";
-
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 /* Import app components */
 import DialogPage from "../components/DialogPage";
 
@@ -69,11 +69,16 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
   const handleDateChange = date => {
     setSelectedDate(date);
   };
-
+  const theme = createMuiTheme({
+    palette: {
+      secondary: { main: "#1589FF" } 
+    }
+  });
   return (
     <>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <div style={{ position: "relative", top: "150px" }}>
+     <MuiThemeProvider theme={theme}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils} color="secondary">
+        <div style={{ position: "relative", top: "150px" }} color="secondary">
           <KeyboardDatePicker
             margin="normal"
             id="date-picker-dialog"
@@ -84,6 +89,7 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
             KeyboardButtonProps={{
               "aria-label": "change date"
             }}
+            color="secondary"
           />
           <KeyboardTimePicker
             margin="normal"
@@ -94,6 +100,7 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
             KeyboardButtonProps={{
               "aria-label": "change time"
             }}
+            color="secondary"
           />
         </div>
 
@@ -141,6 +148,7 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
         routeArgs={routeArgs}
         dialogOpen={dialogOpen}
       />
+      </MuiThemeProvider>
     </>
   );
 }

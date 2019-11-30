@@ -60,7 +60,7 @@ function SignUpPage({ parentRouteTo }) {
         <a
           href="#"
           onClick={() => parentRouteTo(route.signinPage)}
-          style={{ fontSize: "15px", marginTop: "25px" }}
+          style={{ fontSize: "15px", marginTop: "25px", color:"#1589FF" }}
         >
           Have an account? Sign In now!
         </a>

@@ -119,10 +119,9 @@ export default function TopNav() {
         <ListItem
           button
           onClick={() => {
-            localStorage.removeItem("userToken");
-            localStorage.removeItem("userData");
             console.log("sign out successfully");
             logout();
+            setOpen(false);
           }}
         >
           <ListItemIcon>

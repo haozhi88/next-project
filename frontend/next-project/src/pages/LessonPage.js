@@ -17,7 +17,7 @@ const ContainerStyles = {
 };
 
 export default function LessonPage({ parentRouteArgs }) {
-  const [routeArgs, setRouteArgs] = useState([]);
+  const [routeArgs, setRouteArgs] = useState(parentRouteArgs);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
   const routeTo = option => {

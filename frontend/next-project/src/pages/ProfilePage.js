@@ -12,9 +12,10 @@ import {
 import Avatar from "@material-ui/core/Avatar";
 import Rating from "@material-ui/lab/Rating";
 import axios from "axios";
+import Divider from "@material-ui/core/Divider";
 
 /* Import app components */
-import { getApiRoute } from "../global"
+import { getApiRoute } from "../global";
 import useStores from "../hooks/useStores";
 
 /* CSS Styles */
@@ -53,8 +54,8 @@ export default function ProfilePage() {
 
   const {
     userStore: { currentUser, logout }
-  } = useStores(); 
-  // useEffect((  
+  } = useStores();
+  // useEffect((
   //   axios
   //   .get(`${getApiRoute("users/")}${id}`)
   //   .then(result => {
@@ -63,7 +64,7 @@ export default function ProfilePage() {
   //   })
   //   .catch(error => {
   //     console.log("ERROR: ", error);
-  //   });) => { 
+  //   });) => {
   // })
   return (
     <>
@@ -74,7 +75,13 @@ export default function ProfilePage() {
             image="http://nextagram-lee.s3.amazonaws.com/ironman.jpg"
             title="Name"
           /> */}
-          <div style={{ display:"flex", justifyContent:"center", marginTop:"10px"}}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "10px"
+            }}
+          >
             {/* <Avatar
               alt="Lee"
               src="http://nextagram-lee.s3.amazonaws.com/ironman.jpg"
@@ -84,65 +91,44 @@ export default function ProfilePage() {
               alt={currentUser.name}
               src={currentUser.profile_picture}
               className={classes.bigAvatar}
-            />            
+            />
           </div>
-          <CardHeader style={{ textAlign: "center" }} title={currentUser.name} />
-          <div style={{   margin:"5px", borderRadius: 16, border: "1px solid #1589FF", color:"#393333",}}>
-          <CardContent style={{ color:"#393333"}}>
-            <Typography
-              variant="subtitle1"
-              component="p"
-              align="center"
-            >
+          <CardHeader
+            style={{ textAlign: "center" }}
+            title={currentUser.name}
+          />
+          <CardContent style={{ color: "#393333", padding: 0 }}>
+            <Divider />
+            <Typography variant="subtitle1" component="p" align="center">
               <strong>Learning Rating</strong>
             </Typography>
-            <Box component="fieldset" mb={3} borderColor="transparent">
+            <Box component="fieldset" borderColor="transparent">
               <Rating name="read-only" value={learnRating} readOnly />
             </Box>
-            <Typography
-              variant="subtitle1"
-              component="p"
-              align="center"
-            >
+            <Typography variant="subtitle1" component="p" align="center">
               <strong>Teaching Rating</strong>
             </Typography>
-            <Box component="fieldset" mb={3} borderColor="transparent">
+            <Box component="fieldset" borderColor="transparent">
               <Rating name="read-only" value={teachRating} readOnly />
             </Box>
           </CardContent>
-          <CardContent style={{ color:"#393333"}}>
-            <Typography
-              variant="subtitle1"
-              component="p"
-              align="justify"
-            >
+          <Divider />
+          <CardContent style={{ color: "#393333" }}>
+            <Typography variant="subtitle1" component="p" align="center">
               <strong>Email:</strong>
             </Typography>
-            <Typography
-              variant="body2"
-              component="p"
-              align="justify"
-            >
+            <Typography variant="body2" component="p" align="center">
               {currentUser.email}
             </Typography>
           </CardContent>
-          <CardContent style={{ color:"#393333"}}>
-            <Typography
-              variant="subtitle1"
-              component="p"
-              align="justify"
-            >
+          <CardContent style={{ color: "#393333" }}>
+            <Typography variant="subtitle1" component="p" align="center">
               <strong>Skills:</strong>
             </Typography>
-            <Typography
-              variant="body2"
-              component="p"
-              align="justify"
-            >
+            <Typography variant="body2" component="p" align="center">
               Skills
             </Typography>
           </CardContent>
-          </div>
         </Card>
       </div>
     </>

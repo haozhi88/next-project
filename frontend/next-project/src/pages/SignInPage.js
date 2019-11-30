@@ -16,7 +16,7 @@ const ContainerStyles = {
   alignItems: "center",
   width: "100%",
   paddingTop: "3%",
-  overflow: "auto",
+  overflow: "auto"
 };
 
 function SignInPage({ parentRouteTo }) {
@@ -41,15 +41,12 @@ function SignInPage({ parentRouteTo }) {
         const access_token = result.data.data.access_token;
         // console.log(result);
         console.log("sign in successfully");
-        localStorage.setItem("userToken", access_token);
-        localStorage.setItem("userData", JSON.stringify(name));
-        login(name, id, profile_picture, email);
-        parentRouteTo(route.close);
+        login(name, id, profile_picture, email, access_token);
       })
       .catch(error => {
         console.log("ERROR: ", error);
-        parentRouteTo(route.close);
       });
+    parentRouteTo(route.close);
   };
   return (
     <>
@@ -59,7 +56,11 @@ function SignInPage({ parentRouteTo }) {
           userSignIn={userSignIn}
           setUserSignIn={setUserSignIn}
         />
-        <a href="#" onClick={() => parentRouteTo(route.signupPage)} style={{ fontSize:"15px",marginTop:"25px" }}>
+        <a
+          href="#"
+          onClick={() => parentRouteTo(route.signupPage)}
+          style={{ fontSize: "15px", marginTop: "25px" }}
+        >
           No account? Sign up now!
         </a>
         <ButtonGroup

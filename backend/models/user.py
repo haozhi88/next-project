@@ -10,3 +10,5 @@ class User(BaseModel, UserMixin):
     email = pw.CharField(unique=True, null=False)
     password = pw.CharField(null=False)
     profile_picture = pw.CharField(default='https://www.medaid.co.uk/wp-content/uploads/2019/04/default.jpg')
+    latitude = pw.TextField(default=3.135066)
+    longtitude = pw.TextField(default=101.629984)

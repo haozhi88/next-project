@@ -1,5 +1,5 @@
 /* Import package components */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, ButtonGroup } from "@material-ui/core";
 import { route, getApiRoute } from "../global";
@@ -29,23 +29,45 @@ function SignInPage({ parentRouteTo }) {
     userStore: { login }
   } = useStores();
 
+  const [latitude, setLatitude] = useState(null);
+  const [longtitude, setLongtitude] = useState(null);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        setLatitude(position.coords.latitude);
+        console.log(position.coords.latitude);
+        setLongtitude(position.coords.longitude);
+        console.log(longtitude);
+        // const location = JSON.stringify(position);
+      },
+      error => console.log(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+  }, []);
+
   const handleSignIn = () => {
-    // console.log(userSignIn);
+
     axios
-      .post(`${getApiRoute("sessions/signin")}`, userSignIn)
+      .post(`${getApiRoute("sessions/signin")}`, {
+        userSignIn,
+        latitude: latitude,
+        longtitude: longtitude
+      })
       .then(result => {
         const id = result.data.data.id;
         const name = result.data.data.name;
         const profile_picture = result.data.data.profile_picture;
         const email = result.data.data.email;
         const access_token = result.data.data.access_token;
-        // console.log(result);
+        console.log(result);
         console.log("sign in successfully");
-        login(name, id, profile_picture, email, access_token);
+        login(name, id, profile_picture, email, access_token, latitude, longtitude);
       })
       .catch(error => {
         console.log("ERROR: ", error);
       });
+    console.log("gtest");
     parentRouteTo(route.close);
   };
   return (

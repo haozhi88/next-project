@@ -9,7 +9,7 @@ class UserStore {
     loggedIn: false
   };
 
-  login = (name, id, profile_picture, email, access_token) => {
+  login = (name, id, profile_picture, email, access_token, latitude, longtitude) => {
     this.currentUser.name = name;
     this.currentUser.id = id;
     this.currentUser.profile_picture = profile_picture;
@@ -20,6 +20,11 @@ class UserStore {
     localStorage.setItem("userPic", JSON.stringify(profile_picture));
     localStorage.setItem("userEmail", JSON.stringify(email));
     localStorage.setItem("userToken", access_token);
+    localStorage.setItem('userLatitude', JSON.stringify(latitude));
+    localStorage.setItem('userLongtitude', JSON.stringify(longtitude))
+    // localStorage.setItem('userLatitude', 3.081580) //test values for Geolocation
+    // localStorage.setItem('userLongtitude', 101.583552) //test values for Geolocation
+
   };
 
   logout = () => {
@@ -33,6 +38,9 @@ class UserStore {
     localStorage.removeItem("userPic");
     localStorage.removeItem("userEmail");
     localStorage.removeItem("userToken");
+    localStorage.removeItem("userLatitude");
+    localStorage.removeItem("userLongtitude");
+
   };
 
   checkUserLoggedIn = () => {

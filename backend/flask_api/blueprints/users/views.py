@@ -67,7 +67,9 @@ def show(user_id):
         'id': user.id, 
         'name': user.name,
         'email': user.email,
-        'profile_picture': user.profile_picture
+        'profile_picture': user.profile_picture,
+        'latitude': user.latitude,
+        'longtitude': user.longtitude
     } 
     return success_201(f"Returned details of user with id: {data['id']}", data)
 

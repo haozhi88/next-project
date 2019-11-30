@@ -12,6 +12,7 @@ import {
 import Avatar from "@material-ui/core/Avatar";
 import Rating from "@material-ui/lab/Rating";
 import axios from "axios";
+import Divider from '@material-ui/core/Divider';
 
 /* Import app components */
 import { getApiRoute } from "../global"
@@ -87,8 +88,8 @@ export default function ProfilePage() {
             />            
           </div>
           <CardHeader style={{ textAlign: "center" }} title={currentUser.name} />
-          <div style={{   margin:"5px", borderRadius: 16, border: "1px solid #1589FF", color:"#393333",}}>
-          <CardContent style={{ color:"#393333"}}>
+          <CardContent style={{ color:"#393333", padding:0}}>
+          <Divider/>
             <Typography
               variant="subtitle1"
               component="p"
@@ -96,7 +97,7 @@ export default function ProfilePage() {
             >
               <strong>Learning Rating</strong>
             </Typography>
-            <Box component="fieldset" mb={3} borderColor="transparent">
+            <Box component="fieldset" borderColor="transparent">
               <Rating name="read-only" value={learnRating} readOnly />
             </Box>
             <Typography
@@ -106,22 +107,23 @@ export default function ProfilePage() {
             >
               <strong>Teaching Rating</strong>
             </Typography>
-            <Box component="fieldset" mb={3} borderColor="transparent">
+            <Box component="fieldset" borderColor="transparent">
               <Rating name="read-only" value={teachRating} readOnly />
             </Box>
           </CardContent>
+          <Divider/>
           <CardContent style={{ color:"#393333"}}>
             <Typography
               variant="subtitle1"
               component="p"
-              align="justify"
+              align="center"
             >
               <strong>Email:</strong>
             </Typography>
             <Typography
               variant="body2"
               component="p"
-              align="justify"
+              align="center"
             >
               {currentUser.email}
             </Typography>
@@ -130,19 +132,18 @@ export default function ProfilePage() {
             <Typography
               variant="subtitle1"
               component="p"
-              align="justify"
+              align="center"
             >
               <strong>Skills:</strong>
             </Typography>
             <Typography
               variant="body2"
               component="p"
-              align="justify"
+              align="center"
             >
               Skills
             </Typography>
           </CardContent>
-          </div>
         </Card>
       </div>
     </>

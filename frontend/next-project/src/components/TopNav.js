@@ -123,6 +123,7 @@ export default function TopNav() {
             localStorage.removeItem("userData");
             console.log("sign out successfully");
             logout();
+            setOpen(false);
           }}
         >
           <ListItemIcon>

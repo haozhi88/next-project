@@ -51,6 +51,7 @@ export default function TopNav() {
     userStore: { currentUser, logout }
   } = useStores();
   const [open, setOpen] = useState(false);
+  const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
   const routeTo = option => {
@@ -243,6 +244,7 @@ export default function TopNav() {
       <DialogPage
         routeTo={routeTo}
         routeOption={routeOption}
+        routeArgs={routeArgs}
         dialogOpen={dialogOpen}
       />
     </>

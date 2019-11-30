@@ -10,7 +10,7 @@ import SignInPage from "../pages/SignInPage";
 import SignUpPage from "../pages/SignUpPage";
 import ProfilePage from "../pages/ProfilePage";
 import LessonPage from "../pages/LessonPage";
-import BookmarksPage from "../pages/BookmarksPage";
+import BookmarkListPage from "../pages/BookmarkListPage";
 import CreateEventPage from "../pages/CreateEventPage";
 import CreateLessonPage from "../pages/CreateLessonPage";
 import RatingPage from "../pages/RatingPage";
@@ -56,7 +56,10 @@ export default function SubContent({ routeTo, routeOption, routeArgs }) {
         );
       case route.bookmarkListPage:
         return (
-          <BookmarksPage parentRouteTo={routeTo} parentRouteArgs={routeArgs} />
+          <BookmarkListPage
+            parentRouteTo={routeTo}
+            parentRouteArgs={routeArgs}
+          />
         );
       case route.signinPage:
         return (
@@ -115,7 +118,6 @@ export default function SubContent({ routeTo, routeOption, routeArgs }) {
         return new Error("This view does not exist");
     }
   }
-
   return (
     <>
       <div style={ContainerStyles}>{renderView()}</div>

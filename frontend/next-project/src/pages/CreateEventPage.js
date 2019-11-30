@@ -13,6 +13,7 @@ import { route } from "../global";
 import DialogPage from "../components/DialogPage";
 
 export default function CreateEventPage({ parentRouteTo }) {
+  const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
   const routeTo = option => {
@@ -42,7 +43,7 @@ export default function CreateEventPage({ parentRouteTo }) {
   return (
     <>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <div style={{position: "relative", top: "150px"}}>
+        <div style={{ position: "relative", top: "150px" }}>
           <KeyboardDatePicker
             margin="normal"
             id="date-picker-dialog"
@@ -65,18 +66,45 @@ export default function CreateEventPage({ parentRouteTo }) {
             }}
           />
         </div>
-  
+
         <br />
         <div style={ContainerStyles}>
-          <ButtonGroup fullWidth aria-label="full width button group" style={{ position: "absolute", bottom: 0, height:"7vh"}}>
-            <Button onClick={() => parentRouteTo(route.close)}  style={{ padding:"10px", backgroundColor:"#f08080" , color:"#721C24", fontSize: "16px", borderRadius: 0}}>Cancel</Button>
-            <Button onClick={() => routeTo(route.todo)} style={{ padding:"10px",backgroundColor:"#5cb3ff", color:"#004085", fontSize: "16px", borderRadius: 0}}>Submit</Button>
+          <ButtonGroup
+            fullWidth
+            aria-label="full width button group"
+            style={{ position: "absolute", bottom: 0, height: "7vh" }}
+          >
+            <Button
+              onClick={() => parentRouteTo(route.close)}
+              style={{
+                padding: "10px",
+                backgroundColor: "#f08080",
+                color: "#721C24",
+                fontSize: "16px",
+                borderRadius: 0
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={() => routeTo(route.todo)}
+              style={{
+                padding: "10px",
+                backgroundColor: "#5cb3ff",
+                color: "#004085",
+                fontSize: "16px",
+                borderRadius: 0
+              }}
+            >
+              Submit
+            </Button>
           </ButtonGroup>
         </div>
       </MuiPickersUtilsProvider>
       <DialogPage
         routeTo={routeTo}
         routeOption={routeOption}
+        routeArgs={routeArgs}
         dialogOpen={dialogOpen}
       />
     </>

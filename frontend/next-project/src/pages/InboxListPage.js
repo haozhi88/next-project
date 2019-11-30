@@ -6,8 +6,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import Divider from '@material-ui/core/Divider';
-
+import Divider from "@material-ui/core/Divider";
 
 /* Import app components */
 import DialogPage from "../components/DialogPage";
@@ -17,9 +16,9 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     height: "120px",
     width: "96vw",
-    borderRadius:16,
+    borderRadius: 16,
     marginTop: "10px",
-    border: "1px solid #1589FF", 
+    border: "1px solid #1589FF"
   },
   cover: {
     width: 151
@@ -28,6 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function InboxListCard() {
   const classes = useStyles();
+  const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
   const routeTo = option => {
@@ -47,7 +47,10 @@ export default function InboxListCard() {
           </div>
           <Divider orientation="vertical" />
           <div>
-            <CardContent style={{ color:"#393333", fontSize: "10px" }} align="left">
+            <CardContent
+              style={{ color: "#393333", fontSize: "10px" }}
+              align="left"
+            >
               <Typography>Username</Typography>
               <Typography>Message: Hello World!</Typography>
             </CardContent>
@@ -57,6 +60,7 @@ export default function InboxListCard() {
       <DialogPage
         routeTo={routeTo}
         routeOption={routeOption}
+        routeArgs={routeArgs}
         dialogOpen={dialogOpen}
       />
     </>

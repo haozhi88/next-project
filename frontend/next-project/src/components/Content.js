@@ -13,6 +13,7 @@ function Content() {
   const {
     userStore: { currentUser, logout }
   } = useStores();
+  const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
   const routeTo = option => {
@@ -31,14 +32,14 @@ function Content() {
       <Grid item>
         <Button
           variant="outlined"
-          color="primary"
+          color="secondary"
           onClick={() => routeTo(route.inboxListPage)}
         >
           InboxList
         </Button>
         <Button
           variant="outlined"
-          color="primary"
+          color="secondary"
           onClick={() => routeTo(route.eventListPage)}
         >
           EventList
@@ -59,7 +60,7 @@ function Content() {
         </Button>
         <Button
           variant="outlined"
-          color="primary"
+          color="secondary"
           onClick={() => routeTo(route.bookmarkListPage)}
         >
           BookmarkList
@@ -100,13 +101,6 @@ function Content() {
         <Button
           variant="outlined"
           color="primary"
-          onClick={() => routeTo(route.lessonPage)}
-        >
-          Lesson
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
           onClick={() => routeTo(route.createLearnPage)}
         >
           CreateLearn
@@ -120,14 +114,14 @@ function Content() {
         </Button>
         <Button
           variant="outlined"
-          color="primary"
+          color="secondary"
           onClick={() => routeTo(route.createEventPage)}
         >
           CreateEvent
         </Button>
         <Button
           variant="outlined"
-          color="primary"
+          color="secondary"
           onClick={() => routeTo(route.ratingPage)}
         >
           Rating
@@ -146,6 +140,7 @@ function Content() {
       <DialogPage
         routeTo={routeTo}
         routeOption={routeOption}
+        routeArgs={routeArgs}
         dialogOpen={dialogOpen}
       />
     </>

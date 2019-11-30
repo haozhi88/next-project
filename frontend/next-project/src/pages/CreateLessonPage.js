@@ -19,6 +19,7 @@ const ContainerStyles = {
 };
 
 export default function CreateLessonPage({ parentRouteTo, teach }) {
+  const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [userFile, setUploadFile] = useState();
@@ -104,6 +105,7 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
       <DialogPage
         routeTo={routeTo}
         routeOption={routeOption}
+        routeArgs={routeArgs}
         dialogOpen={dialogOpen}
       />
     </>

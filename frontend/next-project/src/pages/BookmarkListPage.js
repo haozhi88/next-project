@@ -7,7 +7,8 @@ import DialogPage from "../components/DialogPage";
 import SearchBar from "../components/SearchBar";
 import ListCard from "../components/ListCard";
 
-export default function BookmarksPage(props) {
+export default function BookmarkListPage() {
+  const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
   const routeTo = option => {
@@ -33,6 +34,7 @@ export default function BookmarksPage(props) {
       <DialogPage
         routeTo={routeTo}
         routeOption={routeOption}
+        routeArgs={routeArgs}
         dialogOpen={dialogOpen}
       />
     </div>

@@ -1,5 +1,5 @@
 /* Import package components */
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import CloseIcon from "@material-ui/icons/Close";
@@ -106,7 +106,7 @@ function Upload({ userFile, setUploadFile }) {
       <input type="hidden" value={setUploadFile(myFiles)}></input>
       <div style={thumbInner}>
         <CloseIcon onClick={removeFile(file)} />
-        <img src={file.preview} style={img} />
+        <img src={file.preview} style={img} alt="preview image" />
       </div>
     </div>
   ));

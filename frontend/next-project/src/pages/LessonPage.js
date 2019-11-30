@@ -17,6 +17,7 @@ const ContainerStyles = {
 };
 
 export default function LessonPage({ parentRouteArgs }) {
+  const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
   const routeTo = option => {
@@ -78,6 +79,7 @@ export default function LessonPage({ parentRouteArgs }) {
       <DialogPage
         routeTo={routeTo}
         routeOption={routeOption}
+        routeArgs={routeArgs}
         dialogOpen={dialogOpen}
       />
     </>

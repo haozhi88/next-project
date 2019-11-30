@@ -66,7 +66,7 @@ export default function TopNav() {
   //profile picture if currentUser loggedIn
   function profilePicture() {
     if (currentUser.loggedIn) {
-      return [
+      return (
         <ListSubheader
           component="div"
           id="nested-list-subheader"
@@ -87,9 +87,9 @@ export default function TopNav() {
             </ListItemText>
           </ListItem>
         </ListSubheader>
-      ];
+      );
     } else {
-      return [
+      return (
         <ListSubheader
           component="div"
           id="nested-list-subheader"
@@ -108,14 +108,14 @@ export default function TopNav() {
             </ListItemText>
           </ListItem>
         </ListSubheader>
-      ];
+      );
     }
   }
 
   //sign in button if currentUser logged in
   function signInButton() {
     if (currentUser.loggedIn) {
-      return [
+      return (
         <ListItem
           button
           onClick={() => {
@@ -132,9 +132,9 @@ export default function TopNav() {
             Sign Out
           </ListItemText>
         </ListItem>
-      ];
+      );
     } else {
-      return [
+      return (
         <ListItem button onClick={() => routeTo(route.signinPage)}>
           <ListItemIcon>
             <ExitToAppIcon style={iconColor} />
@@ -143,7 +143,7 @@ export default function TopNav() {
             Sign Up / Login
           </ListItemText>
         </ListItem>
-      ];
+      );
     }
   }
   return (

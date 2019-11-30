@@ -106,7 +106,7 @@ function Upload({ userFile, setUploadFile }) {
       <input type="hidden" value={setUploadFile(myFiles)}></input>
       <div style={thumbInner}>
         <CloseIcon onClick={removeFile(file)} />
-        <img src={file.preview} style={img} alt="preview image" />
+        <img src={file.preview} style={img} alt="preview" />
       </div>
     </div>
   ));

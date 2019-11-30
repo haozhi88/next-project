@@ -1,5 +1,6 @@
 /* Import package components */
 import React, { useState } from "react";
+import axios from "axios";
 import DateFnsUtils from "@date-io/date-fns";
 import { Button, ButtonGroup } from "@material-ui/core";
 import {
@@ -7,12 +8,17 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker
 } from "@material-ui/pickers";
-import { route } from "../global";
+import { route, getApiRoute } from "../global";
+import useStores from "../hooks/useStores";
+import { observer } from "mobx-react";
 
 /* Import app components */
 import DialogPage from "../components/DialogPage";
 
-export default function CreateEventPage({ parentRouteTo }) {
+function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
+  const {
+    userStore: { currentUser, getToken }
+  } = useStores();
   const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -23,6 +29,30 @@ export default function CreateEventPage({ parentRouteTo }) {
       setDialogOpen(true);
     }
     setRouteOption(option);
+  };
+
+  const handleCreate = () => {
+    const lesson = parentRouteArgs;
+    console.log("lesson name: " + lesson.title + ", lesson id: " + lesson.id);
+    console.log("date: " + selectedDate);
+    // axios
+    //   .post(
+    //     `${getApiRoute("events/create")}`,
+    //     {
+    //       lesson_id: lesson.id,
+    //       user_id: currentUser.id,
+    //       start_datetime: "2019-11-30 14:13:03.603560"
+    //     },
+    //     getToken()
+    //   )
+    //   .then(result => {
+    //     console.log(result);
+    //     console.log("create event successfully");
+    //   })
+    //   .catch(error => {
+    //     console.log("ERROR: ", error);
+    //   });
+    parentRouteTo(route.close);
   };
 
   /* CSS Styles */
@@ -72,7 +102,11 @@ export default function CreateEventPage({ parentRouteTo }) {
           <ButtonGroup
             fullWidth
             aria-label="full width button group"
-            style={{ position: "absolute", bottom: 0, height: "7vh" }}
+            style={{
+              position: "absolute",
+              bottom: 0,
+              height: "7vh"
+            }}
           >
             <Button
               onClick={() => parentRouteTo(route.close)}
@@ -87,7 +121,7 @@ export default function CreateEventPage({ parentRouteTo }) {
               Cancel
             </Button>
             <Button
-              onClick={() => routeTo(route.todo)}
+              onClick={() => handleCreate()}
               style={{
                 padding: "10px",
                 backgroundColor: "#5cb3ff",
@@ -110,3 +144,5 @@ export default function CreateEventPage({ parentRouteTo }) {
     </>
   );
 }
+
+export default observer(CreateEventPage);

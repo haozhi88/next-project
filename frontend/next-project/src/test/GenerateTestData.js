@@ -36,10 +36,17 @@ export const signInUser = (username, userpassword) => {
       password: userpassword
     })
     .then(result => {
+      const id = result.data.data.id;
+      const name = result.data.data.name;
+      const profile_picture = result.data.data.profile_picture;
+      const email = result.data.data.email;
       const access_token = result.data.data.access_token;
-      console.log(access_token);
+      // console.log(access_token);
+      localStorage.setItem("userName", JSON.stringify(name));
+      localStorage.setItem("userID", JSON.stringify(id));
+      localStorage.setItem("userPic", JSON.stringify(profile_picture));
+      localStorage.setItem("userEmail", JSON.stringify(email));
       localStorage.setItem("userToken", access_token);
-      localStorage.setItem("userData", JSON.stringify(username));
     })
     .catch(error => {
       console.log("ERROR: ", error);

@@ -33,25 +33,24 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
 
   const handleCreate = () => {
     const lesson = parentRouteArgs;
-    console.log("lesson name: " + lesson.title + ", lesson id: " + lesson.id);
     console.log("date: " + selectedDate);
-    // axios
-    //   .post(
-    //     `${getApiRoute("events/create")}`,
-    //     {
-    //       lesson_id: lesson.id,
-    //       user_id: currentUser.id,
-    //       start_datetime: "2019-11-30 14:13:03.603560"
-    //     },
-    //     getToken()
-    //   )
-    //   .then(result => {
-    //     console.log(result);
-    //     console.log("create event successfully");
-    //   })
-    //   .catch(error => {
-    //     console.log("ERROR: ", error);
-    //   });
+    axios
+      .post(
+        `${getApiRoute("events/create")}`,
+        {
+          lesson_id: lesson.id,
+          user_id: currentUser.id,
+          start_datetime: "2019-11-30 14:13:03.603560"
+        },
+        getToken()
+      )
+      .then(result => {
+        console.log(result);
+        console.log("create event successfully");
+      })
+      .catch(error => {
+        console.log("ERROR: ", error);
+      });
     parentRouteTo(route.close);
   };
 
@@ -71,83 +70,83 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
   };
   const theme = createMuiTheme({
     palette: {
-      secondary: { main: "#1589FF" } 
+      secondary: { main: "#1589FF" }
     }
   });
   return (
     <>
-     <MuiThemeProvider theme={theme}>
-      <MuiPickersUtilsProvider utils={DateFnsUtils} color="secondary">
-        <div style={{ position: "relative", top: "150px" }} color="secondary">
-          <KeyboardDatePicker
-            margin="normal"
-            id="date-picker-dialog"
-            label="Select Date"
-            format="MM/dd/yyyy"
-            value={selectedDate}
-            onChange={handleDateChange}
-            KeyboardButtonProps={{
-              "aria-label": "change date"
-            }}
-            color="secondary"
-          />
-          <KeyboardTimePicker
-            margin="normal"
-            id="time-picker"
-            label="Select Time"
-            value={selectedDate}
-            onChange={handleDateChange}
-            KeyboardButtonProps={{
-              "aria-label": "change time"
-            }}
-            color="secondary"
-          />
-        </div>
+      <MuiThemeProvider theme={theme}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils} color="secondary">
+          <div style={{ position: "relative", top: "150px" }} color="secondary">
+            <KeyboardDatePicker
+              margin="normal"
+              id="date-picker-dialog"
+              label="Select Date"
+              format="MM/dd/yyyy"
+              value={selectedDate}
+              onChange={handleDateChange}
+              KeyboardButtonProps={{
+                "aria-label": "change date"
+              }}
+              color="secondary"
+            />
+            <KeyboardTimePicker
+              margin="normal"
+              id="time-picker"
+              label="Select Time"
+              value={selectedDate}
+              onChange={handleDateChange}
+              KeyboardButtonProps={{
+                "aria-label": "change time"
+              }}
+              color="secondary"
+            />
+          </div>
 
-        <br />
-        <div style={ContainerStyles}>
-          <ButtonGroup
-            fullWidth
-            aria-label="full width button group"
-            style={{
-              position: "absolute",
-              bottom: 0,
-              height: "7vh"
-            }}
-          >
-            <Button
-              onClick={() => parentRouteTo(route.close)}
+          <br />
+          <div style={ContainerStyles}>
+            <ButtonGroup
+              fullWidth
+              aria-label="full width button group"
               style={{
-                padding: "10px",
-                backgroundColor: "#f08080",
-                color: "#721C24",
-                fontSize: "16px",
-                borderRadius: 0
+                position: "absolute",
+                bottom: 0,
+                height: "7vh"
               }}
             >
-              Cancel
-            </Button>
-            <Button
-              onClick={() => handleCreate()}
-              style={{
-                padding: "10px",
-                backgroundColor: "#5cb3ff",
-                color: "#004085",
-                fontSize: "16px",
-                borderRadius: 0
-              }}
-            >
-              Submit
-            </Button>
-          </ButtonGroup>
-        </div>
-      </MuiPickersUtilsProvider>
-      <DialogPage
-        routeTo={routeTo}
-        routeOption={routeOption}
-        routeArgs={routeArgs}
-        dialogOpen={dialogOpen}
-      />
+              <Button
+                onClick={() => parentRouteTo(route.close)}
+                style={{
+                  padding: "10px",
+                  backgroundColor: "#f08080",
+                  color: "#721C24",
+                  fontSize: "16px",
+                  borderRadius: 0
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => handleCreate()}
+                style={{
+                  padding: "10px",
+                  backgroundColor: "#5cb3ff",
+                  color: "#004085",
+                  fontSize: "16px",
+                  borderRadius: 0
+                }}
+              >
+                Submit
+              </Button>
+            </ButtonGroup>
+          </div>
+        </MuiPickersUtilsProvider>
+        <DialogPage
+          routeTo={routeTo}
+          routeOption={routeOption}
+          routeArgs={routeArgs}
+          dialogOpen={dialogOpen}
+        />
       </MuiThemeProvider>
     </>
   );

@@ -28,7 +28,7 @@ export default function LessonListPage({ teach }) {
     axios
       .get(`${getApiRoute("lessons/filter?")}teach=${teach}`)
       .then(result => {
-        // console.log(result.data);
+        console.log(result.data);
         setLessonsData({
           datas: result.data
         });
@@ -41,7 +41,7 @@ export default function LessonListPage({ teach }) {
   return (
     <div>
       <div style={{ width: "100vw" }}>
-        <SearchBar />
+        <SearchBar setLessonsData={setLessonsData} teach={teach}/>
       </div>
       <div
         style={{ marginTop: "10px", display: "grid", justifyContent: "center" }}

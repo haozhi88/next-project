@@ -1,7 +1,8 @@
 /* Import package components */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Grid, Button } from "@material-ui/core";
-import { route } from "../global";
+import { route, getApiRoute } from "../global";
 import useStores from "../hooks/useStores";
 import { observer } from "mobx-react";
 
@@ -24,7 +25,13 @@ function Content() {
     }
     setRouteOption(option);
   };
-  checkUserLoggedIn();
+  useEffect(() => {
+    // Check if user already logged in
+    if (!currentUser.loggedIn) {
+      checkUserLoggedIn();
+    }
+  }, []);
+
   return (
     <>
       <h1>Content</h1>

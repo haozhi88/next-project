@@ -128,7 +128,6 @@ def update_datetime(event_id):
             return error_401('Event not found!')
     else:
         return error_401('User not found!')
-    
 
 @events_api_blueprint.route('/<event_id>/status', methods=['POST'])
 @jwt_required
@@ -191,7 +190,7 @@ def update_review(event_id):
         # Retrieve event from database
         event = Event.get_or_none(event_id == Event.id)
         if event:
-            query = Event.update(rating=rating, recommend=recommend, comment=comment).where(Event.id == event_id)
+            query = Event.update(rating=rating, recommend=recommend, comment=comment, status="reviewed").where(Event.id == event_id)
             if query.execute():
                 data = {
                     'id': event.id,

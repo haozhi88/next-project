@@ -36,7 +36,7 @@ export default function LessonPage({ parentRouteArgs }) {
           fullWidth
           aria-label="full width button group"
           style={{
-            position: "relative ",
+            position: "absolute",
             bottom: 0,
             height: "7vh"
           }}

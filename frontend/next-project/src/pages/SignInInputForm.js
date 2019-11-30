@@ -1,10 +1,19 @@
 /* Import package components */
 import React from "react";
 import { Container, TextField } from "@material-ui/core";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+
+
+const theme = createMuiTheme({
+  palette: {
+    secondary: { main: "#1589FF" } 
+  }
+});
 
 export default function SignInInputForm({ userSignIn, setUserSignIn }) {
   return (
     <>
+     <MuiThemeProvider theme={theme}>
       <Container maxWidth="sm">
         {/* Username */}
         <TextField
@@ -25,6 +34,7 @@ export default function SignInInputForm({ userSignIn, setUserSignIn }) {
               password: userSignIn.password
             })
           }
+          color="secondary"
         />
 
         {/* Password */}
@@ -46,8 +56,10 @@ export default function SignInInputForm({ userSignIn, setUserSignIn }) {
               password: e.target.value
             })
           }
+          color="secondary"
         />
       </Container>
+      </MuiThemeProvider>
     </>
   );
 }

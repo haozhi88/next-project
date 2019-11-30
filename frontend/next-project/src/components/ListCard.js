@@ -41,7 +41,6 @@ export default function ListCard({ lesson }) {
           </CardContent>
         </div>
       </Card>
-      <br />
     </>
   );
 }

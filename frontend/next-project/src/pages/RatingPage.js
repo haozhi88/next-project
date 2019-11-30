@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Button, ButtonGroup } from "@material-ui/core";
 import { route, getApiRoute } from "../global";
+import useStores from "../hooks/useStores";
 
 /* Import app components */
 import RatingInputForm from "../pages/RatingInputForm";
@@ -17,6 +18,9 @@ const ContainerStyles = {
 };
 
 export default function RatingPage({ parentRouteTo }) {
+  const {
+    userStore: { getToken }
+  } = useStores();
   const [userReview, setUserReview] = useState({
     rating: 5,
     recommend: "True",
@@ -26,7 +30,11 @@ export default function RatingPage({ parentRouteTo }) {
     console.log(userReview);
     const event_id = 3; //hardcode
     axios
-      .post(`${getApiRoute("events/")}${event_id}/review`, userReview)
+      .post(
+        `${getApiRoute("events/")}${event_id}/review`,
+        userReview,
+        getToken()
+      )
       .then(result => {
         console.log(result);
         console.log("submit rating successfully");

@@ -44,7 +44,7 @@ export default function LessonListPage({ teach }) {
         <SearchBar setLessonsData={setLessonsData} teach={teach}/>
       </div>
       <div
-        style={{ marginTop: "10px", display: "grid", justifyContent: "center" }}
+        style={{ marginTop: "10px", display: "grid", justifyContent: "center", gridGap:"10px" }}
         id="cardBox"
       >
         {lessonsData.datas.map(lesson => (

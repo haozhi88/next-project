@@ -1,10 +1,10 @@
 /* Configurations */
-const LOCAL = true;
+const LOCAL = false;
 const LOCAL_ROUTE = "http://127.0.0.1:5000/api/v1/";
 const SERVER_ROUTE = "https://meetmymentor02.herokuapp.com/api/v1/";
 
 /* Constants */
-export const VERSION = 1;
+export const VERSION = 3;
 
 export const route = {
   close: 0,
@@ -44,6 +44,57 @@ export const subTitle = [
   "Event", //14
   "Version", //15
   "Todo" //16
+];
+
+export const skills = [
+  {
+    name: "Cooking",
+    id: 2
+  },
+  {
+    name: "Literature",
+    id: 3
+  },
+  {
+    name: "Computer Science",
+    id: 4
+  },
+  {
+    name: "Chemistry",
+    id: 5
+  },
+  {
+    name: "Language",
+    id: 6
+  },
+  {
+    name: "Physics",
+    id: 7
+  },
+  {
+    name: "Biology",
+    id: 8
+  },
+  {
+    name: "Information Technology",
+    id: 9
+  },
+  {
+    name: "Mathematics",
+    id: 10
+  },
+  {
+    name: "Geography",
+    id: 11
+  },
+  {
+    name: "Health and Fitness",
+    id: 12
+  },
+  {
+    name: "Travel",
+    id: 13
+  }
 ];
 
 export const getApiRoute = route => {

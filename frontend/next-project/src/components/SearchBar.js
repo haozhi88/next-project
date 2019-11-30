@@ -29,20 +29,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SearchBar() {
+export default function SearchBar({setLessonsData, teach}) {
   const classes = useStyles();
   const [record, setRecord]=useState(false);
   const [searchValue, setSearchValue] = useState("");
   const searchLessons = event => {
     event.preventDefault();
     axios
-      .get(`${getApiRoute("lessons/search_lessons")}`, {
-        params: {
-          search_value: searchValue
-        }
-      })
-      .then(response => {
+      .get(`${getApiRoute("lessons/search_lessons?")}search_value=${searchValue}&teach=${teach}`).then(response => {
         console.log(response);
+        setLessonsData({
+          datas: response.data.data
+        });
+        setSearchValue('')
       })
       .catch(err => {
         console.log(err);

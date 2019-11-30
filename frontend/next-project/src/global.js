@@ -46,6 +46,57 @@ export const subTitle = [
   "Todo" //16
 ];
 
+export const skills = [
+  {
+    name: "Cooking",
+    id: 2
+  },
+  {
+    name: "Literature",
+    id: 3
+  },
+  {
+    name: "Computer Science",
+    id: 4
+  },
+  {
+    name: "Chemistry",
+    id: 5
+  },
+  {
+    name: "Language",
+    id: 6
+  },
+  {
+    name: "Physics",
+    id: 7
+  },
+  {
+    name: "Biology",
+    id: 8
+  },
+  {
+    name: "Information Technology",
+    id: 9
+  },
+  {
+    name: "Mathematics",
+    id: 10
+  },
+  {
+    name: "Geography",
+    id: 11
+  },
+  {
+    name: "Health and Fitness",
+    id: 12
+  },
+  {
+    name: "Travel",
+    id: 13
+  }
+];
+
 export const getApiRoute = route => {
   return (LOCAL ? LOCAL_ROUTE : SERVER_ROUTE) + route;
 };

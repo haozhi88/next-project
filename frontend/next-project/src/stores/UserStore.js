@@ -42,7 +42,6 @@ class UserStore {
     const email = JSON.parse(localStorage.getItem("userEmail"));
     const token = localStorage.getItem("userToken");
     if (name && token) {
-      console.log("already signed in");
       this.currentUser.name = name;
       this.currentUser.id = id;
       this.currentUser.profile_picture = profile_picture;

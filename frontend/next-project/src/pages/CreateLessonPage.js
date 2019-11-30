@@ -47,8 +47,9 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
     formData.append("description", lessonInput.description);
     formData.append("skill", lessonInput.skill);
     formData.append("teach", teach);
-    formData.append("image", userFile[0]);
-
+    if (userFile) {
+      formData.append("image", userFile[0]);
+    }
     axios
       .post(`${getApiRoute("lessons/create")}`, formData, getToken())
       .then(result => {

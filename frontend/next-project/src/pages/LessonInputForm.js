@@ -29,19 +29,14 @@ const useStyles = makeStyles(theme => ({
   });
 
 
-export default function CreateLessonPage({ lessonInput, setLessonInput }) {
-  // const classes = useStyles();
+export default function CreateLessonPage({ lessonInput, setLessonInput, skills }) {
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
 
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
   React.useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
   }, []);
-  const handleChange = event => {
-    setAge(event.target.value);
-  };
 
   return (
     <>
@@ -64,7 +59,7 @@ export default function CreateLessonPage({ lessonInput, setLessonInput }) {
             setLessonInput({
               title: e.target.value,
               description: lessonInput.description,
-              skill: lessonInput.skill
+              index: lessonInput.index
             })
           }
           color="secondary"
@@ -87,29 +82,42 @@ export default function CreateLessonPage({ lessonInput, setLessonInput }) {
             setLessonInput({
               title: lessonInput.title,
               description: e.target.value,
-              skill: lessonInput.skill
+              index: lessonInput.index
             })
           }
           color="secondary"
         />
-        <FormControl variant="outlined" margin="normal" fullWidth style={{ align :"left" }} color="secondary">
+        <FormControl variant="outlined" margin="normal" fullWidth style={{ align :"left" }} color="secondary" >
           <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
             Skill
           </InputLabel>
           <Select
             labelId="demo-simple-select-outlined-label"
             id="demo-simple-select-outlined"
-            value={age}
-            onChange={handleChange}
+            // value={age}
+            // onChange={handleChange}
+            value={lessonInput.index}
+            onChange={e =>
+              setLessonInput({
+                title: lessonInput.title,
+                description: lessonInput.description,
+                index: e.target.value
+              })
+            }
             labelWidth={labelWidth}
             align="left"
           >
-            <MenuItem value="">
+            {/* <MenuItem value="">
               <em>None</em>
             </MenuItem>
             <MenuItem value={10}>Ten</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem> */}
+          {skills.map((skillList, index)=>(
+            <MenuItem value={index} key={index}>{skillList.name}</MenuItem>
+          ))}
+          
+
           </Select>
         </FormControl>
         {/* Skills */}

@@ -1,7 +1,7 @@
 /* Import package components */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, ButtonGroup } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { route, getApiRoute } from "../global";
 import useStores from "../hooks/useStores";
 import { observer } from "mobx-react";
@@ -91,17 +91,16 @@ function SignInPage({ parentRouteTo }) {
         >
           No account? Sign up now!
         </a>
-        <ButtonGroup
-          fullWidth
-          aria-label="full width button group"
-          style={{ position: "absolute", bottom: 0, height: "60px" }}
-        >
           <Button
             style={{
-              backgroundColor: "#f08080",
-              color: "#721C24",
+              backgroundColor: "#ff0000",
+              color: "#FFFFFF",
               fontSize: "16px",
-              borderRadius: 0
+              borderRadius: 16,
+              fontWeight: "bold",
+              height: "45px",
+              width: 360,
+              marginTop: "15px"
             }}
             onClick={() => parentRouteTo(route.close)}
           >
@@ -109,16 +108,19 @@ function SignInPage({ parentRouteTo }) {
           </Button>
           <Button
             style={{
-              backgroundColor: "#5CB3FF",
-              color: "#004085",
+              backgroundColor: "#1589FF",
+              color: "#FFFFFF",
               fontSize: "16px",
-              borderRadius: 0
+              borderRadius: 16,
+              fontWeight: "bold",
+              height: "45px",
+              width: 360,
+              marginTop: "5px"
             }}
             onClick={handleSignIn}
           >
             Sign In
           </Button>
-        </ButtonGroup>
       </div>
     </>
   );

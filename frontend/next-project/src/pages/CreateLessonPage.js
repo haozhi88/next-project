@@ -1,8 +1,8 @@
 /* Import package components */
 import React, { useState } from "react";
 import axios from "axios";
-import { Button, ButtonGroup } from "@material-ui/core";
-import { route, getApiRoute } from "../global";
+import { Button } from "@material-ui/core";
+import { route, getApiRoute, skills } from "../global";
 import useStores from "../hooks/useStores";
 
 /* Import app components */
@@ -30,7 +30,7 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
   const [lessonInput, setLessonInput] = useState({
     title: "",
     description: "",
-    skill: 3 // hard code first, enable for user to select later
+    index: 0 // hard code first, enable for user to select later
   });
   const routeTo = option => {
     if (option === route.close) {
@@ -41,11 +41,14 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
     setRouteOption(option);
   };
   const handleCreate = () => {
+    console.log("index:" + lessonInput.index)
+    console.log("skill id:" + skills[lessonInput.index].id)
+    console.log("skill name:" + skills[lessonInput.index].name)
     // Create formdata
     let formData = new FormData();
     formData.append("title", lessonInput.title);
     formData.append("description", lessonInput.description);
-    formData.append("skill", lessonInput.skill);
+    formData.append("skill", skills[lessonInput.index].id);
     formData.append("teach", teach);
     if (userFile) {
       formData.append("image", userFile[0]);
@@ -70,18 +73,18 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
         <LessonInputForm
           lessonInput={lessonInput}
           setLessonInput={setLessonInput}
+          skills = {skills}
         />
-        <ButtonGroup
-          fullWidth
-          aria-label="full width button group"
-          style={{ position: "absolute", bottom: 0, height: "7vh" }}
-        >
           <Button
             style={{
-              backgroundColor: "#f08080",
-              color: "#721C24",
+              backgroundColor: "#ff0000",
+              color: "#FFFFFF",
               fontSize: "16px",
-              borderRadius: 0
+              borderRadius: 16,
+              fontWeight: "bold",
+              height: "45px",
+              width: 360,
+              marginTop: "20px"
             }}
             onClick={() => parentRouteTo(route.close)}
           >
@@ -89,16 +92,19 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
           </Button>
           <Button
             style={{
-              backgroundColor: "#5CB3FF",
-              color: "#004085",
+              backgroundColor: "#1589FF",
+              color: "#FFFFFF",
               fontSize: "16px",
-              borderRadius: 0
+              borderRadius: 16,
+              fontWeight: "bold",
+              height: "45px",
+              width: 360,
+              marginTop: "10px"
             }}
             onClick={handleCreate}
           >
             Create
           </Button>
-        </ButtonGroup>
       </div>
       <DialogPage
         routeTo={routeTo}

@@ -1,6 +1,6 @@
 /* Import package components */
 import React, { useState } from "react";
-import { Button, ButtonGroup } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { route } from "../global";
 
 /* Import app components */
@@ -32,21 +32,17 @@ export default function LessonPage({ parentRouteArgs }) {
   function actionButton() {
     if (parentRouteArgs.showAction) {
       return (
-        <ButtonGroup
-          fullWidth
-          aria-label="full width button group"
-          style={{
-            position: "absolute",
-            bottom: 0,
-            height: "7vh"
-          }}
-        >
+        <>
           <Button
             style={{
-              backgroundColor: "#ffd700",
-              color: "#393333",
-              fontSize: "14px",
-              borderRadius: 0
+              backgroundColor: "#ffd100",
+              color: "#FFFFFF",
+              fontSize: "18px",
+              borderRadius:  16,
+              marginTop: "5px",
+              height:"45px",
+              width: 360,
+              fontWeight: "bold"
             }}
             onClick={() => routeTo(route.todo)}
           >
@@ -54,10 +50,14 @@ export default function LessonPage({ parentRouteArgs }) {
           </Button>
           <Button
             style={{
-              backgroundColor: "#5CB3FF",
-              color: "#004085",
-              fontSize: "14px",
-              borderRadius: 0
+              backgroundColor: "#1589FF",
+              color: "#FFFFFF",
+              fontSize: "18px",
+              borderRadius:  16,
+              marginTop: "5px",
+              height:"45px",
+              width: 360,
+              fontWeight: "bold"
             }}
             onClick={() => routeTo(route.todo)}
           >
@@ -65,16 +65,21 @@ export default function LessonPage({ parentRouteArgs }) {
           </Button>
           <Button
             style={{
-              backgroundColor: "#90ee90",
-              color: "#155724",
-              fontSize: "14px",
-              borderRadius: 0
+              backgroundColor: "#32cd32",
+              color: "#FFFFFF",
+              fontSize: "18px",
+              borderRadius:  16,
+              marginTop: "5px",
+              marginBottom: "20px",
+              height:"45px",
+              width: 360,
+              fontWeight: "bold"
             }}
             onClick={() => routeTo(route.createEventPage)}
           >
             Request
           </Button>
-        </ButtonGroup>
+        </>
       );
     } else {
       return <></>;

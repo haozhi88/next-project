@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import DateFnsUtils from "@date-io/date-fns";
-import { Button, ButtonGroup } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -77,7 +77,8 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
     <>
       <MuiThemeProvider theme={theme}>
         <MuiPickersUtilsProvider utils={DateFnsUtils} color="secondary">
-          <div style={{ position: "relative", top: "150px" }} color="secondary">
+        <div style={ContainerStyles}>
+          <div style={{ marginTop: "150px" }} color="secondary">
             <KeyboardDatePicker
               margin="normal"
               id="date-picker-dialog"
@@ -104,24 +105,17 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
           </div>
 
           <br />
-          <div style={ContainerStyles}>
-            <ButtonGroup
-              fullWidth
-              aria-label="full width button group"
-              style={{
-                position: "absolute",
-                bottom: 0,
-                height: "7vh"
-              }}
-            >
               <Button
                 onClick={() => parentRouteTo(route.close)}
                 style={{
-                  padding: "10px",
-                  backgroundColor: "#f08080",
-                  color: "#721C24",
+                  backgroundColor: "#ff0000",
+                  color: "#FFFFFF",
                   fontSize: "16px",
-                  borderRadius: 0
+                  borderRadius: 16,
+                  fontWeight: "bold",
+                  height: "45px",
+                  width: 360,
+                  marginTop: "140px"
                 }}
               >
                 Cancel
@@ -129,16 +123,18 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
               <Button
                 onClick={() => handleCreate()}
                 style={{
-                  padding: "10px",
-                  backgroundColor: "#5cb3ff",
-                  color: "#004085",
+                  backgroundColor: "#1589FF",
+                  color: "#FFFFFF",
                   fontSize: "16px",
-                  borderRadius: 0
+                  borderRadius: 16,
+                  fontWeight: "bold",
+                  height: "45px",
+                  width: 360,
+                  marginTop: "5px"
                 }}
               >
                 Submit
               </Button>
-            </ButtonGroup>
           </div>
         </MuiPickersUtilsProvider>
         <DialogPage

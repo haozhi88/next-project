@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     color: "#393333"
   },
   media: {
-    height: 0,
+    height: 300,
     paddingTop: "56.25%" // 16:9
   },
   expand: {

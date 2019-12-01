@@ -76,11 +76,12 @@ export default function RatingInputForm({ userReview, setUserReview }) {
                 comment: e.target.value
               })
             }
+            color= "secondary"
           />
 
           {/* Recommend */}
           <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">
+            <FormLabel component="legend" color= "secondary">
               Would you recommend to your friend?
             </FormLabel>
             <RadioGroup

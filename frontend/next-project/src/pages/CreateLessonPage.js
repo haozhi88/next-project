@@ -54,7 +54,8 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
       .post(`${getApiRoute("lessons/create")}`, formData, getToken())
       .then(result => {
         // const id = result.data.data.id;
-        console.log(result);
+        // console.log(result);
+        console.log("create lesson successfully");
       })
       .catch(error => {
         console.log("ERROR: ", error);

@@ -6,8 +6,8 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import { getApiRoute } from "../global";
-import MicIcon from '@material-ui/icons/Mic';
-import Divider from '@material-ui/core/Divider';
+import MicIcon from "@material-ui/icons/Mic";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,19 +29,24 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SearchBar({setLessonsData, teach}) {
+export default function SearchBar({ setLessonsData, teach }) {
   const classes = useStyles();
-  const [record, setRecord]=useState(false);
+  const [record, setRecord] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const searchLessons = event => {
     event.preventDefault();
     axios
-      .get(`${getApiRoute("lessons/search_lessons?")}search_value=${searchValue}&teach=${teach}`).then(response => {
-        console.log(response);
+      .get(
+        `${getApiRoute(
+          "lessons/search_lessons?"
+        )}search_value=${searchValue}&teach=${teach}`
+      )
+      .then(response => {
+        // console.log(response);
         setLessonsData({
           datas: response.data.data
         });
-        setSearchValue('')
+        setSearchValue("");
       })
       .catch(err => {
         console.log(err);
@@ -66,13 +71,13 @@ export default function SearchBar({setLessonsData, teach}) {
     //When a valid word(s) is detected, this function will run
     var text = event.results[0][0].transcript;
     setSearchValue(text);
-    console.log(text);
+    // console.log(text);
   };
 
   const startRecording = e => {
     //when a button is clicked, this will start the recording
     e.preventDefault();
-    console.log("activated");
+    // console.log("activated");
 
     recognition.start();
   };
@@ -80,7 +85,7 @@ export default function SearchBar({setLessonsData, teach}) {
   const stopRecording = e => {
     //when a button is clicked, this will stop the browser from recording
     e.preventDefault();
-    console.log("stopped");
+    // console.log("stopped");
 
     recognition.stop();
   };
@@ -92,7 +97,11 @@ export default function SearchBar({setLessonsData, teach}) {
         onSubmit={e => searchLessons(e)}
         component="form"
         className={classes.root}
-        style={{ width: "100vw", border: "1px solid #1589FF" , borderRadius:"0px" }}
+        style={{
+          width: "100vw",
+          border: "1px solid #1589FF",
+          borderRadius: "0px"
+        }}
       >
         <InputBase
           value={searchValue}
@@ -102,13 +111,13 @@ export default function SearchBar({setLessonsData, teach}) {
           inputProps={{ "aria-label": "search google maps" }}
         />
         <IconButton
-            type="submit"
-            className={classes.iconButton}
-            aria-label="search"
-          >
-            <SearchIcon />
-          </IconButton>
-            <Divider orientation="vertical" />
+          type="submit"
+          className={classes.iconButton}
+          aria-label="search"
+        >
+          <SearchIcon />
+        </IconButton>
+        <Divider orientation="vertical" />
         {record ? (
           <IconButton
             type="submit"
@@ -116,10 +125,10 @@ export default function SearchBar({setLessonsData, teach}) {
             aria-label="search"
             onClick={e => {
               stopRecording(e);
-              setRecord(false)
+              setRecord(false);
             }}
           >
-            <MicIcon style={{color:"1589FF"}} />
+            <MicIcon style={{ color: "1589FF" }} />
           </IconButton>
         ) : (
           <IconButton
@@ -128,7 +137,7 @@ export default function SearchBar({setLessonsData, teach}) {
             aria-label="search"
             onClick={e => {
               startRecording(e);
-              setRecord(true)
+              setRecord(true);
             }}
           >
             <MicIcon />

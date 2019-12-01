@@ -36,9 +36,9 @@ function SignInPage({ parentRouteTo }) {
     navigator.geolocation.getCurrentPosition(
       position => {
         setLatitude(position.coords.latitude);
-        console.log(position.coords.latitude);
+        // console.log(position.coords.latitude);
         setLongtitude(position.coords.longitude);
-        console.log(longtitude);
+        // console.log(longtitude);
         // const location = JSON.stringify(position);
       },
       error => console.log(error.message),
@@ -47,7 +47,6 @@ function SignInPage({ parentRouteTo }) {
   }, []);
 
   const handleSignIn = () => {
-
     axios
       .post(`${getApiRoute("sessions/signin")}`, {
         userSignIn,
@@ -60,14 +59,21 @@ function SignInPage({ parentRouteTo }) {
         const profile_picture = result.data.data.profile_picture;
         const email = result.data.data.email;
         const access_token = result.data.data.access_token;
-        console.log(result);
+        // console.log(result);
         console.log("sign in successfully");
-        login(name, id, profile_picture, email, access_token, latitude, longtitude);
+        login(
+          name,
+          id,
+          profile_picture,
+          email,
+          access_token,
+          latitude,
+          longtitude
+        );
       })
       .catch(error => {
         console.log("ERROR: ", error);
       });
-    console.log("gtest");
     parentRouteTo(route.close);
   };
   return (
@@ -81,7 +87,7 @@ function SignInPage({ parentRouteTo }) {
         <a
           href="#"
           onClick={() => parentRouteTo(route.signupPage)}
-          style={{ fontSize: "15px", marginTop: "25px", color:"#1589FF"  }}
+          style={{ fontSize: "15px", marginTop: "25px", color: "#1589FF" }}
         >
           No account? Sign up now!
         </a>

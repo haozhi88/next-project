@@ -45,7 +45,7 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
         getToken()
       )
       .then(result => {
-        console.log(result);
+        // console.log(result);
         console.log("create event successfully");
       })
       .catch(error => {

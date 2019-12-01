@@ -64,15 +64,15 @@ export default function LessonListPage({ teach }) {
         }}
         id="cardBox"
       >
-        {lessonsData.datas.map(lesson => (
+        {lessonsData.datas.map(lessonData => (
           <div
-            key={lesson.id}
+            key={lessonData.id}
             onClick={() => {
-              setRouteArgs(lesson);
+              setRouteArgs({ lesson: lessonData, showAction: true });
               routeTo(route.lessonPage);
             }}
           >
-            <ListCard lesson={lesson} />
+            <ListCard lesson={lessonData} />
           </div>
         ))}
       </div>

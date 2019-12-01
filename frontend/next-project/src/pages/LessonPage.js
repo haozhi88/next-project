@@ -17,7 +17,7 @@ const ContainerStyles = {
 };
 
 export default function LessonPage({ parentRouteArgs }) {
-  const [routeArgs, setRouteArgs] = useState(parentRouteArgs);
+  const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
   const routeTo = option => {
@@ -28,10 +28,10 @@ export default function LessonPage({ parentRouteArgs }) {
     }
     setRouteOption(option);
   };
-  return (
-    <>
-      <div style={ContainerStyles}>
-        <LessonInfoPage lesson={parentRouteArgs} />
+  //sign in button if currentUser logged in
+  function actionButton() {
+    if (parentRouteArgs.showAction) {
+      return (
         <ButtonGroup
           fullWidth
           aria-label="full width button group"
@@ -75,6 +75,16 @@ export default function LessonPage({ parentRouteArgs }) {
             Request
           </Button>
         </ButtonGroup>
+      );
+    } else {
+      return <></>;
+    }
+  }
+  return (
+    <>
+      <div style={ContainerStyles}>
+        <LessonInfoPage lesson={parentRouteArgs.lesson} />
+        {actionButton()}
       </div>
       <DialogPage
         routeTo={routeTo}

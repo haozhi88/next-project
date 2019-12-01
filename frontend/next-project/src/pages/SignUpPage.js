@@ -40,7 +40,7 @@ function SignUpPage({ parentRouteTo }) {
         const profile_picture = result.data.data.profile_picture;
         const email = result.data.data.email;
         const access_token = result.data.data.access_token;
-        console.log(result);
+        // console.log(result);
         console.log("sign up successfully");
         login(name, id, profile_picture, email, access_token);
       })
@@ -60,7 +60,7 @@ function SignUpPage({ parentRouteTo }) {
         <a
           href="#"
           onClick={() => parentRouteTo(route.signinPage)}
-          style={{ fontSize: "15px", marginTop: "25px", color:"#1589FF" }}
+          style={{ fontSize: "15px", marginTop: "25px", color: "#1589FF" }}
         >
           Have an account? Sign In now!
         </a>

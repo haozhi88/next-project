@@ -27,7 +27,6 @@ export default function RatingPage({ parentRouteTo }) {
     comment: ""
   });
   const handleSubmit = () => {
-    console.log(userReview);
     const event_id = 3; //hardcode
     axios
       .post(
@@ -36,7 +35,7 @@ export default function RatingPage({ parentRouteTo }) {
         getToken()
       )
       .then(result => {
-        console.log(result);
+        // console.log(result);
         console.log("submit rating successfully");
         parentRouteTo(route.close);
       })

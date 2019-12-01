@@ -24,9 +24,9 @@ export default function EventOwnerListPage({ parentRouteTo }) {
     axios
       .get(`${getApiRoute("lessons/")}${lesson_id}`)
       .then(result => {
-        const lesson = result.data;
+        const lessonData = result.data;
         // console.log(lesson);
-        setRouteArgs(lesson);
+        setRouteArgs({ lesson: lessonData, showAction: false });
         routeTo(route.lessonPage);
       })
       .catch(error => {
@@ -51,7 +51,6 @@ export default function EventOwnerListPage({ parentRouteTo }) {
       .then(result => {
         const eventlist = result.data.data.owner;
         setEventList(eventlist);
-        console.log(eventlist);
       })
       .catch(error => {
         console.log("ERROR: ", error);

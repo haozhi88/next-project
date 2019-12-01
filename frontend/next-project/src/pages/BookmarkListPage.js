@@ -5,7 +5,7 @@ import { route } from "../global";
 /* Import app components */
 import DialogPage from "../components/DialogPage";
 import SearchBar from "../components/SearchBar";
-import ListCard from "../components/ListCard";
+import ListCard from "../pages/ListCard";
 
 export default function BookmarkListPage() {
   const [routeArgs, setRouteArgs] = useState([]);

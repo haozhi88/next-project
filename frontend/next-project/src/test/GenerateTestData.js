@@ -9,8 +9,9 @@ export const generateData = () => {
   // getAllSkills();
   // getUser(3);
   // getAllEvents();
+  getMyEvents();
   // generateSkillList();
-  generateLessonList();
+  // generateLessonList();
   // getAllLessonsWithFilter(false);
   // createLesson("Machine Learning", "no description", "True", 3);
   // signUpUser("test1112", "test1112@email.com", "123");
@@ -222,7 +223,19 @@ export const getAllSkills = () => {
 /* Events */
 export const getAllEvents = () => {
   axios
-    .get(`${getApiRoute("events/")}`, getTokenConfig())
+    .get(`${getApiRoute("events/")}`)
+    .then(result => {
+      const events = result.data.data;
+      console.log(events);
+    })
+    .catch(error => {
+      console.log("ERROR: ", error);
+    });
+};
+
+export const getMyEvents = () => {
+  axios
+    .get(`${getApiRoute("events/my")}`, getTokenConfig())
     .then(result => {
       const events = result.data.data;
       console.log(events);

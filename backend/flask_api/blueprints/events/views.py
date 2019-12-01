@@ -4,6 +4,7 @@ from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identi
 from flask_api.util.response import *
 from models.user import User
 from models.event import Event
+from models.lesson import Lesson
 
 import datetime
 
@@ -28,39 +29,72 @@ def create():
         user_id = data['user_id']
         start_datetime = data['start_datetime']
 
-        event = Event(lesson = lesson_id , user= user_id, start_datetime = start_datetime, status='Pending')
-        if event.save():
-            data = {
-                'id': event.id,
-                'lesson_id': event.lesson_id,
-                'user_id': event.user_id,
-                'status': event.status,
-                'start_datetime': event.start_datetime,
-                'rating': event.rating,
-                'recommend': event.recommend,
-                'comment': event.comment
-            }
-            return success_201('Event created successfully!', data)
+        # Get lesson
+        lesson = Lesson.get_or_none(Lesson.id == lesson_id)
+        if lesson:
+            event = Event(lesson = lesson_id , user= user_id, owner=lesson.owner_id, start_datetime = start_datetime, status='Pending')
+            if event.save():
+                data = {
+                    'id': event.id,
+                    'lesson_id': event.lesson_id,
+                    'lesson_title': event.lesson.title,
+                    'user_id': event.user_id,
+                    'user_name': event.user.name,
+                    'owner_id': event.owner_id,
+                    'owner_name': event.owner.name,
+                    'status': event.status,
+                    'start_datetime': event.start_datetime,
+                    'rating': event.rating,
+                    'recommend': event.recommend,
+                    'comment': event.comment
+                }
+                return success_201('Event created successfully!', data)
+            else:
+                return error_401('Error when creating event')
         else:
-           return error_401('Error when creating event')
+            return error_401('Lesson not found in database!')
     else:
        return error_401('User not found in database!')
 
-
 @events_api_blueprint.route('/', methods=['GET'])
-@jwt_required
 def index():
+    # Retrieve all events
+    data = [
+        {
+            'id': event.id,
+            'lesson_id': event.lesson_id,
+            'lesson_title': event.lesson.title,
+            'user_id': event.user_id,
+            'user_name': event.user.name,
+            'owner_id': event.owner_id,
+            'owner_name': event.owner.name,
+            'status': event.status,
+            'start_datetime': event.start_datetime,
+            'rating': event.rating,
+            'recommend': event.recommend,
+            'comment': event.comment
+        } for event in Event.select()
+    ]
+    return success_201("List of all events", data)
+
+@events_api_blueprint.route('/my', methods=['GET'])
+@jwt_required
+def my_events():
     # Check if user exists and signed in
     jwt_identity = get_jwt_identity()
 
     user = User.get_or_none(User.name == jwt_identity)
     if user:
         # Retrieve events that belong to user from database
-        data = [
+        applicant = [
             {
                 'id': event.id,
                 'lesson_id': event.lesson_id,
+                'lesson_title': event.lesson.title,
                 'user_id': event.user_id,
+                'user_name': event.user.name,
+                'owner_id': event.owner_id,
+                'owner_name': event.owner.name,
                 'status': event.status,
                 'start_datetime': event.start_datetime,
                 'rating': event.rating,
@@ -68,6 +102,26 @@ def index():
                 'comment': event.comment
             } for event in Event.select().where(Event.user_id == user.id)
         ]
+        owner = [
+            {
+                'id': event.id,
+                'lesson_id': event.lesson_id,
+                'lesson_title': event.lesson.title,
+                'user_id': event.user_id,
+                'user_name': event.user.name,
+                'owner_id': event.owner_id,
+                'owner_name': event.owner.name,
+                'status': event.status,
+                'start_datetime': event.start_datetime,
+                'rating': event.rating,
+                'recommend': event.recommend,
+                'comment': event.comment
+            } for event in Event.select().where(Event.owner_id == user.id)
+        ]
+        data = {
+            'applicant': applicant,
+            'owner': owner
+        }
         return success_201("List of all current user's events", data)
     else:
         return error_401('User not found in database!')
@@ -79,7 +133,11 @@ def show(event_id):
         data = {
             'id': event.id,
             'lesson_id': event.lesson_id,
+            'lesson_title': event.lesson.title,
             'user_id': event.user_id,
+            'user_name': event.user.name,
+            'owner_id': event.owner_id,
+            'owner_name': event.owner.name,
             'status': event.status,
             'start_datetime': event.start_datetime,
             'rating': event.rating,
@@ -89,7 +147,6 @@ def show(event_id):
         return success_201(f'Returned data about event {event_id}', data)
     else:
         return error_401('Event not found in database!')
-
 
 @events_api_blueprint.route('/<event_id>/datetime', methods=['POST'])
 @jwt_required
@@ -114,7 +171,11 @@ def update_datetime(event_id):
                 data = {
                     'id': event.id,
                     'lesson_id': event.lesson_id,
+                    'lesson_title': event.lesson.title,
                     'user_id': event.user_id,
+                    'user_name': event.user.name,
+                    'owner_id': event.owner_id,
+                    'owner_name': event.owner.name,
                     'status': event.status,
                     'start_datetime': event.start_datetime,
                     'rating': event.rating,
@@ -152,7 +213,11 @@ def update_status(event_id):
                 data = {
                     'id': event.id,
                     'lesson_id': event.lesson_id,
+                    'lesson_title': event.lesson.title,
                     'user_id': event.user_id,
+                    'user_name': event.user.name,
+                    'owner_id': event.owner_id,
+                    'owner_name': event.owner.name,
                     'status': event.status,
                     'start_datetime': event.start_datetime,
                     'rating': event.rating,
@@ -195,7 +260,11 @@ def update_review(event_id):
                 data = {
                     'id': event.id,
                     'lesson_id': event.lesson_id,
+                    'lesson_title': event.lesson.title,
                     'user_id': event.user_id,
+                    'user_name': event.user.name,
+                    'owner_id': event.owner_id,
+                    'owner_name': event.owner.name,
                     'status': event.status,
                     'start_datetime': event.start_datetime,
                     'rating': event.rating,

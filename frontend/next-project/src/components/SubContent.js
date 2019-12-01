@@ -3,8 +3,8 @@ import React from "react";
 import { route } from "../global";
 
 /* Import app components */
-import InboxListPage from "../pages/InboxListPage";
-import EventListPage from "../pages/EventListPage";
+import EventApplicantListPage from "../pages/EventApplicantListPage";
+import EventOwnerListPage from "../pages/EventOwnerListPage";
 import LessonListPage from "../pages/LessonListPage";
 import SignInPage from "../pages/SignInPage";
 import SignUpPage from "../pages/SignUpPage";
@@ -30,13 +30,19 @@ export default function SubContent({ routeTo, routeOption, routeArgs }) {
     switch (routeOption) {
       case route.close:
         return <p>todo: close</p>;
-      case route.inboxListPage:
+      case route.eventApplicantListPage:
         return (
-          <InboxListPage parentRouteTo={routeTo} parentRouteArgs={routeArgs} />
+          <EventApplicantListPage
+            parentRouteTo={routeTo}
+            parentRouteArgs={routeArgs}
+          />
         );
-      case route.eventListPage:
+      case route.eventOwnerListPage:
         return (
-          <EventListPage parentRouteTo={routeTo} parentRouteArgs={routeArgs} />
+          <EventOwnerListPage
+            parentRouteTo={routeTo}
+            parentRouteArgs={routeArgs}
+          />
         );
       case route.teachListPage:
         return (

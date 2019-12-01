@@ -1,8 +1,7 @@
 /* Import package components */
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Grid, Button } from "@material-ui/core";
-import { route, getApiRoute } from "../global";
+import { route } from "../global";
 import useStores from "../hooks/useStores";
 import { observer } from "mobx-react";
 
@@ -41,51 +40,51 @@ function Content() {
         <Button
           variant="outlined"
           color="secondary"
-          onClick={() => routeTo(route.inboxListPage)}
+          onClick={() => routeTo(route.eventApplicantListPage)}
         >
-          InboxList
+          Event Applied
         </Button>
         <Button
           variant="outlined"
           color="secondary"
-          onClick={() => routeTo(route.eventListPage)}
+          onClick={() => routeTo(route.eventOwnerListPage)}
         >
-          EventList
+          Event Owned
         </Button>
         <Button
           variant="outlined"
           color="primary"
           onClick={() => routeTo(route.teachListPage)}
         >
-          TeachList
+          Teach List
         </Button>
         <Button
           variant="outlined"
           color="primary"
           onClick={() => routeTo(route.learnListPage)}
         >
-          LearnList
+          Learn List
         </Button>
         <Button
           variant="outlined"
           color="secondary"
           onClick={() => routeTo(route.bookmarkListPage)}
         >
-          BookmarkList
+          Bookmark List
         </Button>
         <Button
           variant="outlined"
           color="primary"
           onClick={() => routeTo(route.signinPage)}
         >
-          SignIn
+          Sign In
         </Button>
         <Button
           variant="outlined"
           color="primary"
           onClick={() => routeTo(route.signupPage)}
         >
-          SignUp
+          Sign Up
         </Button>
         <Button
           variant="outlined"
@@ -109,14 +108,14 @@ function Content() {
           color="primary"
           onClick={() => routeTo(route.createLearnPage)}
         >
-          CreateLearn
+          Create Learn
         </Button>
         <Button
           variant="outlined"
           color="primary"
           onClick={() => routeTo(route.createTeachPage)}
         >
-          CreateTeach
+          Create Teach
         </Button>
         <Button
           variant="outlined"

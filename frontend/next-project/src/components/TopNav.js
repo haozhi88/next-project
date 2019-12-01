@@ -196,12 +196,26 @@ export default function TopNav() {
                   Teach
                 </ListItemText>
               </ListItem>
-              <ListItem button onClick={() => routeTo(route.eventListPage)}>
+              <ListItem
+                button
+                onClick={() => routeTo(route.eventOwnerListPage)}
+              >
                 <ListItemIcon>
                   <EventIcon style={iconColor} />
                 </ListItemIcon>
                 <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-                  Events
+                  Events Owned
+                </ListItemText>
+              </ListItem>
+              <ListItem
+                button
+                onClick={() => routeTo(route.eventApplicantListPage)}
+              >
+                <ListItemIcon>
+                  <InboxIcon style={iconColor} />
+                </ListItemIcon>
+                <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
+                  Events Applied
                 </ListItemText>
               </ListItem>
               <ListItem button onClick={() => routeTo(route.bookmarkListPage)}>
@@ -210,14 +224,6 @@ export default function TopNav() {
                 </ListItemIcon>
                 <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
                   Bookmark List
-                </ListItemText>
-              </ListItem>
-              <ListItem button onClick={() => routeTo(route.inboxListPage)}>
-                <ListItemIcon>
-                  <InboxIcon style={iconColor} />
-                </ListItemIcon>
-                <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-                  Inbox
                 </ListItemText>
               </ListItem>
               <ListItem button>

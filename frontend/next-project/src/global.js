@@ -1,5 +1,5 @@
 /* Configurations */
-const LOCAL = false;
+const LOCAL = true;
 const LOCAL_ROUTE = "http://127.0.0.1:5000/api/v1/";
 const SERVER_ROUTE = "https://meetmymentor02.herokuapp.com/api/v1/";
 
@@ -8,8 +8,8 @@ export const VERSION = 4;
 
 export const route = {
   close: 0,
-  inboxListPage: 1,
-  eventListPage: 2,
+  eventApplicantListPage: 1,
+  eventOwnerListPage: 2,
   teachListPage: 3,
   learnListPage: 4,
   bookmarkListPage: 5,
@@ -28,8 +28,8 @@ export const route = {
 
 export const subTitle = [
   "", //0
-  "Inbox", //1
-  "Event List", //2
+  "Event Applicant List", //1
+  "Event Owner List", //2
   "Teach List", //3
   "Learn List", //4
   "Bookmark List", //5

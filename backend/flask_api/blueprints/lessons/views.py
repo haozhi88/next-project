@@ -5,6 +5,7 @@ from flask_api.util.response import *
 from models.user import User
 from models.lesson import Lesson
 from models.skill import Skill
+from models.bookmark import Bookmark
 from werkzeug.utils import secure_filename
 
 lessons_api_blueprint = Blueprint('lessons_api', __name__)
@@ -227,4 +228,58 @@ def add_image():
             return error_401('Requested data is not JSON or not found!')
     else:
         error_401('User not found!')
+
+
+@lessons_api_blueprint.route('/create_bookmark', methods=['POST'])
+@jwt_required
+def create_bookmark():
+    if not request.is_json:
+        return error_401("Reponse is not JSON")
+
+    # Check if user exists and signed in
+    jwt_user = get_jwt_identity()
+    user = User.get_or_none(User.name == jwt_user) 
+
+    if not user:
+        return error_401("Unauthorized action")
+
+    bookmark_data = request.get_json()
+    lesson = bookmark_data['lesson_id']
+
+    if Bookmark.create(owner = 2, lesson = lesson):
+        data = {
+            'lesson_id': lesson,
+            'user_id': user.id
+        }
+        return success_201('Bookmark saved!', data)
+
+@lessons_api_blueprint.route('/bookmarks', methods=['GET'])
+@jwt_required
+def bookmarks():
+
+    jwt_user = get_jwt_identity()
+    user = User.get_or_none(User.name == jwt_user) 
+
+    if not user:
+        return error_401("Unauthorized action")
+
+    user_bookmarks = Lesson.select().join(Bookmark, on=(Bookmark.lesson == Lesson.id)).where(Bookmark.owner == user.id)
+
+    data = [
+        {
+            'id': lesson.id,
+            'title': lesson.title,
+            'description': lesson.description,
+            'rating': lesson.rating,
+            'teach': lesson.teach,
+            'owner_id': lesson.owner_id,
+            'owner_name': lesson.owner.name,
+            'skill_id': lesson.skill_id,
+            'skill_name': lesson.skill.name,
+            'image_url': lesson.image_url
+        } for lesson in user_bookmarks
+    ]
+
+    return success_201("Returned list of the current user's bookmarks", data)
+
     

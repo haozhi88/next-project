@@ -9,9 +9,10 @@ export const generateData = () => {
   // getAllSkills();
   // getUser(3);
   // getAllEvents();
-  getMyEvents();
+  // getMyEvents();
   // generateSkillList();
   // generateLessonList();
+  generateBookmarkList()
   // getAllLessonsWithFilter(false);
   // createLesson("Machine Learning", "no description", "True", 3);
   // signUpUser("test1112", "test1112@email.com", "123");
@@ -263,6 +264,30 @@ export const createEvent = (newLessonId, newUserId, newStartDatetime) => {
       console.log("ERROR: ", error);
     });
 };
+
+export const createBookmark = (lesson) => {
+  console.log('test========')
+  axios
+  .post(
+    `${getApiRoute("lessons/create_bookmark")}`,
+    {
+      lesson_id: lesson
+    },
+    getTokenConfig()
+  )
+  .then(result => {
+    console.log(result.data.data);
+  })
+  .catch(error => {
+    console.log("ERROR: ", error);
+  });
+}
+
+export const generateBookmarkList = () => {
+  createBookmark(1)
+  createBookmark(2)
+  createBookmark(3)
+}
 
 /* Versions */
 export const getVersion = () => {

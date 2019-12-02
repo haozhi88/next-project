@@ -71,14 +71,11 @@ export default function SearchBar({ setLessonsData, teach }) {
     //When a valid word(s) is detected, this function will run
     var text = event.results[0][0].transcript;
     setSearchValue(text);
-    // console.log(text);
   };
 
   const startRecording = e => {
     //when a button is clicked, this will start the recording
     e.preventDefault();
-    // console.log("activated");
-
     recognition.start();
   };
 

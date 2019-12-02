@@ -8,6 +8,7 @@ import { observer } from "mobx-react";
 /* Import app components */
 import DialogPage from "../components/DialogPage";
 import { generateData } from "../test/GenerateTestData";
+import LoadingNav from "../components/LoadingNav";
 
 function Content() {
   const {
@@ -16,6 +17,8 @@ function Content() {
   const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true) 
+
   const routeTo = option => {
     if (option === route.close) {
       setDialogOpen(false);
@@ -28,9 +31,14 @@ function Content() {
     // Check if user already logged in
     if (!currentUser.loggedIn) {
       checkUserLoggedIn();
+      
     }
+    setIsLoading(false)
   }, []);
-
+  
+  if(isLoading){
+    return <LoadingNav />
+  }
   return (
     <>
       <h1>Content</h1>

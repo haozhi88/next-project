@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { getApiRoute, VERSION } from "../global";
 
+/* Import app components */
+import LoadingNav from "../components/LoadingNav";
+
 /* CSS Styles */
 const ContainerStyles = {
   display: "flex",
@@ -13,6 +16,7 @@ const ContainerStyles = {
 };
 
 export default function LessonPage() {
+  const [isLoading, setIsLoading] = useState(true) 
   const [version, setVersion] = useState("");
   useEffect(() => {
     axios
@@ -20,11 +24,16 @@ export default function LessonPage() {
       .then(result => {
         const final = "v" + VERSION + "." + result.data; // v{frontend ver}.{backend ver}
         setVersion(final);
+        setIsLoading(false)
       })
       .catch(error => {
         console.log("ERROR: ", error);
       });
   });
+  
+  if(isLoading){
+    return <LoadingNav />
+  }
   return (
     <>
       <div style={ContainerStyles}>

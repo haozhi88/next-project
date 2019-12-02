@@ -7,15 +7,14 @@ import useStores from "../hooks/useStores";
 /* Import app components */
 import DialogPage from "../components/DialogPage";
 import EventApplicantCard from "./EventApplicantCard";
+import LoadingNav from "../components/LoadingNav"
 
 export default function EventApplicantListPage({ parentRouteTo }) {
   const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [eventList, setEventList] = useState([]);
-  const {
-    userStore: { getToken, currentUser }
-  } = useStores();
+  const [isLoading, setIsLoading] = useState(true)
+
   const routeTo = option => {
     if (option === route.close) {
       setDialogOpen(false);
@@ -37,58 +36,44 @@ export default function EventApplicantListPage({ parentRouteTo }) {
         console.log("ERROR: ", error);
       });
   };
-  const handleAction = (event_id, action) => {
-    console.log(action);
-    axios
-      .post(
-        `${getApiRoute("events/")}${event_id}/status`,
-        { status: action },
-        getToken()
-      )
-      .then(result => {
-        // console.log(result);
-        console.log("update event status to complete successfully");
-      })
-      .catch(error => {
-        console.log("ERROR: ", error);
-      });
-    parentRouteTo(route.close);
-  };
-  const handleRating = event_id => {
-    setRouteArgs({ event_id: event_id });
-    routeTo(route.ratingPage);
-  };
+  const [eventList, setEventList] = useState([]);
+  const {
+    userStore: { getToken }
+  } = useStores();
   useEffect(() => {
     axios
-      .get(
-        `${getApiRoute("events/my")}`,
-        {
-          params: {
-            status: ["pending", "approved", "complete"],
-            user_id: currentUser.name
-          }
-        },
-        getToken()
-      )
+      .get(`${getApiRoute("events/my")}`, getToken())
       .then(result => {
-        // console.log(result);
         const eventlist = result.data.data.applicant;
         setEventList(eventlist);
+        setIsLoading(false)
+
       })
       .catch(error => {
         console.log("ERROR: ", error);
       });
   }, []);
+
+  if(isLoading){
+    return <LoadingNav />
+  }
   return (
     <>
       {/* <div style={{ display: "flex", justifyContent: "center" }}> */}
+      <div
+        style={{
+          marginTop: "10px",
+          display: "grid",
+          justifyContent: "center",
+          gridGap: "10px"
+        }}
+        id="cardBox"
+      >
       {eventList.map((event, index) => (
         <EventApplicantCard
           key={index}
           event={event}
           handleLinkLesson={handleLinkLesson}
-          handleAction={handleAction}
-          handleRating={handleRating}
         />
       ))}
       {/* </div> */}
@@ -98,6 +83,7 @@ export default function EventApplicantListPage({ parentRouteTo }) {
         routeArgs={routeArgs}
         dialogOpen={dialogOpen}
       />
+    </div>
     </>
   );
 }

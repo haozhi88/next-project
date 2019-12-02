@@ -55,17 +55,6 @@ export default function ProfilePage() {
   const {
     userStore: { currentUser, logout }
   } = useStores();
-  // useEffect((
-  //   axios
-  //   .get(`${getApiRoute("users/")}${id}`)
-  //   .then(result => {
-  //     const user = result.data;
-  //     console.log(user);
-  //   })
-  //   .catch(error => {
-  //     console.log("ERROR: ", error);
-  //   });) => {
-  // })
   return (
     <>
       <div style={ContainerStyles}>
@@ -79,7 +68,9 @@ export default function ProfilePage() {
             style={{
               display: "flex",
               justifyContent: "center",
-              marginTop: "10px"
+              paddingTop: "10px",
+              paddingBottom: "10px",
+              backgroundColor: "#C2DFFF"
             }}
           >
             {/* <Avatar
@@ -98,7 +89,7 @@ export default function ProfilePage() {
             title={currentUser.name}
           />
           <CardContent style={{ color: "#393333", padding: 0 }}>
-            <Divider />
+            {/* <Divider variant="middle"/> */}
             <Typography variant="subtitle1" component="p" align="center">
               <strong>Learning Rating</strong>
             </Typography>
@@ -112,20 +103,21 @@ export default function ProfilePage() {
               <Rating name="read-only" value={teachRating} readOnly />
             </Box>
           </CardContent>
-          <Divider />
+          <Divider variant="middle" />
           <CardContent style={{ color: "#393333" }}>
-            <Typography variant="subtitle1" component="p" align="center">
+            <Typography variant="caption" component="p" align="left">
               <strong>Email:</strong>
             </Typography>
-            <Typography variant="body2" component="p" align="center">
+            <Typography variant="h6" component="p" align="left">
               {currentUser.email}
             </Typography>
           </CardContent>
+          <Divider variant="middle" />
           <CardContent style={{ color: "#393333" }}>
-            <Typography variant="subtitle1" component="p" align="center">
+            <Typography variant="caption" component="p" align="left">
               <strong>Skills:</strong>
             </Typography>
-            <Typography variant="body2" component="p" align="center">
+            <Typography variant="h6" component="p" align="left">
               Skills
             </Typography>
           </CardContent>

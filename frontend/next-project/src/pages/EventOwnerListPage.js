@@ -7,11 +7,13 @@ import useStores from "../hooks/useStores";
 /* Import app components */
 import DialogPage from "../components/DialogPage";
 import EventOwnerCard from "./EventOwnerCard";
+import LoadingNav from "../components/LoadingNav";
 
 export default function EventOwnerListPage({ parentRouteTo }) {
   const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
   const routeTo = option => {
     if (option === route.close) {
       setDialogOpen(false);
@@ -44,54 +46,63 @@ export default function EventOwnerListPage({ parentRouteTo }) {
       .then(result => {
         // console.log(result);
         console.log("approve/decline event successfully");
+        parentRouteTo(route.close);
+
       })
       .catch(error => {
         console.log("ERROR: ", error);
+        parentRouteTo(route.close);
       });
     parentRouteTo(route.close);
   };
   const [eventList, setEventList] = useState([]);
   const {
-    userStore: { getToken, currentUser }
+    userStore: { getToken }
   } = useStores();
   useEffect(() => {
     axios
-      .get(
-        `${getApiRoute("events/my")}`,
-        {
-          params: {
-            status: ["pending"],
-            user_id: currentUser.name
-          }
-        },
-        getToken()
-      )
+      .get(`${getApiRoute("events/my")}?status=pending`, getToken())
       .then(result => {
         const eventlist = result.data.data.owner;
         setEventList(eventlist);
+        setIsLoading(false)
       })
       .catch(error => {
         console.log("ERROR: ", error);
       });
   }, []);
+
+  if(isLoading){
+    return <LoadingNav />
+  }
   return (
     <>
       {/* <div style={{ display: "flex", justifyContent: "center" }}> */}
-      {eventList.map((event, index) => (
-        <EventOwnerCard
-          key={index}
-          event={event}
-          handleLinkLesson={handleLinkLesson}
-          handleAction={handleAction}
+      <div
+        style={{
+          marginTop: "10px",
+          display: "grid",
+          justifyContent: "center",
+          gridGap: "10px"
+        }}
+        id="cardBox"
+      >
+        {eventList.map((event, index) => (
+          <EventOwnerCard
+            key={index}
+            event={event}
+            handleLinkLesson={handleLinkLesson}
+            handleAction={handleAction}
+          />
+        ))}
+        {/* </div> */}
+        <DialogPage
+          routeTo={routeTo}
+          routeOption={routeOption}
+          routeArgs={routeArgs}
+          dialogOpen={dialogOpen}
         />
-      ))}
-      {/* </div> */}
-      <DialogPage
-        routeTo={routeTo}
-        routeOption={routeOption}
-        routeArgs={routeArgs}
-        dialogOpen={dialogOpen}
-      />
+      </div>
     </>
   );
 }

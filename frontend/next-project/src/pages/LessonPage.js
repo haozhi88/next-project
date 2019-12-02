@@ -28,7 +28,6 @@ export default function LessonPage({ parentRouteArgs }) {
     }
     setRouteOption(option);
   };
-  //sign in button if currentUser logged in
   function actionButton() {
     if (parentRouteArgs.showAction) {
       return (

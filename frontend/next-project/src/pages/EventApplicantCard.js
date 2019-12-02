@@ -27,8 +27,56 @@ const useStyles = makeStyles({
   }
 });
 
-export default function EventApplicantCard({ event, handleLinkLesson }) {
+export default function EventApplicantCard({
+  event,
+  handleLinkLesson,
+  handleAction,
+  handleRating
+}) {
   const classes = useStyles();
+  function actionButton() {
+    if (event.status === "approved") {
+      return (
+        <CardActions style={{ padding: "0px" }}>
+          <ButtonGroup fullWidth aria-label="full width button group">
+            <Button
+              style={{
+                backgroundColor: "#f08080",
+                color: "#721C24",
+                fontSize: "16px"
+              }}
+              onClick={() => {
+                handleAction(event.id, "complete");
+              }}
+            >
+              Complete
+            </Button>
+          </ButtonGroup>
+        </CardActions>
+      );
+    } else if (event.status === "complete") {
+      return (
+        <CardActions style={{ padding: "0px" }}>
+          <ButtonGroup fullWidth aria-label="full width button group">
+            <Button
+              style={{
+                backgroundColor: "#f08080",
+                color: "#721C24",
+                fontSize: "16px"
+              }}
+              onClick={() => {
+                handleRating(event.id);
+              }}
+            >
+              Rate
+            </Button>
+          </ButtonGroup>
+        </CardActions>
+      );
+    } else {
+      return <></>;
+    }
+  }
   return (
     <Card className={classes.card}>
       <CardActionArea
@@ -61,21 +109,16 @@ export default function EventApplicantCard({ event, handleLinkLesson }) {
           >
             Time: <strong>5:00 P.M.</strong>
           </Typography>
+          <Typography
+            variant="body2"
+            className={classes.contentText}
+            component="p"
+          >
+            Status: <strong>{event.status}</strong>
+          </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions style={{ padding: "0px" }}>
-        <ButtonGroup fullWidth aria-label="full width button group">
-          <Button
-            style={{
-              backgroundColor: "#f08080",
-              color: "#721C24",
-              fontSize: "16px"
-            }}
-          >
-            {event.status}
-          </Button>
-        </ButtonGroup>
-      </CardActions>
+      {actionButton()}
     </Card>
   );
 }

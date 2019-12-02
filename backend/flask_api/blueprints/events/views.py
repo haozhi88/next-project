@@ -78,64 +78,53 @@ def index():
     return success_201("List of all events", data)
 
 @events_api_blueprint.route('/my', methods=['GET'])
-@jwt_required
+# @jwt_required
 def my_events():
-    # Check if user exists and signed in
-    jwt_identity = get_jwt_identity()
+    # Retrieve data from json
+    data = request.args.getlist('status[]')
 
-    # Retrieve arguments
-    status = request.args.get('status')
-    show_all = True
-    if status == "all":
-        show_all = True
-    elif status == "pending" or status == "approved" or status == "declined" or status == "complete" or status == "reviewed":
-        show_all = False
-    else:
-        print("[ERROR]: Invalid status")
+    # Check if user exists and signed in
+    # jwt_identity = get_jwt_identity()
+    jwt_identity = request.args.get('user_id')
 
     user = User.get_or_none(User.name == jwt_identity)
     if user:
-        # Retrieve events that belong to user from database
-        if show_all:
-            applicant_events = Event.select().where(Event.user_id == user.id).order_by(Event.start_datetime)
-            owner_events = Event.select().where(Event.owner_id == user.id).order_by(Event.start_datetime)
-        else:
+        applicant = []
+        owner = []
+        for status in data:
             applicant_events = Event.select().where(Event.user_id == user.id, Event.status == status).order_by(Event.start_datetime)
+            for event in applicant_events:
+                applicant.append({
+                    'id': event.id,
+                    'lesson_id': event.lesson_id,
+                    'lesson_title': event.lesson.title,
+                    'user_id': event.user_id,
+                    'user_name': event.user.name,
+                    'owner_id': event.owner_id,
+                    'owner_name': event.owner.name,
+                    'status': event.status,
+                    'start_datetime': event.start_datetime,
+                    'rating': event.rating,
+                    'recommend': event.recommend,
+                    'comment': event.comment
+                })
+            
             owner_events = Event.select().where(Event.owner_id == user.id, Event.status == status).order_by(Event.start_datetime)
-
-        applicant = [
-            {
-                'id': event.id,
-                'lesson_id': event.lesson_id,
-                'lesson_title': event.lesson.title,
-                'user_id': event.user_id,
-                'user_name': event.user.name,
-                'owner_id': event.owner_id,
-                'owner_name': event.owner.name,
-                'status': event.status,
-                'start_datetime': event.start_datetime,
-                'rating': event.rating,
-                'recommend': event.recommend,
-                'comment': event.comment
-            } for event in applicant_events
-        ]    
-
-        owner = [
-            {
-                'id': event.id,
-                'lesson_id': event.lesson_id,
-                'lesson_title': event.lesson.title,
-                'user_id': event.user_id,
-                'user_name': event.user.name,
-                'owner_id': event.owner_id,
-                'owner_name': event.owner.name,
-                'status': event.status,
-                'start_datetime': event.start_datetime,
-                'rating': event.rating,
-                'recommend': event.recommend,
-                'comment': event.comment
-            } for event in owner_events
-        ]
+            for event in owner_events:
+                owner.append({
+                    'id': event.id,
+                    'lesson_id': event.lesson_id,
+                    'lesson_title': event.lesson.title,
+                    'user_id': event.user_id,
+                    'user_name': event.user.name,
+                    'owner_id': event.owner_id,
+                    'owner_name': event.owner.name,
+                    'status': event.status,
+                    'start_datetime': event.start_datetime,
+                    'rating': event.rating,
+                    'recommend': event.recommend,
+                    'comment': event.comment
+                })
 
         data = {
             'applicant': applicant,

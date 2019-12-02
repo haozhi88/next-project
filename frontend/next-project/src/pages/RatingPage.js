@@ -17,7 +17,7 @@ const ContainerStyles = {
   width: "100%"
 };
 
-export default function RatingPage({ parentRouteTo }) {
+export default function RatingPage({ parentRouteTo, parentRouteArgs }) {
   const {
     userStore: { getToken }
   } = useStores();
@@ -27,7 +27,7 @@ export default function RatingPage({ parentRouteTo }) {
     comment: ""
   });
   const handleSubmit = () => {
-    const event_id = 3; //hardcode
+    const event_id = parentRouteArgs.event_id;
     axios
       .post(
         `${getApiRoute("events/")}${event_id}/review`,
@@ -37,12 +37,11 @@ export default function RatingPage({ parentRouteTo }) {
       .then(result => {
         // console.log(result);
         console.log("submit rating successfully");
-        parentRouteTo(route.close);
       })
       .catch(error => {
         console.log("ERROR: ", error);
-        parentRouteTo(route.close);
       });
+    parentRouteTo(route.close);
   };
   return (
     <>

@@ -65,6 +65,13 @@ export default function EventOwnerCard({
           >
             Time: <strong>5:00 P.M.</strong>
           </Typography>
+          <Typography
+            variant="body2"
+            className={classes.contentText}
+            component="p"
+          >
+            Status: <strong>{event.status}</strong>
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions style={{ padding: "0px" }}>

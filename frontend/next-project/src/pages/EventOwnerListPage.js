@@ -44,21 +44,28 @@ export default function EventOwnerListPage({ parentRouteTo }) {
       .then(result => {
         // console.log(result);
         console.log("approve/decline event successfully");
-        parentRouteTo(route.close);
       })
       .catch(error => {
         console.log("ERROR: ", error);
-        parentRouteTo(route.close);
       });
     parentRouteTo(route.close);
   };
   const [eventList, setEventList] = useState([]);
   const {
-    userStore: { getToken }
+    userStore: { getToken, currentUser }
   } = useStores();
   useEffect(() => {
     axios
-      .get(`${getApiRoute("events/my")}?status=pending`, getToken())
+      .get(
+        `${getApiRoute("events/my")}`,
+        {
+          params: {
+            status: ["pending"],
+            user_id: currentUser.name
+          }
+        },
+        getToken()
+      )
       .then(result => {
         const eventlist = result.data.data.owner;
         setEventList(eventlist);

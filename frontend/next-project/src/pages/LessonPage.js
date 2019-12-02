@@ -75,7 +75,10 @@ export default function LessonPage({ parentRouteArgs }) {
               width: 360,
               fontWeight: "bold"
             }}
-            onClick={() => routeTo(route.createEventPage)}
+            onClick={() => {
+              setRouteArgs(parentRouteArgs.lesson);
+              routeTo(route.createEventPage);
+            }}
           >
             Request
           </Button>

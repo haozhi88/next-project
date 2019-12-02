@@ -1,8 +1,12 @@
 import axios from "axios";
 import { getApiRoute, VERSION } from "../global";
+import { isIOS, isChrome, isSafari } from "react-device-detect";
 
 /* Functions */
 export const generateData = () => {
+  console.log("isIOS: " + isIOS);
+  console.log("isChrome: " + isChrome);
+  console.log("isSafari: " + isSafari);
   // getVersion();
   // getAllUsers();
   // getAllLessons();
@@ -12,7 +16,7 @@ export const generateData = () => {
   // getMyEvents();
   // generateSkillList();
   // generateLessonList();
-  generateBookmarkList()
+  // generateBookmarkList()
   // getAllLessonsWithFilter(false);
   // createLesson("Machine Learning", "no description", "True", 3);
   // signUpUser("test1112", "test1112@email.com", "123");
@@ -265,29 +269,29 @@ export const createEvent = (newLessonId, newUserId, newStartDatetime) => {
     });
 };
 
-export const createBookmark = (lesson) => {
-  console.log('test========')
+export const createBookmark = lesson => {
+  console.log("test========");
   axios
-  .post(
-    `${getApiRoute("lessons/create_bookmark")}`,
-    {
-      lesson_id: lesson
-    },
-    getTokenConfig()
-  )
-  .then(result => {
-    console.log(result.data.data);
-  })
-  .catch(error => {
-    console.log("ERROR: ", error);
-  });
-}
+    .post(
+      `${getApiRoute("lessons/create_bookmark")}`,
+      {
+        lesson_id: lesson
+      },
+      getTokenConfig()
+    )
+    .then(result => {
+      console.log(result.data.data);
+    })
+    .catch(error => {
+      console.log("ERROR: ", error);
+    });
+};
 
 export const generateBookmarkList = () => {
-  createBookmark(1)
-  createBookmark(2)
-  createBookmark(3)
-}
+  createBookmark(1);
+  createBookmark(2);
+  createBookmark(3);
+};
 
 /* Versions */
 export const getVersion = () => {

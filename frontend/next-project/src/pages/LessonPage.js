@@ -38,9 +38,9 @@ export default function LessonPage({ parentRouteArgs }) {
               backgroundColor: "#ffd100",
               color: "#FFFFFF",
               fontSize: "18px",
-              borderRadius:  16,
+              borderRadius: 16,
               marginTop: "5px",
-              height:"45px",
+              height: "45px",
               width: 360,
               fontWeight: "bold"
             }}
@@ -50,28 +50,13 @@ export default function LessonPage({ parentRouteArgs }) {
           </Button>
           <Button
             style={{
-              backgroundColor: "#1589FF",
-              color: "#FFFFFF",
-              fontSize: "18px",
-              borderRadius:  16,
-              marginTop: "5px",
-              height:"45px",
-              width: 360,
-              fontWeight: "bold"
-            }}
-            onClick={() => routeTo(route.todo)}
-          >
-            Chat
-          </Button>
-          <Button
-            style={{
               backgroundColor: "#32cd32",
               color: "#FFFFFF",
               fontSize: "18px",
-              borderRadius:  16,
+              borderRadius: 16,
               marginTop: "5px",
               marginBottom: "20px",
-              height:"45px",
+              height: "45px",
               width: 360,
               fontWeight: "bold"
             }}

@@ -41,9 +41,9 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
     setRouteOption(option);
   };
   const handleCreate = () => {
-    console.log("index:" + lessonInput.index)
-    console.log("skill id:" + skills[lessonInput.index].id)
-    console.log("skill name:" + skills[lessonInput.index].name)
+    console.log("index:" + lessonInput.index);
+    console.log("skill id:" + skills[lessonInput.index].id);
+    console.log("skill name:" + skills[lessonInput.index].name);
     // Create formdata
     let formData = new FormData();
     formData.append("title", lessonInput.title);
@@ -73,38 +73,23 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
         <LessonInputForm
           lessonInput={lessonInput}
           setLessonInput={setLessonInput}
-          skills = {skills}
+          skills={skills}
         />
-          <Button
-            style={{
-              backgroundColor: "#ff0000",
-              color: "#FFFFFF",
-              fontSize: "16px",
-              borderRadius: 16,
-              fontWeight: "bold",
-              height: "45px",
-              width: 360,
-              marginTop: "20px"
-            }}
-            onClick={() => parentRouteTo(route.close)}
-          >
-            Cancel
-          </Button>
-          <Button
-            style={{
-              backgroundColor: "#1589FF",
-              color: "#FFFFFF",
-              fontSize: "16px",
-              borderRadius: 16,
-              fontWeight: "bold",
-              height: "45px",
-              width: 360,
-              marginTop: "10px"
-            }}
-            onClick={handleCreate}
-          >
-            Create
-          </Button>
+        <Button
+          style={{
+            backgroundColor: "#1589FF",
+            color: "#FFFFFF",
+            fontSize: "16px",
+            borderRadius: 16,
+            fontWeight: "bold",
+            height: "45px",
+            width: 360,
+            marginTop: "10px"
+          }}
+          onClick={handleCreate}
+        >
+          Create
+        </Button>
       </div>
       <DialogPage
         routeTo={routeTo}

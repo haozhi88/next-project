@@ -77,64 +77,49 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
     <>
       <MuiThemeProvider theme={theme}>
         <MuiPickersUtilsProvider utils={DateFnsUtils} color="secondary">
-        <div style={ContainerStyles}>
-          <div style={{ marginTop: "150px" }} color="secondary">
-            <KeyboardDatePicker
-              margin="normal"
-              id="date-picker-dialog"
-              label="Select Date"
-              format="MM/dd/yyyy"
-              value={selectedDate}
-              onChange={handleDateChange}
-              KeyboardButtonProps={{
-                "aria-label": "change date"
-              }}
-              color="secondary"
-            />
-            <KeyboardTimePicker
-              margin="normal"
-              id="time-picker"
-              label="Select Time"
-              value={selectedDate}
-              onChange={handleDateChange}
-              KeyboardButtonProps={{
-                "aria-label": "change time"
-              }}
-              color="secondary"
-            />
-          </div>
+          <div style={ContainerStyles}>
+            <div style={{ marginTop: "150px" }} color="secondary">
+              <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-dialog"
+                label="Select Date"
+                format="MM/dd/yyyy"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  "aria-label": "change date"
+                }}
+                color="secondary"
+              />
+              <KeyboardTimePicker
+                margin="normal"
+                id="time-picker"
+                label="Select Time"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  "aria-label": "change time"
+                }}
+                color="secondary"
+              />
+            </div>
 
-          <br />
-              <Button
-                onClick={() => parentRouteTo(route.close)}
-                style={{
-                  backgroundColor: "#ff0000",
-                  color: "#FFFFFF",
-                  fontSize: "16px",
-                  borderRadius: 16,
-                  fontWeight: "bold",
-                  height: "45px",
-                  width: 360,
-                  marginTop: "140px"
-                }}
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={() => handleCreate()}
-                style={{
-                  backgroundColor: "#1589FF",
-                  color: "#FFFFFF",
-                  fontSize: "16px",
-                  borderRadius: 16,
-                  fontWeight: "bold",
-                  height: "45px",
-                  width: 360,
-                  marginTop: "5px"
-                }}
-              >
-                Submit
-              </Button>
+            <br />
+            <Button
+              onClick={() => handleCreate()}
+              style={{
+                backgroundColor: "#1589FF",
+                color: "#FFFFFF",
+                fontSize: "16px",
+                borderRadius: 16,
+                fontWeight: "bold",
+                height: "45px",
+                width: 360,
+                marginTop: "5px"
+              }}
+            >
+              Submit
+            </Button>
           </div>
         </MuiPickersUtilsProvider>
         <DialogPage

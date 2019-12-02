@@ -64,36 +64,21 @@ function SignUpPage({ parentRouteTo }) {
         >
           Have an account? Sign In now!
         </a>
-          <Button
-            style={{
-              backgroundColor: "#ff0000",
-              color: "#FFFFFF",
-              fontSize: "16px",
-              borderRadius: 16,
-              fontWeight: "bold",
-              height: "45px",
-              width: 360,
-              marginTop: "15px"
-            }}
-            onClick={() => parentRouteTo(route.close)}
-          >
-            Cancel
-          </Button>
-          <Button
-            style={{
-              backgroundColor: "#1589FF",
-              color: "#FFFFFF",
-              fontSize: "16px",
-              borderRadius: 16,
-              fontWeight: "bold",
-              height: "45px",
-              width: 360,
-              marginTop: "5px"
-            }}
-            onClick={handleSignUp}
-          >
-            Sign Up
-          </Button>
+        <Button
+          style={{
+            backgroundColor: "#1589FF",
+            color: "#FFFFFF",
+            fontSize: "16px",
+            borderRadius: 16,
+            fontWeight: "bold",
+            height: "45px",
+            width: 360,
+            marginTop: "5px"
+          }}
+          onClick={handleSignUp}
+        >
+          Sign Up
+        </Button>
       </div>
     </>
   );

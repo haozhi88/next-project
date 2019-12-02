@@ -47,42 +47,27 @@ export default function RatingPage({ parentRouteTo }) {
   return (
     <>
       <div style={ContainerStyles}>
-      <div style={{ marginTop: "150px" }}>
-        <RatingInputForm
-          userReview={userReview}
-          setUserReview={setUserReview}
-        />
-      </div>
-          <Button
-            onClick={() => parentRouteTo(route.close)}
-            style={{
-              backgroundColor: "#ff0000",
-              color: "#FFFFFF",
-              fontSize: "16px",
-              borderRadius: 16,
-              fontWeight: "bold",
-              height: "45px",
-              width: 360,
-              marginTop: "15px"
-            }}
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={handleSubmit}
-            style={{
-              backgroundColor: "#1589FF",
-              color: "#FFFFFF",
-              fontSize: "16px",
-              borderRadius: 16,
-              fontWeight: "bold",
-              height: "45px",
-              width: 360,
-              marginTop: "5px"
-            }}
-          >
-            Submit
-          </Button>
+        <div style={{ marginTop: "150px" }}>
+          <RatingInputForm
+            userReview={userReview}
+            setUserReview={setUserReview}
+          />
+        </div>
+        <Button
+          onClick={handleSubmit}
+          style={{
+            backgroundColor: "#1589FF",
+            color: "#FFFFFF",
+            fontSize: "16px",
+            borderRadius: 16,
+            fontWeight: "bold",
+            height: "45px",
+            width: 360,
+            marginTop: "5px"
+          }}
+        >
+          Submit
+        </Button>
       </div>
     </>
   );

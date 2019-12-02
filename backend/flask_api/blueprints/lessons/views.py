@@ -168,7 +168,6 @@ def search_lessons():
     search_value = request.args['search_value']
 
     teach_arg = request.args['teach']
-    print(f'========================================{teach_arg}========================================')
     if str(teach_arg) == 'true':
         teach=True
     else:
@@ -186,7 +185,6 @@ def search_lessons():
 
                     
     if len(final_lessons_list) > 0:
-        print(f'-------------test7-----------------')
         
         data = [
             {
@@ -202,7 +200,6 @@ def search_lessons():
             'image_url': lesson.image_url
             } for lesson in final_lessons_list
         ]
-        print(f'-------------test8-----------------')
 
         return success_201('success testing', data)
     else:
@@ -246,7 +243,7 @@ def create_bookmark():
     bookmark_data = request.get_json()
     lesson = bookmark_data['lesson_id']
 
-    if Bookmark.create(owner = 2, lesson = lesson):
+    if Bookmark.create(owner = user.id, lesson = lesson):
         data = {
             'lesson_id': lesson,
             'user_id': user.id
@@ -282,4 +279,46 @@ def bookmarks():
 
     return success_201("Returned list of the current user's bookmarks", data)
 
+@lessons_api_blueprint.route('/delete_bookmark', methods=['POST'])
+@jwt_required
+def delete_bookmark():
+
+    jwt_user = get_jwt_identity()
+    user = User.get_or_none(User.name == jwt_user) 
+
+    if not user:
+        return error_401('Unauthorzied action!')
     
+    if not request.is_json:
+        return error_401('Request is not JSON!')
+
+    data = request.get_json()
+    lesson_id = data['lesson_id']
+
+    query = Bookmark.delete().where((owner_id == user.id) and (lesson_id == lesson_id)) 
+    
+    if query.execute():
+        success_200('Bookmark succesfully removed!')
+    
+@lessons_api_blueprint.route('/bookmarks/<lessonID>', methods=['GET'])
+@jwt_required
+def view_bookmark(lessonID):
+    jwt_user = get_jwt_identity()
+    user = User.get_or_none(User.name == jwt_user) 
+
+    if not user:
+        return error_401('Unauthorzied action!')
+
+    bookmark_test = Bookmark.get_or_none((Bookmark.owner_id == user.id) and (Bookmark.lesson_id == lessonID))
+
+    if bookmark_test:
+        data = True    
+    else:
+        data = False
+        
+
+    return success_201('Bookmark checked', data)
+    
+
+
+

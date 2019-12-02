@@ -8,7 +8,6 @@ import SearchIcon from "@material-ui/icons/Search";
 import { getApiRoute } from "../global";
 import MicIcon from "@material-ui/icons/Mic";
 import Divider from "@material-ui/core/Divider";
-import { isIOS, isChrome, isSafari } from "react-device-detect";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -116,9 +115,7 @@ export default function SearchBar({ setLessonsData, teach }) {
           <SearchIcon />
         </IconButton>
         <Divider orientation="vertical" />
-        {isIOS ? (
-          <></>
-        ) : record ? (
+        {record ? (
           <IconButton
             type="submit"
             className={classes.iconButton}

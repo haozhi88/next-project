@@ -1,12 +1,8 @@
 import axios from "axios";
 import { getApiRoute, VERSION } from "../global";
-import { isIOS, isChrome, isSafari } from "react-device-detect";
 
 /* Functions */
 export const generateData = () => {
-  console.log("isIOS: " + isIOS);
-  console.log("isChrome: " + isChrome);
-  console.log("isSafari: " + isSafari);
   // getVersion();
   // getAllUsers();
   // getAllLessons();

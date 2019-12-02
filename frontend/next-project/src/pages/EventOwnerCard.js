@@ -30,8 +30,7 @@ const useStyles = makeStyles({
 export default function EventOwnerCard({
   event,
   handleLinkLesson,
-  handleApprove,
-  handleDecline
+  handleAction
 }) {
   const classes = useStyles();
   return (
@@ -77,7 +76,7 @@ export default function EventOwnerCard({
               fontSize: "16px"
             }}
             onClick={() => {
-              handleDecline();
+              handleAction(event.id, "declined");
             }}
           >
             Decline
@@ -89,7 +88,7 @@ export default function EventOwnerCard({
               fontSize: "16px"
             }}
             onClick={() => {
-              handleApprove();
+              handleAction(event.id, "approved");
             }}
           >
             Approve

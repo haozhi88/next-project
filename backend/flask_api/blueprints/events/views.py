@@ -32,7 +32,7 @@ def create():
         # Get lesson
         lesson = Lesson.get_or_none(Lesson.id == lesson_id)
         if lesson:
-            event = Event(lesson = lesson_id , user= user_id, owner=lesson.owner_id, start_datetime = start_datetime, status='Pending')
+            event = Event(lesson = lesson_id , user= user_id, owner=lesson.owner_id, start_datetime = start_datetime, status='pending')
             if event.save():
                 data = {
                     'id': event.id,
@@ -83,9 +83,26 @@ def my_events():
     # Check if user exists and signed in
     jwt_identity = get_jwt_identity()
 
+    # Retrieve arguments
+    status = request.args.get('status')
+    show_all = True
+    if status == "all":
+        show_all = True
+    elif status == "pending" or status == "approved" or status == "declined" or status == "complete" or status == "reviewed":
+        show_all = False
+    else:
+        print("[ERROR]: Invalid status")
+
     user = User.get_or_none(User.name == jwt_identity)
     if user:
         # Retrieve events that belong to user from database
+        if show_all:
+            applicant_events = Event.select().where(Event.user_id == user.id).order_by(Event.start_datetime)
+            owner_events = Event.select().where(Event.owner_id == user.id).order_by(Event.start_datetime)
+        else:
+            applicant_events = Event.select().where(Event.user_id == user.id, Event.status == status).order_by(Event.start_datetime)
+            owner_events = Event.select().where(Event.owner_id == user.id, Event.status == status).order_by(Event.start_datetime)
+
         applicant = [
             {
                 'id': event.id,
@@ -100,8 +117,9 @@ def my_events():
                 'rating': event.rating,
                 'recommend': event.recommend,
                 'comment': event.comment
-            } for event in Event.select().where(Event.user_id == user.id)
-        ]
+            } for event in applicant_events
+        ]    
+
         owner = [
             {
                 'id': event.id,
@@ -116,8 +134,9 @@ def my_events():
                 'rating': event.rating,
                 'recommend': event.recommend,
                 'comment': event.comment
-            } for event in Event.select().where(Event.owner_id == user.id)
+            } for event in owner_events
         ]
+
         data = {
             'applicant': applicant,
             'owner': owner

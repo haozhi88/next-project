@@ -1,3 +1,4 @@
+import datetime
 import os
 
 
@@ -11,7 +12,7 @@ class Config(object):
     S3_KEY                    = os.environ.get("S3_ACCESS_KEY_ID")
     S3_SECRET                 = os.environ.get("S3_SECRECT_ACCESS_KEY")
     S3_LOCATION               = os.environ.get("S3_DOMAIN")
-
+    JWT_EXPIRATION_DELTA = datetime.timedelta(hours=1)
 
 class ProductionConfig(Config):
     DEBUG = False

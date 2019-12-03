@@ -33,9 +33,8 @@ export default function BookmarkListPage() {
     };
 
     axios
-      .get(`${getApiRoute("lessons/bookmarks")}`, config)
+      .get(`${getApiRoute("bookmarks/")}`, config)
       .then(result => {
-        console.log(result);
         setLessonsData({
           datas: result.data.data
         });

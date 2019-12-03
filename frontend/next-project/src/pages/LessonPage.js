@@ -33,7 +33,7 @@ export default function LessonPage({ parentRouteArgs }) {
 
   useEffect(() => {
     axios
-      .get(`${getApiRoute("lessons/bookmarks/")}${parentRouteArgs.lesson.id}`, {
+      .get(`${getApiRoute("bookmarks/")}${parentRouteArgs.lesson.id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("userToken")
         }
@@ -56,7 +56,7 @@ export default function LessonPage({ parentRouteArgs }) {
     };
     axios
       .post(
-        `${getApiRoute("lessons/create_bookmark")}`,
+        `${getApiRoute("bookmarks/create")}`,
         {
           lesson_id: parentRouteArgs.lesson.id
         },
@@ -65,6 +65,28 @@ export default function LessonPage({ parentRouteArgs }) {
       .then(() => {
         setBookmark(true);
       })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  const deleteBookmark = e => {
+    e.preventDefault();
+    const token = localStorage.getItem("userToken");
+    const config = {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    };
+    axios
+      .post(
+        `${getApiRoute("bookmarks/delete")}`,
+        {
+          lesson_id: parentRouteArgs.lesson.id
+        },
+        config
+      )
+      .then(setBookmark(null))
       .catch(error => {
         console.log(error);
       });
@@ -91,7 +113,25 @@ export default function LessonPage({ parentRouteArgs }) {
             >
               Bookmark
             </Button>
-          ) : null}
+          ) : (
+            <Button
+              style={{
+                backgroundColor: "#ff3333",
+                color: "#FFFFFF",
+                fontSize: "18px",
+                borderRadius: 16,
+                marginTop: "5px",
+                height: "45px",
+                width: 360,
+                fontWeight: "bold"
+              }}
+              onClick={e => {
+                deleteBookmark(e);
+              }}
+            >
+              Unbookmark
+            </Button>
+          )}
 
           <Button
             style={{

@@ -85,7 +85,7 @@ def my_events():
 
     # Check if user exists and signed in
     # jwt_identity = get_jwt_identity()
-    jwt_identity = request.args.get('user_id')
+    jwt_identity = request.args.get('user_name')
 
     user = User.get_or_none(User.name == jwt_identity)
     if user:

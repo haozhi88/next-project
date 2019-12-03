@@ -1,10 +1,10 @@
 /* Configurations */
-const LOCAL = true;
+const LOCAL = false;
 const LOCAL_ROUTE = "http://127.0.0.1:5000/api/v1/";
 const SERVER_ROUTE = "https://meetmymentor02.herokuapp.com/api/v1/";
 
 /* Constants */
-export const VERSION = 5;
+export const VERSION = 6;
 
 export const route = {
   close: 0,

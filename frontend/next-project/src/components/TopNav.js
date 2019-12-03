@@ -84,7 +84,7 @@ export default function TopNav() {
             <ListItemText
               style={{ color: "#393333", fontSize: "14px", margin: "15px" }}
             >
-              <h4 style={{margin:"0px"}}>{currentUser.name}</h4>
+              <h4 style={{ margin: "0px" }}>{currentUser.name}</h4>
             </ListItemText>
           </ListItem>
         </ListSubheader>
@@ -105,7 +105,7 @@ export default function TopNav() {
             <ListItemText
               style={{ color: "#393333", fontSize: "14px", margin: "15px" }}
             >
-              <h4 style={{margin:"0px"}}>Username</h4>
+              <h4 style={{ margin: "0px" }}>Username</h4>
             </ListItemText>
           </ListItem>
         </ListSubheader>
@@ -129,7 +129,7 @@ export default function TopNav() {
             <ExitToAppIcon style={iconColor} />
           </ListItemIcon>
           <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-          <h4 style={{margin:"0px"}}>Sign Out</h4>
+            <h4 style={{ margin: "0px" }}>Sign Out</h4>
           </ListItemText>
         </ListItem>
       );
@@ -140,7 +140,7 @@ export default function TopNav() {
             <ExitToAppIcon style={iconColor} />
           </ListItemIcon>
           <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-          <h4 style={{margin:"0px"}}>Sign Up / Login</h4>
+            <h4 style={{ margin: "0px" }}>Sign Up / Login</h4>
           </ListItemText>
         </ListItem>
       );
@@ -186,7 +186,7 @@ export default function TopNav() {
                   <MenuBookIcon style={iconColor} />
                 </ListItemIcon>
                 <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-                <h4 style={{margin:"0px"}}>Learn</h4>
+                  <h4 style={{ margin: "0px" }}>Learn</h4>
                 </ListItemText>
               </ListItem>
               <ListItem button onClick={() => routeTo(route.teachListPage)}>
@@ -194,29 +194,7 @@ export default function TopNav() {
                   <PeopleIcon style={iconColor} />
                 </ListItemIcon>
                 <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-                <h4 style={{margin:"0px"}}>Teach</h4>
-                </ListItemText>
-              </ListItem>
-              <ListItem
-                button
-                onClick={() => routeTo(route.eventOwnerListPage)}
-              >
-                <ListItemIcon>
-                <InboxIcon style={iconColor} /> 
-                </ListItemIcon>
-                <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-                  <h4 style={{margin:"0px"}}>Events Owned</h4>
-                </ListItemText>
-              </ListItem>
-              <ListItem
-                button
-                onClick={() => routeTo(route.eventApplicantListPage)}
-              >
-                <ListItemIcon>
-                 <EventIcon style={iconColor} />
-                </ListItemIcon>
-                <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-                <h4 style={{margin:"0px"}}>Events Applied</h4>
+                  <h4 style={{ margin: "0px" }}>Teach</h4>
                 </ListItemText>
               </ListItem>
               <ListItem button onClick={() => routeTo(route.bookmarkListPage)}>
@@ -224,7 +202,29 @@ export default function TopNav() {
                   <BookmarkIcon style={iconColor} />
                 </ListItemIcon>
                 <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-                <h4 style={{margin:"0px"}}>Bookmark List</h4>
+                  <h4 style={{ margin: "0px" }}>Bookmarks</h4>
+                </ListItemText>
+              </ListItem>
+              <ListItem
+                button
+                onClick={() => routeTo(route.eventOwnerListPage)}
+              >
+                <ListItemIcon>
+                  <InboxIcon style={iconColor} />
+                </ListItemIcon>
+                <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
+                  <h4 style={{ margin: "0px" }}>Events Owned</h4>
+                </ListItemText>
+              </ListItem>
+              <ListItem
+                button
+                onClick={() => routeTo(route.eventApplicantListPage)}
+              >
+                <ListItemIcon>
+                  <EventIcon style={iconColor} />
+                </ListItemIcon>
+                <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
+                  <h4 style={{ margin: "0px" }}>Events Applied</h4>
                 </ListItemText>
               </ListItem>
               <ListItem button onClick={generateData}>
@@ -232,7 +232,7 @@ export default function TopNav() {
                   <SettingsIcon style={iconColor} />
                 </ListItemIcon>
                 <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-                <h4 style={{margin:"0px"}}>Settings</h4>
+                  <h4 style={{ margin: "0px" }}>Settings</h4>
                 </ListItemText>
               </ListItem>
               <ListItem button onClick={() => routeTo(route.versionPage)}>
@@ -240,7 +240,7 @@ export default function TopNav() {
                   <InfoIcon style={iconColor} />
                 </ListItemIcon>
                 <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-                <h4 style={{margin:"0px"}}>About Us</h4>
+                  <h4 style={{ margin: "0px" }}>About Us</h4>
                 </ListItemText>
               </ListItem>
             </List>

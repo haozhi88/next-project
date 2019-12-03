@@ -10,8 +10,11 @@ import Content from "./components/Content";
 const ContainerStyles = {
   height: "calc(100vh - 56px)",
   width: "100vw",
-  overflow: "auto",
-  textAlign: "center"
+  overflowX: "hidden",
+  overflowY: "auto",
+  display: "grid",
+  justifyContent: "center",
+  textAlign:"center",
 };
 
 export default function App() {

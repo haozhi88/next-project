@@ -13,7 +13,7 @@ export default function EventOwnerListPage({ parentRouteTo }) {
   const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   const routeTo = option => {
     if (option === route.close) {
       setDialogOpen(false);
@@ -46,34 +46,40 @@ export default function EventOwnerListPage({ parentRouteTo }) {
       .then(result => {
         // console.log(result);
         console.log("approve/decline event successfully");
-        parentRouteTo(route.close);
-
       })
       .catch(error => {
         console.log("ERROR: ", error);
-        parentRouteTo(route.close);
       });
     parentRouteTo(route.close);
   };
   const [eventList, setEventList] = useState([]);
   const {
-    userStore: { getToken }
+    userStore: { getToken, currentUser }
   } = useStores();
   useEffect(() => {
     axios
-      .get(`${getApiRoute("events/my")}?status=pending`, getToken())
+      .get(
+        `${getApiRoute("events/my")}`,
+        {
+          params: {
+            status: ["pending"],
+            user_name: currentUser.name
+          }
+        },
+        getToken()
+      )
       .then(result => {
         const eventlist = result.data.data.owner;
         setEventList(eventlist);
-        setIsLoading(false)
+        setIsLoading(false);
       })
       .catch(error => {
         console.log("ERROR: ", error);
       });
   }, []);
 
-  if(isLoading){
-    return <LoadingNav />
+  if (isLoading) {
+    return <LoadingNav />;
   }
   return (
     <>

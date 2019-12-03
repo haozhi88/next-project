@@ -58,34 +58,34 @@ export default function SearchBar({ setLessonsData, teach }) {
   };
 
   // Voice recognition stuff----------------------------------------------
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition; //Initialize SpeechRecognition
-  const recognition = new SpeechRecognition(); // Create an instance
+  // const SpeechRecognition =
+  //   window.SpeechRecognition || window.webkitSpeechRecognition; //Initialize SpeechRecognition
+  // const recognition = new SpeechRecognition(); // Create an instance
 
-  recognition.continuous = true; //Custom settings for recognition
-  recognition.lang = "en-US";
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
+  // recognition.continuous = true; //Custom settings for recognition
+  // recognition.lang = "en-US";
+  // recognition.interimResults = false;
+  // recognition.maxAlternatives = 1;
 
-  recognition.onresult = function(event) {
-    //When a valid word(s) is detected, this function will run
-    var text = event.results[0][0].transcript;
-    setSearchValue(text);
-  };
+  // recognition.onresult = function(event) {
+  //   //When a valid word(s) is detected, this function will run
+  //   var text = event.results[0][0].transcript;
+  //   setSearchValue(text);
+  // };
 
-  const startRecording = e => {
-    //when a button is clicked, this will start the recording
-    e.preventDefault();
-    recognition.start();
-  };
+  // const startRecording = e => {
+  //   //when a button is clicked, this will start the recording
+  //   e.preventDefault();
+  //   recognition.start();
+  // };
 
-  const stopRecording = e => {
-    //when a button is clicked, this will stop the browser from recording
-    e.preventDefault();
-    // console.log("stopped");
+  // const stopRecording = e => {
+  //   //when a button is clicked, this will stop the browser from recording
+  //   e.preventDefault();
+  //   // console.log("stopped");
 
-    recognition.stop();
-  };
+  //   recognition.stop();
+  // };
   return (
     <div
       style={{ display: "flex", justifyContent: "center", marginTop: "0.2px" }}
@@ -115,7 +115,7 @@ export default function SearchBar({ setLessonsData, teach }) {
           <SearchIcon />
         </IconButton>
         <Divider orientation="vertical" />
-        {record ? (
+        {/* {record ? (
           <IconButton
             type="submit"
             className={classes.iconButton}
@@ -139,7 +139,7 @@ export default function SearchBar({ setLessonsData, teach }) {
           >
             <MicIcon />
           </IconButton>
-        )}
+        )} */}
       </Paper>
     </div>
   );

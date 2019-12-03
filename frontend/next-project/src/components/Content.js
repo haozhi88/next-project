@@ -50,7 +50,7 @@ const HeaderTitle = styled.div`
 
 function Content() {
   const {
-    userStore: { currentUser, checkUserLoggedIn }
+    userStore: { currentUser }
   } = useStores();
   const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
@@ -64,13 +64,6 @@ function Content() {
     }
     setRouteOption(option);
   };
-  useEffect(() => {
-    // Check if user already logged in
-    if (!currentUser.loggedIn) {
-      checkUserLoggedIn();
-    }
-  }, []);
-
   const Featuredsettings = {
     infinite: true,
     slidesToShow: 1,

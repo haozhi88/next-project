@@ -51,7 +51,7 @@ function FirstSignIn() {
   };
 
   const {
-    userStore: { login }
+    userStore: { currentUser, checkUserLoggedIn, login }
   } = useStores();
 
   const [open, setOpen] = useState(false);
@@ -71,13 +71,23 @@ function FirstSignIn() {
   const [longtitude, setLongtitude] = useState(101.6271656);
 
   useEffect(() => {
+    // Check if user already logged in
+    if (!currentUser.loggedIn) {
+      checkUserLoggedIn();
+    }
+
+    // Get geolocation
     navigator.geolocation.getCurrentPosition(
       position => {
         setLatitude(position.coords.latitude);
         setLongtitude(position.coords.longitude);
       },
       error => console.log(error.message),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 1000
+      }
     );
   }, []);
 

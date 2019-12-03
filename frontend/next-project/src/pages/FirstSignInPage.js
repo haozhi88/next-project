@@ -5,15 +5,14 @@ import { Button } from "@material-ui/core";
 import { route, getApiRoute } from "../global";
 import useStores from "../hooks/useStores";
 import { observer } from "mobx-react";
-import { createMuiTheme } from "@material-ui/core/styles";
 import DialogPage from "../components/DialogPage";
 import Toolbar from "@material-ui/core/Toolbar";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
 
 /* Import app components */
 import LoadingNav from "../components/LoadingNav";
@@ -68,8 +67,8 @@ function FirstSignIn() {
     }
     setRouteOption(option);
   };
-  const [latitude, setLatitude] = useState(null);
-  const [longtitude, setLongtitude] = useState(null);
+  const [latitude, setLatitude] = useState(3.1424113);
+  const [longtitude, setLongtitude] = useState(101.6271656);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -106,7 +105,7 @@ function FirstSignIn() {
       .catch(error => {
         console.log("ERROR: ", error);
         handleClickOpen();
-        setUserSignIn({name:"",password:""})
+        setUserSignIn({ name: "", password: "" });
       });
     setIsLoading(true);
     setTimeout(() => {
@@ -180,14 +179,19 @@ function FirstSignIn() {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title" style={{ color:"#1589FF"}}>Sign In failed. WHY?</DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title" style={{ color: "#1589FF" }}>
+          Sign In failed.
+        </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description" style={{ color:"black"}}>
-            Please try agian. Thank you.
+          <DialogContentText
+            id="alert-dialog-slide-description"
+            style={{ color: "black" }}
+          >
+            Please try again. Thank you.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} style={{ color:"#1589FF"}}>
+          <Button onClick={handleClose} style={{ color: "#1589FF" }}>
             CONTINUE
           </Button>
         </DialogActions>

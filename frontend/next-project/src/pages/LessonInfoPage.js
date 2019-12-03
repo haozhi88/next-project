@@ -95,13 +95,7 @@ export default function LessonInfoPage({ lesson }) {
           title="Lesson image"
         />
         <CardHeader
-          style={{ textAlign: "left" }}
-          avatar={
-            <Avatar aria-label="recipe" className={classes.avatar}>
-              A
-            </Avatar>
-          }
-          title={lesson.title}
+          title={<h3  style={{ margin:"0px", padding:"0px" }}>{lesson.title}</h3>}
           // subheader="November 25, 2019"
         />
         <CardContent className={classes.cardContent}>

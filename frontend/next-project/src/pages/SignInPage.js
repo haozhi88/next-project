@@ -79,7 +79,13 @@ function SignInPage({ parentRouteTo }) {
   return (
     <>
       <div style={ContainerStyles}>
-        <h1 style={{ color: "#393333" }}>Sign In</h1>
+        <img
+              src={require('../media/peerskill512.png')}
+              style={{
+                width: "240px",
+                height: "240px"
+              }}
+            />
         <SignInInputForm
           userSignIn={userSignIn}
           setUserSignIn={setUserSignIn}
@@ -91,6 +97,7 @@ function SignInPage({ parentRouteTo }) {
         >
           No account? Sign up now!
         </a>
+        <br></br>
         <Button
           style={{
             backgroundColor: "#1589FF",

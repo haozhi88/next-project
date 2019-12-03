@@ -52,7 +52,13 @@ function SignUpPage({ parentRouteTo }) {
   return (
     <>
       <div style={ContainerStyles}>
-        <h1 style={{ color: "#393333" }}>Create an account</h1>
+      <img
+              src={require('../media/peerskill512.png')}
+              style={{
+                width: "240px",
+                height: "240px"
+              }}
+            />
         <SignUpInputForm
           userSignUp={userSignUp}
           setUserSignUp={setUserSignUp}
@@ -64,6 +70,7 @@ function SignUpPage({ parentRouteTo }) {
         >
           Have an account? Sign In now!
         </a>
+        <br></br>
         <Button
           style={{
             backgroundColor: "#1589FF",

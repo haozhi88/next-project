@@ -28,13 +28,13 @@ export const route = {
 
 export const subTitle = [
   "", //0
-  "Event Applicant List", //1
-  "Event Owner List", //2
-  "Teach List", //3
-  "Learn List", //4
-  "Bookmark List", //5
+  "My Events", //1
+  "Requests", //2
+  "Teach", //3
+  "Learn", //4
+  "Bookmarks", //5
   "Sign In", //6
-  "Sign Up", //7
+  "Create an account", //7
   "Profile", //8
   "Lesson", //9
   "Create Learn", //10
@@ -80,11 +80,11 @@ export const skills = [
     id: 8
   },
   {
-    name: "Sports",
+    name: "Tuition",
     id: 9
   },
   {
-    name: "Tuition",
+    name: "Sports",
     id: 10
   }
 ];

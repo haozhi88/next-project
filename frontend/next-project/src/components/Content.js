@@ -40,7 +40,7 @@ const CardInCard = styled.div`
   border: 1px solid #1589ff;
   border-radius: 1px;
   height: 100%;
-  
+  background-color:white;
 `;
  const HeaderTitle = styled.div`
   padding: 5px;
@@ -143,7 +143,7 @@ function Content() {
   return (
     <>
       <Grid item>
-      <FeaturedPageWrapper>
+      <FeaturedPageWrapper style={{paddingTop:"12px"}}>
         <HeaderTitle>Featured</HeaderTitle>
         <Slider {...Featuredsettings}>
           <FeaturedPage>
@@ -174,7 +174,8 @@ function Content() {
             />
           </FeaturedPage>
         </Slider>
-        <HeaderTitle>Learn</HeaderTitle>
+        <HeaderTitle style={{ paddingTop:"25px", color:"#1589FF" }}>Learn</HeaderTitle>
+        <div style={{ backgroundColor:"#e2e2e2"}}>
         <Slider {...Cardsettings}>
           <CardPage>
             <CardInCard onClick={() => routeTo(route.createLearnPage)} > 
@@ -195,8 +196,9 @@ function Content() {
           </div>
           ))}
         </Slider>
-        <br></br>
-        <HeaderTitle> Teach</HeaderTitle>
+        </div>
+        <HeaderTitle style={{ paddingTop:"45px", color:"#1589FF" }}> Teach</HeaderTitle>
+        <div style={{ backgroundColor:"#e2e2e2"}}>
         <Slider {...Cardsettings}>
           <CardPage>
             <CardInCard onClick={() => routeTo(route.createTeachPage)}>
@@ -217,6 +219,7 @@ function Content() {
           </div>
           ))}
         </Slider>
+        </div>
       </FeaturedPageWrapper>
       </Grid>
       <DialogPage

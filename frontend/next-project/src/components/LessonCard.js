@@ -14,6 +14,7 @@ const CardInCard = styled.div`
   border: 1px solid #1589ff;
   border-radius: 1px;
   height: 100%;
+  background-color:white;
 `;
 
 export default function LessonCard({lessonData}) {

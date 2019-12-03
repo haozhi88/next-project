@@ -15,7 +15,6 @@ import {
 } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
-import InboxIcon from "@material-ui/icons/Inbox";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
@@ -25,6 +24,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import InfoIcon from "@material-ui/icons/Info";
 import { route } from "../global";
 import { generateData } from "../test/GenerateTestData";
+import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 
 /* Import app components */
 import DialogPage from "../components/DialogPage";
@@ -140,7 +140,7 @@ export default function TopNav() {
             <ExitToAppIcon style={iconColor} />
           </ListItemIcon>
           <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-            <h4 style={{ margin: "0px" }}>Sign Up / Login</h4>
+            <h4 style={{ margin: "0px" }}>Sign In</h4>
           </ListItemText>
         </ListItem>
       );
@@ -153,6 +153,16 @@ export default function TopNav() {
           <IconButton color="inherit" onClick={() => setOpen(!open)}>
             <Menu style={{ fontSize: "30px" }} />
           </IconButton>
+          <div style={{ width:"100%", display:"flex", justifyContent:"center"}}>
+          <img
+              src={require('../media/peerskillTopNav.png')}
+              style={{
+                width: "40px",
+                height: "40px",
+              }}
+            />
+            <p style={{ fontWeight:"600", fontSize: "27px", margin:"0px"}}>PeerSkill</p>
+            </div>
           <div style={{ flexGrow: 1 }} />
           {/* <Avatar onClick={() => routeTo(route.profilePage)}>S</Avatar> */}
           <IconButton
@@ -210,10 +220,10 @@ export default function TopNav() {
                 onClick={() => routeTo(route.eventOwnerListPage)}
               >
                 <ListItemIcon>
-                  <InboxIcon style={iconColor} />
+                <EventAvailableIcon style={iconColor} />
                 </ListItemIcon>
                 <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-                  <h4 style={{ margin: "0px" }}>Events Owned</h4>
+                  <h4 style={{ margin: "0px" }}>Requests</h4>
                 </ListItemText>
               </ListItem>
               <ListItem
@@ -224,7 +234,7 @@ export default function TopNav() {
                   <EventIcon style={iconColor} />
                 </ListItemIcon>
                 <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-                  <h4 style={{ margin: "0px" }}>Events Applied</h4>
+                  <h4 style={{ margin: "0px" }}>My Events</h4>
                 </ListItemText>
               </ListItem>
               <ListItem button onClick={generateData}>

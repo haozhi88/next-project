@@ -8,10 +8,20 @@ import { observer } from "mobx-react";
 import { createMuiTheme } from "@material-ui/core/styles";
 import DialogPage from "../components/DialogPage";
 import Toolbar from "@material-ui/core/Toolbar";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
 
 /* Import app components */
 import LoadingNav from "../components/LoadingNav";
 import SignInInputForm from "../pages/SignInInputForm";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 /* CSS Styles */
 const ContainerStyles = {
@@ -33,6 +43,13 @@ function FirstSignIn() {
     name: "",
     password: ""
   });
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const {
     userStore: { login }
@@ -88,6 +105,8 @@ function FirstSignIn() {
       })
       .catch(error => {
         console.log("ERROR: ", error);
+        handleClickOpen();
+        setUserSignIn({name:"",password:""})
       });
     setIsLoading(true);
     setTimeout(() => {
@@ -153,6 +172,26 @@ function FirstSignIn() {
         routeArgs={routeArgs}
         dialogOpen={dialogOpen}
       />
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title" style={{ color:"#1589FF"}}>Sign In failed. WHY?</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description" style={{ color:"black"}}>
+            Please try agian. Thank you.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} style={{ color:"#1589FF"}}>
+            CONTINUE
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }

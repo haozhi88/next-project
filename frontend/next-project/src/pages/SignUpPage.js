@@ -3,10 +3,20 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Button } from "@material-ui/core";
 import { route, getApiRoute } from "../global";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
 
 /* Import app components */
 import SignUpInputForm from "../pages/SignUpInputForm";
 import LoadingNav from "../components/LoadingNav";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 /* CSS Styles */
 const ContainerStyles = {
@@ -24,6 +34,15 @@ export default function SignUpPage({ parentRouteTo }) {
     email: "",
     password: ""
   });
+
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const [isLoading, setIsLoading] = useState(false);
   const handleSignUp = () => {
     // console.log(userSignUp);
@@ -35,11 +54,16 @@ export default function SignUpPage({ parentRouteTo }) {
       })
       .catch(error => {
         console.log("ERROR: ", error);
+        handleClickOpen()
+        setUserSignUp({
+          name:"",
+          email:"",
+          password:""
+        })
       });
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      parentRouteTo(route.close);
       console.log("setTimeOut");
     }, 2000);
   };
@@ -86,6 +110,26 @@ export default function SignUpPage({ parentRouteTo }) {
           Sign Up
         </Button>
       </div>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title" style={{ color:"#1589FF"}}>Sign Up account failed. WHY?</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description" style={{ color:"black"}}>
+            Please try agian. Thank you.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} style={{ color:"#1589FF"}}>
+            CONTINUE
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }

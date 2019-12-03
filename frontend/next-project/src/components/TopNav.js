@@ -135,7 +135,11 @@ export default function TopNav() {
       );
     } else {
       return (
-        <ListItem button onClick={() => routeTo(route.signinPage)}>
+        <ListItem button onClick={() => {
+          routeTo(route.signinPage); 
+          setOpen(false);
+          }}
+        >
           <ListItemIcon>
             <ExitToAppIcon style={iconColor} />
           </ListItemIcon>

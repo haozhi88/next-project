@@ -78,9 +78,14 @@ export default function EventOwnerCard({
         <ButtonGroup fullWidth aria-label="full width button group">
           <Button
             style={{
-              backgroundColor: "#f08080",
-              color: "#721C24",
-              fontSize: "16px"
+              backgroundColor: "#ffd100",
+              color: "#FFFFFF",
+              fontSize: "18px",
+              borderRadius: 16,
+              // marginTop: "5px",
+              height: "45px",
+              width: 360,
+              fontWeight: "bold"
             }}
             onClick={() => {
               handleAction(event.id, "declined");
@@ -90,9 +95,15 @@ export default function EventOwnerCard({
           </Button>
           <Button
             style={{
-              backgroundColor: "#90ee90",
-              color: "#155724",
-              fontSize: "16px"
+              backgroundColor: "#32cd32",
+              color: "#FFFFFF",
+              fontSize: "18px",
+              borderRadius: 16,
+              // marginTop: "5px",
+              // marginBottom: "20px",
+              height: "45px",
+              width: 360,
+              fontWeight: "bold"
             }}
             onClick={() => {
               handleAction(event.id, "approved");

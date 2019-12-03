@@ -33,19 +33,21 @@ export default function SearchBar({ setLessonsData, teach }) {
   const classes = useStyles();
   const [record, setRecord] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const searchLessons = event => {
-    event.preventDefault();
+  const searchLessons = (text) => {
+    // console.log("before axios call with search value" + text)
     axios
       .get(
         `${getApiRoute(
           "lessons/search_lessons?"
-        )}search_value=${searchValue}&teach=${teach}`
+        )}search_value=${text}&teach=${teach}`
       )
       .then(response => {
-        // console.log(response);
+        console.log(response)
         setLessonsData({
           datas: response.data.data
         });
+        // console.log(setLessonsData)
+        // console.log("after axios call")
         setSearchValue("");
       })
       .catch(err => {
@@ -124,7 +126,8 @@ export default function SearchBar({ setLessonsData, teach }) {
       style={{ display: "flex", justifyContent: "center", marginTop: "0.2px" }}
     >
       <Paper
-        onSubmit={e => searchLessons(e)}
+        onSubmit={e => {e.preventDefault()
+          searchLessons(searchValue)}}
         component="form"
         className={classes.root}
         style={{

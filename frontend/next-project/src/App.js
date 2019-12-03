@@ -3,10 +3,11 @@ import React from "react";
 import { Grid, CssBaseline } from "@material-ui/core";
 import useStores from "../src/hooks/useStores";
 import { observer } from "mobx-react";
+
 /* Import app components */
 import TopNav from "./components/TopNav";
 import Content from "./components/Content";
-import FirstSignIn from "../src/pages/FirstSignInPage"
+import FirstSignIn from "../src/pages/FirstSignInPage";
 
 /* CSS Styles */
 const ContainerStyles = {
@@ -16,14 +17,14 @@ const ContainerStyles = {
   overflowY: "auto",
   display: "grid",
   justifyContent: "center",
-  textAlign:"center",
+  textAlign: "center"
 };
 
 function App() {
   const {
-    userStore: { currentUser, logout }
+    userStore: { currentUser }
   } = useStores();
-  function SignInUser(){
+  function SignInUser() {
     if (currentUser.loggedIn) {
       return (
         <>
@@ -36,22 +37,17 @@ function App() {
           <CssBaseline />
         </>
       );
-    }
-    else{
+    } else {
       return (
         <>
           <Grid container direction="column">
-            <FirstSignIn/>
+            <FirstSignIn />
           </Grid>
           <CssBaseline />
         </>
       );
     }
   }
-  return(
-    <>
-    {SignInUser()}
-    </>
-  )
+  return <>{SignInUser()}</>;
 }
-export default observer(App)
+export default observer(App);

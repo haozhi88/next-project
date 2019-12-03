@@ -5,8 +5,7 @@ import { Button } from "@material-ui/core";
 import { route, getApiRoute } from "../global";
 import useStores from "../hooks/useStores";
 import { observer } from "mobx-react";
-import { Container, TextField } from "@material-ui/core";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
 import DialogPage from "../components/DialogPage";
 import Toolbar from "@material-ui/core/Toolbar";
 
@@ -28,12 +27,6 @@ const navBackgroundColor = {
   backgroundColor: "#1589FF",
   textAlign: "center"
 };
-
-const theme = createMuiTheme({
-  palette: {
-    secondary: { main: "#1589FF" }
-  }
-});
 
 function FirstSignIn() {
   const [userSignIn, setUserSignIn] = useState({
@@ -123,6 +116,7 @@ function FirstSignIn() {
             width: "240px",
             height: "240px"
           }}
+          alt="app logo"
         />
         <SignInInputForm
           userSignIn={userSignIn}

@@ -1,7 +1,6 @@
 /* Import package components */
 import React, { useEffect, useState } from "react";
 import {
-  Avatar,
   Card,
   CardHeader,
   CardMedia,
@@ -12,9 +11,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
 import { getApiRoute } from "../global";
 import axios from "axios";
-
-/* Import app components */
-import LoadingNav from "../components/LoadingNav";
 
 /* CSS Styles */
 const useStyles = makeStyles(theme => ({
@@ -47,13 +43,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function LessonInfoPage({ lesson }) {
-  const [isLoading, setIsLoading] = useState(true) 
+  const [isLoading, setIsLoading] = useState(true);
   const [distance, setDistance] = useState(null);
   useEffect(() => {
     axios.get(`${getApiRoute("users/")}${lesson.owner_id}`).then(response => {
       const userLatitude = localStorage.getItem("userLatitude");
       const userLongtitude = localStorage.getItem("userLongtitude");
-      setIsLoading(false)
+      setIsLoading(false);
       axios
         .get(
           `https://graphhopper.com/api/1/matrix?point=${response.data.data.latitude},${response.data.data.longtitude}&point=${userLatitude},${userLongtitude}&type=json&vehicle=car&debug=true&out_array=weights&out_array=times&out_array=distances&key=5dcb6221-e534-491b-863b-3e1c72ab7264`
@@ -65,7 +61,7 @@ export default function LessonInfoPage({ lesson }) {
           const allDistances = [];
           distancesArr.map(arr => {
             arr.map(val => {
-              if (val != 0) {
+              if (val !== 0) {
                 allDistances.push(val);
               }
             });
@@ -95,7 +91,9 @@ export default function LessonInfoPage({ lesson }) {
           title="Lesson image"
         />
         <CardHeader
-          title={<h3  style={{ margin:"0px", padding:"0px" }}>{lesson.title}</h3>}
+          title={
+            <h3 style={{ margin: "0px", padding: "0px" }}>{lesson.title}</h3>
+          }
           // subheader="November 25, 2019"
         />
         <CardContent className={classes.cardContent}>

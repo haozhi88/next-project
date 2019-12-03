@@ -20,11 +20,9 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import PeopleIcon from "@material-ui/icons/People";
 import EventIcon from "@material-ui/icons/Event";
-import SettingsIcon from "@material-ui/icons/Settings";
 import InfoIcon from "@material-ui/icons/Info";
 import { route } from "../global";
-import { generateData } from "../test/GenerateTestData";
-import EventAvailableIcon from '@material-ui/icons/EventAvailable';
+import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 
 /* Import app components */
 import DialogPage from "../components/DialogPage";
@@ -137,9 +135,11 @@ export default function TopNav() {
       );
     } else {
       return (
-        <ListItem button onClick={() => {
-          routeTo(route.signinPage); 
-          setOpen(false);
+        <ListItem
+          button
+          onClick={() => {
+            routeTo(route.signinPage);
+            setOpen(false);
           }}
         >
           <ListItemIcon>
@@ -159,16 +159,21 @@ export default function TopNav() {
           <IconButton color="inherit" onClick={() => setOpen(!open)}>
             <Menu style={{ fontSize: "30px" }} />
           </IconButton>
-          <div style={{ width:"100%", display:"flex", justifyContent:"center"}}>
-          <img
-              src={require('../media/peerskillTopNav.png')}
+          <div
+            style={{ width: "100%", display: "flex", justifyContent: "center" }}
+          >
+            <img
+              src={require("../media/peerskillTopNav.png")}
               style={{
                 width: "40px",
-                height: "40px",
+                height: "40px"
               }}
+              alt="app icon"
             />
-            <p style={{ fontWeight:"600", fontSize: "27px", margin:"0px"}}>PeerSkill</p>
-            </div>
+            <p style={{ fontWeight: "600", fontSize: "27px", margin: "0px" }}>
+              PeerSkill
+            </p>
+          </div>
           <div style={{ flexGrow: 1 }} />
           {/* <Avatar onClick={() => routeTo(route.profilePage)}>S</Avatar> */}
           <IconButton
@@ -226,7 +231,7 @@ export default function TopNav() {
                 onClick={() => routeTo(route.eventOwnerListPage)}
               >
                 <ListItemIcon>
-                <EventAvailableIcon style={iconColor} />
+                  <EventAvailableIcon style={iconColor} />
                 </ListItemIcon>
                 <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
                   <h4 style={{ margin: "0px" }}>Requests</h4>

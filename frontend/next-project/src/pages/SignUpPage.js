@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Button } from "@material-ui/core";
 import { route, getApiRoute } from "../global";
-import useStores from "../hooks/useStores";
-import { observer } from "mobx-react";
 
 /* Import app components */
 import SignUpInputForm from "../pages/SignUpInputForm";
@@ -20,18 +18,13 @@ const ContainerStyles = {
   overflow: "auto"
 };
 
-function SignUpPage({ parentRouteTo }) {
+export default function SignUpPage({ parentRouteTo }) {
   const [userSignUp, setUserSignUp] = useState({
     name: "",
     email: "",
     password: ""
   });
   const [isLoading, setIsLoading] = useState(false);
-
-  const {
-    userStore: { login }
-  } = useStores();
-
   const handleSignUp = () => {
     // console.log(userSignUp);
     axios
@@ -63,6 +56,7 @@ function SignUpPage({ parentRouteTo }) {
             width: "240px",
             height: "240px"
           }}
+          alt="app logo"
         />
         <SignUpInputForm
           userSignUp={userSignUp}
@@ -95,5 +89,3 @@ function SignUpPage({ parentRouteTo }) {
     </>
   );
 }
-
-export default observer(SignUpPage);

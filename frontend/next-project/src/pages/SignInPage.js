@@ -78,6 +78,7 @@ function SignInPage({ parentRouteTo }) {
             width: "240px",
             height: "240px"
           }}
+          alt="app logo"
         />
         <SignInInputForm
           userSignIn={userSignIn}

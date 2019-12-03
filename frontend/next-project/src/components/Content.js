@@ -1,6 +1,6 @@
 /* Import package components */
 import React, { useState, useEffect } from "react";
-import { Grid, Button } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { route, getApiRoute } from "../global";
 import useStores from "../hooks/useStores";
 import { observer } from "mobx-react";
@@ -50,7 +50,7 @@ const HeaderTitle = styled.div`
 
 function Content() {
   const {
-    userStore: { currentUser, logout, checkUserLoggedIn }
+    userStore: { currentUser, checkUserLoggedIn }
   } = useStores();
   const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
@@ -157,6 +157,7 @@ function Content() {
                   width: "100%",
                   height: "100%"
                 }}
+                alt="Feature 1"
               />
             </FeaturedPage>
             <FeaturedPage>
@@ -166,6 +167,7 @@ function Content() {
                   width: "100%",
                   height: "100%"
                 }}
+                alt="Feature 2"
               />
             </FeaturedPage>
             <FeaturedPage>
@@ -175,6 +177,7 @@ function Content() {
                   width: "100%",
                   height: "100%"
                 }}
+                alt="Feature 3"
               />
             </FeaturedPage>
           </Slider>

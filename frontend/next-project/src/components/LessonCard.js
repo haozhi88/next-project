@@ -1,8 +1,8 @@
 /* Import package components */
-import React, { useState, useEffect } from "react";
+import React from "react";
+
 // import useStores from "../hooks/useStores";
 import styled from "styled-components";
-
 
 const CardPage = styled.div`
   height: 260px;
@@ -10,19 +10,17 @@ const CardPage = styled.div`
   /* border: 1px solid #1589ff; */
   padding: 5px;
 `;
+
 const CardInCard = styled.div`
   border: 1px solid #1589ff;
   border-radius: 1px;
   height: 100%;
-  background-color:white;
+  background-color: white;
 `;
 
-export default function LessonCard({lessonData}) {
-
-
+export default function LessonCard({ lessonData }) {
   return (
     <>
-    {/* <div>hello</div> */}
       <CardPage>
         <CardInCard>
           <img
@@ -32,6 +30,7 @@ export default function LessonCard({lessonData}) {
               height: "65%",
               objectFit: "container"
             }}
+            alt="lesson"
           />
           <div
             style={{
@@ -40,14 +39,27 @@ export default function LessonCard({lessonData}) {
               marginTop: "5px"
             }}
           >
-            <div style={{ display:"flex", margin: 0 , fontWeight:"bold"}}>Title: <p style={{ margin: 0, fontWeight:"normal"}}>{lessonData.title}</p></div>
-            <div style={{ display:"flex", margin: 0 , fontWeight:"bold"}}>Author: <p style={{ margin: 0, fontWeight:"normal"}}>{lessonData.owner_name}</p></div>
-            <div style={{ display:"flex", margin: 0 , fontWeight:"bold"}}>Skill: <p style={{ margin: 0, fontWeight:"normal"}}>{lessonData.skill_name}</p> </div>
+            <div style={{ display: "flex", margin: 0, fontWeight: "bold" }}>
+              Title:
+              <p style={{ margin: 0, fontWeight: "normal" }}>
+                {lessonData.title}
+              </p>
+            </div>
+            <div style={{ display: "flex", margin: 0, fontWeight: "bold" }}>
+              Author:
+              <p style={{ margin: 0, fontWeight: "normal" }}>
+                {lessonData.owner_name}
+              </p>
+            </div>
+            <div style={{ display: "flex", margin: 0, fontWeight: "bold" }}>
+              Skill:
+              <p style={{ margin: 0, fontWeight: "normal" }}>
+                {lessonData.skill_name}
+              </p>
+            </div>
           </div>
         </CardInCard>
       </CardPage>
     </>
   );
 }
-
-

@@ -10,6 +10,7 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import DialogPage from "../components/DialogPage";
 import Toolbar from "@material-ui/core/Toolbar";
 /* Import app components */
+import LoadingNav from "../components/LoadingNav";
 // import SignInInputForm from "../pages/SignInInputForm";
 
 /* CSS Styles */
@@ -47,6 +48,7 @@ function FirstSignIn({ parentRouteTo }) {
   const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const routeTo = option => {
     if (option === route.close) {
       setDialogOpen(false);
@@ -100,7 +102,15 @@ function FirstSignIn({ parentRouteTo }) {
       .catch(error => {
         console.log("ERROR: ", error);
       });
+      setIsLoading(true)
+      setTimeout(()=> {
+        setIsLoading(false)
+        console.log("setTimeOut")
+      }, 2000)
   };
+  if(isLoading){
+    return <LoadingNav />
+  }
   return (
     <>
     <div style={navBackgroundColor}>

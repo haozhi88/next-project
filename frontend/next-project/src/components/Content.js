@@ -16,6 +16,7 @@ import LessonCard from "../components/LessonCard";
 
 /* Import app components */
 import DialogPage from "../components/DialogPage";
+import LoadingNav from "../components/LoadingNav";
 
 
 const FeaturedPage = styled.div`
@@ -56,6 +57,7 @@ function Content() {
   const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
   const routeTo = option => {
     if (option === route.close) {
       setDialogOpen(false);
@@ -111,6 +113,7 @@ function Content() {
         setLearnsData({
           Learndata: newLessonList
         });
+        setIsLoading(false)
       })
       .catch(error => {
         console.log("ERROR: ", error);
@@ -134,12 +137,16 @@ function Content() {
         setTeachsData({
           Teachdata: newLessonList
         });
+        setIsLoading(false)
       })
       .catch(error => {
         console.log("ERROR: ", error);
       });
   }, []);
-
+  
+  if(isLoading){
+    return <LoadingNav />
+  }
   return (
     <>
       <Grid item>

@@ -8,6 +8,7 @@ import { observer } from "mobx-react";
 
 /* Import app components */
 import SignUpInputForm from "../pages/SignUpInputForm";
+import LoadingNav from "../components/LoadingNav";
 
 /* CSS Styles */
 const ContainerStyles = {
@@ -25,6 +26,7 @@ function SignUpPage({ parentRouteTo }) {
     email: "",
     password: ""
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     userStore: { login }
@@ -41,8 +43,17 @@ function SignUpPage({ parentRouteTo }) {
       .catch(error => {
         console.log("ERROR: ", error);
       });
-    parentRouteTo(route.close);
+      setIsLoading(true)
+      setTimeout(()=> {
+        setIsLoading(false)
+        parentRouteTo(route.close);
+        console.log("setTimeOut")
+      }, 2000)
   };
+    //loader
+  if(isLoading){
+    return <LoadingNav />
+  }
   return (
     <>
       <div style={ContainerStyles}>

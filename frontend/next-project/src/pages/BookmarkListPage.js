@@ -7,11 +7,13 @@ import axios from "axios";
 import DialogPage from "../components/DialogPage";
 import SearchBar from "../components/SearchBar";
 import ListCard from "../pages/ListCard";
+import LoadingNav from "../components/LoadingNav";
 
 export default function BookmarkListPage() {
   const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const routeTo = option => {
     if (option === route.close) {
       setDialogOpen(false);
@@ -38,19 +40,28 @@ export default function BookmarkListPage() {
         setLessonsData({
           datas: result.data.data
         });
+        setIsLoading(false);
       })
       .catch(err => {
         console.log(err);
       });
   }, []);
 
+  if (isLoading) {
+    return <LoadingNav />;
+  }
   return (
     <div>
       <div style={{ width: "100vw" }}>
         <SearchBar />
       </div>
       <div
-        style={{ marginTop: "10px" }}
+         style={{
+          marginTop: "10px",
+          display: "grid",
+          justifyContent: "center",
+          gridGap: "10px"
+        }}
         id="cardBox"
         onClick={() => routeTo(route.lessonPage)}
       >

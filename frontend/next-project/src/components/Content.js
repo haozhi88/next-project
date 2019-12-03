@@ -144,7 +144,6 @@ function Content() {
     <>
       <Grid item>
       <FeaturedPageWrapper style={{paddingTop:"12px"}}>
-        <HeaderTitle>Featured</HeaderTitle>
         <Slider {...Featuredsettings}>
           <FeaturedPage>
             <img

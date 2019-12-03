@@ -135,7 +135,7 @@ export default function LessonPage({ parentRouteArgs }) {
 
           <Button
             style={{
-              backgroundColor: "#32cd32",
+              backgroundColor: "#1589FF",
               color: "#FFFFFF",
               fontSize: "18px",
               borderRadius: 16,

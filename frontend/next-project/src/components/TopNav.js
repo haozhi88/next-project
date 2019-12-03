@@ -241,14 +241,6 @@ export default function TopNav() {
                   <h4 style={{ margin: "0px" }}>My Events</h4>
                 </ListItemText>
               </ListItem>
-              <ListItem button onClick={generateData}>
-                <ListItemIcon>
-                  <SettingsIcon style={iconColor} />
-                </ListItemIcon>
-                <ListItemText style={{ color: "#393333", fontSize: "14px" }}>
-                  <h4 style={{ margin: "0px" }}>Settings</h4>
-                </ListItemText>
-              </ListItem>
               <ListItem button onClick={() => routeTo(route.versionPage)}>
                 <ListItemIcon>
                   <InfoIcon style={iconColor} />

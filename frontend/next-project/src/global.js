@@ -48,52 +48,44 @@ export const subTitle = [
 
 export const skills = [
   {
-    name: "Cooking",
-    id: 2
-  },
-  {
-    name: "Literature",
-    id: 3
+    name: "Art",
+    id: 1
   },
   {
     name: "Computer Science",
+    id: 2
+  },
+  {
+    name: "Cooking",
+    id: 3
+  },
+  {
+    name: "eSports",
     id: 4
   },
   {
-    name: "Chemistry",
+    name: "Language",
     id: 5
   },
   {
-    name: "Language",
+    name: "Literature",
     id: 6
   },
   {
-    name: "Physics",
+    name: "Music",
     id: 7
   },
   {
-    name: "Biology",
+    name: "Recreational",
     id: 8
   },
   {
-    name: "Information Technology",
+    name: "Sports",
     id: 9
   },
   {
-    name: "Mathematics",
+    name: "Tuition",
     id: 10
-  },
-  {
-    name: "Geography",
-    id: 11
-  },
-  {
-    name: "Health and Fitness",
-    id: 12
-  },
-  {
-    name: "Travel",
-    id: 13
   }
 ];
 

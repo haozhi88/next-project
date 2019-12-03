@@ -16,7 +16,7 @@ const ContainerStyles = {
 };
 
 export default function LessonPage() {
-  const [isLoading, setIsLoading] = useState(true) 
+  const [isLoading, setIsLoading] = useState(true);
   const [version, setVersion] = useState("");
   useEffect(() => {
     axios
@@ -24,20 +24,21 @@ export default function LessonPage() {
       .then(result => {
         const final = "v" + VERSION + "." + result.data; // v{frontend ver}.{backend ver}
         setVersion(final);
-        setIsLoading(false)
+        setIsLoading(false);
       })
       .catch(error => {
         console.log("ERROR: ", error);
       });
   });
-  
-  if(isLoading){
-    return <LoadingNav />
+
+  if (isLoading) {
+    return <LoadingNav />;
   }
   return (
     <>
       <div style={ContainerStyles}>
         <h4>Version: {version}</h4>
+        <h4>Platform: {navigator.platform}</h4>
       </div>
     </>
   );

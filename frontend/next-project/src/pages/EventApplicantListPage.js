@@ -7,14 +7,17 @@ import useStores from "../hooks/useStores";
 /* Import app components */
 import DialogPage from "../components/DialogPage";
 import EventApplicantCard from "./EventApplicantCard";
-import LoadingNav from "../components/LoadingNav"
+import LoadingNav from "../components/LoadingNav";
 
 export default function EventApplicantListPage({ parentRouteTo }) {
   const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true)
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [eventList, setEventList] = useState([]);
+  const {
+    userStore: { getToken, currentUser }
+  } = useStores();
   const routeTo = option => {
     if (option === route.close) {
       setDialogOpen(false);
@@ -36,26 +39,52 @@ export default function EventApplicantListPage({ parentRouteTo }) {
         console.log("ERROR: ", error);
       });
   };
-  const [eventList, setEventList] = useState([]);
-  const {
-    userStore: { getToken }
-  } = useStores();
+  const handleAction = (event_id, action) => {
+    console.log(action);
+    axios
+      .post(
+        `${getApiRoute("events/")}${event_id}/status`,
+        { status: action },
+        getToken()
+      )
+      .then(result => {
+        // console.log(result);
+        console.log("update event status to complete successfully");
+      })
+      .catch(error => {
+        console.log("ERROR: ", error);
+      });
+    parentRouteTo(route.close);
+  };
+  const handleRating = event_id => {
+    setRouteArgs({ event_id: event_id });
+    routeTo(route.ratingPage);
+  };
+
   useEffect(() => {
     axios
-      .get(`${getApiRoute("events/my")}`, getToken())
+      .get(
+        `${getApiRoute("events/my")}`,
+        {
+          params: {
+            status: ["pending", "approved", "complete"],
+            user_name: currentUser.name
+          }
+        },
+        getToken()
+      )
       .then(result => {
         const eventlist = result.data.data.applicant;
         setEventList(eventlist);
-        setIsLoading(false)
-
+        setIsLoading(false);
       })
       .catch(error => {
         console.log("ERROR: ", error);
       });
   }, []);
 
-  if(isLoading){
-    return <LoadingNav />
+  if (isLoading) {
+    return <LoadingNav />;
   }
   return (
     <>
@@ -69,21 +98,22 @@ export default function EventApplicantListPage({ parentRouteTo }) {
         }}
         id="cardBox"
       >
-      {eventList.map((event, index) => (
-        <EventApplicantCard
-          key={index}
-          event={event}
-          handleLinkLesson={handleLinkLesson}
+        {eventList.map((event, index) => (
+          <EventApplicantCard
+            key={index}
+            event={event}
+            handleLinkLesson={handleLinkLesson}
+            handleAction={handleAction}
+            handleRating={handleRating}
+          />
+        ))}
+        <DialogPage
+          routeTo={routeTo}
+          routeOption={routeOption}
+          routeArgs={routeArgs}
+          dialogOpen={dialogOpen}
         />
-      ))}
-      {/* </div> */}
-      <DialogPage
-        routeTo={routeTo}
-        routeOption={routeOption}
-        routeArgs={routeArgs}
-        dialogOpen={dialogOpen}
-      />
-    </div>
+      </div>
     </>
   );
 }

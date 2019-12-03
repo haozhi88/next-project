@@ -70,7 +70,7 @@ export default function ProfilePage() {
               justifyContent: "center",
               paddingTop: "10px",
               paddingBottom: "10px",
-              backgroundColor: "#C2DFFF"
+              // backgroundColor: "#C2DFFF"
             }}
           >
             {/* <Avatar

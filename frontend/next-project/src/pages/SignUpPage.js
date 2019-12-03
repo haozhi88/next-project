@@ -35,14 +35,8 @@ function SignUpPage({ parentRouteTo }) {
     axios
       .post(`${getApiRoute("users/signup")}`, userSignUp)
       .then(result => {
-        const id = result.data.data.id;
-        const name = result.data.data.name;
-        const profile_picture = result.data.data.profile_picture;
-        const email = result.data.data.email;
-        const access_token = result.data.data.access_token;
         // console.log(result);
         console.log("sign up successfully");
-        login(name, id, profile_picture, email, access_token);
       })
       .catch(error => {
         console.log("ERROR: ", error);

@@ -40,9 +40,9 @@ export default function LessonCard({lessonData}) {
               marginTop: "5px"
             }}
           >
-            <p style={{ margin: 0 }}>Title: {lessonData.title}</p>
-            <p style={{ margin: 0 }}>Author: {lessonData.owner_name}</p>
-            <p style={{ margin: 0 }}>Skill: {lessonData.skill_name} </p>
+            <div style={{ display:"flex", margin: 0 , fontWeight:"bold"}}>Title: <p style={{ margin: 0, fontWeight:"normal"}}>{lessonData.title}</p></div>
+            <div style={{ display:"flex", margin: 0 , fontWeight:"bold"}}>Author: <p style={{ margin: 0, fontWeight:"normal"}}>{lessonData.owner_name}</p></div>
+            <div style={{ display:"flex", margin: 0 , fontWeight:"bold"}}>Skill: <p style={{ margin: 0, fontWeight:"normal"}}>{lessonData.skill_name}</p> </div>
           </div>
         </CardInCard>
       </CardPage>

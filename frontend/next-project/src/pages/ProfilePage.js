@@ -1,21 +1,19 @@
 /* Import package components */
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Box,
   Card,
   CardHeader,
-  CardMedia,
   CardContent,
   makeStyles,
   Typography
 } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Rating from "@material-ui/lab/Rating";
-import axios from "axios";
 import Divider from "@material-ui/core/Divider";
+import { observer } from "mobx-react";
 
 /* Import app components */
-import { getApiRoute } from "../global";
 import useStores from "../hooks/useStores";
 
 /* CSS Styles */
@@ -47,14 +45,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ProfilePage() {
+function ProfilePage() {
   const classes = useStyles();
-  const learnRating = 4;
-  const teachRating = 4;
-
   const {
-    userStore: { currentUser, logout }
+    userStore: { currentUser }
   } = useStores();
+  const learnRating = 5;
+  const teachRating = 5;
+  const skills = currentUser.skills;
   return (
     <>
       <div style={ContainerStyles}>
@@ -69,7 +67,7 @@ export default function ProfilePage() {
               display: "flex",
               justifyContent: "center",
               paddingTop: "10px",
-              paddingBottom: "10px",
+              paddingBottom: "10px"
               // backgroundColor: "#C2DFFF"
             }}
           >
@@ -118,7 +116,7 @@ export default function ProfilePage() {
               <strong>Skills:</strong>
             </Typography>
             <Typography variant="h6" component="p" align="left">
-              Skills
+              {skills}
             </Typography>
           </CardContent>
         </Card>
@@ -126,3 +124,5 @@ export default function ProfilePage() {
     </>
   );
 }
+
+export default observer(ProfilePage);

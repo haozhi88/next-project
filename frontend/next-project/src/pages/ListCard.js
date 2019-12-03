@@ -37,7 +37,7 @@ export default function ListCard({ lesson }) {
             <Typography>Author: {lesson.owner_name}</Typography>
             <Typography>Skill: {lesson.skill_name}</Typography>
             <Typography>Lesson Rating:</Typography>
-            <Rating name="read-only" value={lesson.value} readOnly />
+            <Rating name="read-only" value={lesson.rating} readOnly />
           </CardContent>
         </div>
       </Card>

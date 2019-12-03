@@ -43,27 +43,27 @@ function SignUpPage({ parentRouteTo }) {
       .catch(error => {
         console.log("ERROR: ", error);
       });
-      setIsLoading(true)
-      setTimeout(()=> {
-        setIsLoading(false)
-        parentRouteTo(route.close);
-        console.log("setTimeOut")
-      }, 2000)
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      parentRouteTo(route.close);
+      console.log("setTimeOut");
+    }, 2000);
   };
-    //loader
-  if(isLoading){
-    return <LoadingNav />
+  //loader
+  if (isLoading) {
+    return <LoadingNav />;
   }
   return (
     <>
       <div style={ContainerStyles}>
-      <img
-              src={require('../media/peerskill512.png')}
-              style={{
-                width: "240px",
-                height: "240px"
-              }}
-            />
+        <img
+          src={require("../media/peerskill512.png")}
+          style={{
+            width: "240px",
+            height: "240px"
+          }}
+        />
         <SignUpInputForm
           userSignUp={userSignUp}
           setUserSignUp={setUserSignUp}

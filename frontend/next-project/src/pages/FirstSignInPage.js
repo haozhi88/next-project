@@ -9,9 +9,10 @@ import { Container, TextField } from "@material-ui/core";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import DialogPage from "../components/DialogPage";
 import Toolbar from "@material-ui/core/Toolbar";
+
 /* Import app components */
 import LoadingNav from "../components/LoadingNav";
-// import SignInInputForm from "../pages/SignInInputForm";
+import SignInInputForm from "../pages/SignInInputForm";
 
 /* CSS Styles */
 const ContainerStyles = {
@@ -24,9 +25,9 @@ const ContainerStyles = {
 };
 
 const navBackgroundColor = {
-    backgroundColor: "#1589FF",
-    textAlign: "center"
-  };
+  backgroundColor: "#1589FF",
+  textAlign: "center"
+};
 
 const theme = createMuiTheme({
   palette: {
@@ -34,7 +35,7 @@ const theme = createMuiTheme({
   }
 });
 
-function FirstSignIn({ parentRouteTo }) {
+function FirstSignIn() {
   const [userSignIn, setUserSignIn] = useState({
     name: "",
     password: ""
@@ -64,10 +65,7 @@ function FirstSignIn({ parentRouteTo }) {
     navigator.geolocation.getCurrentPosition(
       position => {
         setLatitude(position.coords.latitude);
-        // console.log(position.coords.latitude);
         setLongtitude(position.coords.longitude);
-        // console.log(longtitude);
-        // const location = JSON.stringify(position);
       },
       error => console.log(error.message),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -82,44 +80,41 @@ function FirstSignIn({ parentRouteTo }) {
         longtitude: longtitude
       })
       .then(result => {
-        const id = result.data.data.id;
-        const name = result.data.data.name;
-        const profile_picture = result.data.data.profile_picture;
-        const email = result.data.data.email;
-        const access_token = result.data.data.access_token;
         // console.log(result);
         console.log("sign in successfully");
         login(
-          name,
-          id,
-          profile_picture,
-          email,
-          access_token,
+          result.data.data.name,
+          result.data.data.id,
+          result.data.data.profile_picture,
+          result.data.data.email,
+          result.data.data.access_token,
           latitude,
-          longtitude
+          longtitude,
+          result.data.data.skills
         );
       })
       .catch(error => {
         console.log("ERROR: ", error);
       });
-      setIsLoading(true)
-      setTimeout(()=> {
-        setIsLoading(false)
-        console.log("setTimeOut")
-      }, 2000)
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
   };
-  if(isLoading){
-    return <LoadingNav />
+  if (isLoading) {
+    return <LoadingNav />;
   }
   return (
     <>
-    <div style={navBackgroundColor}>
-      <Toolbar style={{ display: "flex" , width: "100vw", justifyContent:"center" }}>
-        <div style={{ width: "100vw", justifyContent:"center" }} >
-        <h2 style={{ color: "white"}}>Sign In</h2>
-        </div>
-      </Toolbar>
-    </div>
+      <div style={navBackgroundColor}>
+        <Toolbar
+          style={{ display: "flex", width: "100vw", justifyContent: "center" }}
+        >
+          <div style={{ width: "100vw", justifyContent: "center" }}>
+            <h2 style={{ color: "white" }}>Sign In</h2>
+          </div>
+        </Toolbar>
+      </div>
 
       <div style={ContainerStyles}>
         <img
@@ -129,57 +124,11 @@ function FirstSignIn({ parentRouteTo }) {
             height: "240px"
           }}
         />
-        {/* <SignInInputForm
+        <SignInInputForm
           userSignIn={userSignIn}
           setUserSignIn={setUserSignIn}
-        /> */}
-     <MuiThemeProvider theme={theme}>
-      <Container maxWidth="sm">
-        {/* Username */}
-        <TextField
-          id="username-input"
-          label="Username"
-          placeholder="Username"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true
-          }}
-          variant="outlined"
-          type="text"
-          value={userSignIn.name}
-          onChange={e =>
-            setUserSignIn({
-              name: e.target.value,
-              password: userSignIn.password
-            })
-          }
-          color="secondary"
         />
 
-        {/* Password */}
-        <TextField
-          id="password-input"
-          label="Password"
-          placeholder="Password"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true
-          }}
-          variant="outlined"
-          type="password"
-          value={userSignIn.password}
-          onChange={e =>
-            setUserSignIn({
-              name: userSignIn.name,
-              password: e.target.value
-            })
-          }
-          color="secondary"
-        />
-      </Container>
-      </MuiThemeProvider>
         <a
           href="#"
           onClick={() => routeTo(route.signupPage)}

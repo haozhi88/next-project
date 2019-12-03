@@ -287,3 +287,21 @@ def update_review(event_id):
     else:
         return error_401('User not found!')
 
+@events_api_blueprint.route('/exists', methods=['GET'])
+@jwt_required
+def check_for_event():
+
+    # Check if user exists and signed in
+    jwt_identity = get_jwt_identity()
+    user = User.get_or_none(User.name == jwt_identity)
+
+    if not user:
+        return error_401('Unauthorized action!')
+
+    lesson = request.args['lesson_id']
+    event_query = Event.get_or_none((Event.user_id == user.id) and (Event.lesson_id == lesson))
+    if event_query:
+        data=True
+    else:
+        data=False
+    return success_200(data)

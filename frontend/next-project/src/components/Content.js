@@ -12,7 +12,6 @@ import styled from "styled-components";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import LessonCard from "../components/LessonCard";
-import { generateData } from "../test/GenerateTestData";
 
 
 /* Import app components */
@@ -149,7 +148,7 @@ function Content() {
         <Slider {...Featuredsettings}>
           <FeaturedPage>
             <img
-              src="https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg"
+              src={require('../media/fea1.png')}
               style={{
                 width: "100%",
                 height: "100%"
@@ -157,11 +156,17 @@ function Content() {
             />
           </FeaturedPage>
           <FeaturedPage>
-            <h3>2</h3>
+          <img
+              src={require('../media/fea2.png')}
+              style={{
+                width: "100%",
+                height: "100%"
+              }}
+            />
           </FeaturedPage>
           <FeaturedPage>
             <img
-              src="https://desmond-nextagram.s3-ap-southeast-1.amazonaws.com/cat4.png"
+              src={require('../media/fea3.png')}
               style={{
                 width: "100%",
                 height: "100%"
@@ -214,108 +219,6 @@ function Content() {
         </Slider>
       </FeaturedPageWrapper>
       </Grid>
-      <div>
-      <h1>Content</h1>
-      <h4>User: {currentUser.name}</h4>
-      <h4>ID: {currentUser.id}</h4>
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={() => routeTo(route.eventApplicantListPage)}
-        >
-          Event Applied
-        </Button>
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={() => routeTo(route.eventOwnerListPage)}
-        >
-          Event Owned
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => routeTo(route.teachListPage)}
-        >
-          Teach List
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => routeTo(route.learnListPage)}
-        >
-          Learn List
-        </Button>
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={() => routeTo(route.bookmarkListPage)}
-        >
-          Bookmark List
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => routeTo(route.signinPage)}
-        >
-          Sign In
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => routeTo(route.signupPage)}
-        >
-          Sign Up
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => {
-            console.log("sign out successfully");
-            logout();
-          }}
-        >
-          Sign Out
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => routeTo(route.profilePage)}
-        >
-          Profile
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => routeTo(route.createLearnPage)}
-        >
-          Create Learn
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => routeTo(route.createTeachPage)}
-        >
-          Create Teach
-        </Button>
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={() => routeTo(route.ratingPage)}
-        >
-          Rating
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => routeTo(route.versionPage)}
-        >
-          APP Version
-        </Button>
-        <Button variant="outlined" color="primary" onClick={generateData}>
-          Test AXIOS
-        </Button>
-      </div>
       <DialogPage
         routeTo={routeTo}
         routeOption={routeOption}

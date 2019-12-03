@@ -46,7 +46,6 @@ export default function BookmarkListPage() {
 
   return (
     <div>
-      <h1>Bookmark Page</h1>
       <div style={{ width: "100vw" }}>
         <SearchBar />
       </div>

@@ -104,7 +104,7 @@ export default function EventApplicantCard({
             className={classes.contentText}
             component="p"
           >
-            Date: <strong>{event.start_datetime}</strong>
+            Date: <strong>{new Date(event.start_datetime).toString()}</strong>
           </Typography>
           <Typography
             variant="body2"

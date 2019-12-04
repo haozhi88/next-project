@@ -67,9 +67,9 @@ export default function LessonPage({ parentRouteArgs }) {
       });
   }, []);
 
-  const handleSubmit =()=>{
-    setEvent(true)
-  }
+  const handleSubmit = () => {
+    setEvent(true);
+  };
 
   const createBookmark = e => {
     e.preventDefault();
@@ -124,7 +124,7 @@ export default function LessonPage({ parentRouteArgs }) {
     if (parentRouteArgs.showAction) {
       return (
         <>
-          {!bookmark && !event ? (
+          {true ? (
             <>
               <Button
                 style={{

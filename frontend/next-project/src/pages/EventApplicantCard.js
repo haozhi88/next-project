@@ -37,40 +37,44 @@ export default function EventApplicantCard({
   function actionButton() {
     if (event.status === "approved") {
       return (
-        <CardActions style={{ padding: "0px" }}>
-          <ButtonGroup fullWidth aria-label="full width button group">
-            <Button
-              style={{
-                backgroundColor: "#f08080",
-                color: "#721C24",
-                fontSize: "16px"
-              }}
-              onClick={() => {
-                handleAction(event.id, "complete");
-              }}
-            >
-              Complete
-            </Button>
-          </ButtonGroup>
+        <CardActions
+          style={{ padding: "0px", display: "flex", justifyContent: "center" }}
+        >
+          <Button
+            style={{
+              backgroundColor: "#1589FF",
+              color: "#FFFFFF",
+              fontSize: "16px",
+              borderRadius: "0 0 0 0",
+              width: "100%"
+            }}
+            onClick={() => {
+              handleAction(event.id, "complete");
+            }}
+          >
+            Complete
+          </Button>
         </CardActions>
       );
     } else if (event.status === "complete") {
       return (
-        <CardActions style={{ padding: "0px" }}>
-          <ButtonGroup fullWidth aria-label="full width button group">
-            <Button
-              style={{
-                backgroundColor: "#f08080",
-                color: "#721C24",
-                fontSize: "16px"
-              }}
-              onClick={() => {
-                handleRating(event.id);
-              }}
-            >
-              Rate
-            </Button>
-          </ButtonGroup>
+        <CardActions
+          style={{ padding: "0px", display: "flex", justifyContent: "center" }}
+        >
+          <Button
+            style={{
+              backgroundColor: "#1589FF",
+              color: "#FFFFFF",
+              fontSize: "16px",
+              borderRadius: "0 0 0 0",
+              width: "100%"
+            }}
+            onClick={() => {
+              handleRating(event.id);
+            }}
+          >
+            Rate
+          </Button>
         </CardActions>
       );
     } else {

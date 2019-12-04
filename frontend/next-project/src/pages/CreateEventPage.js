@@ -15,6 +15,7 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 /* Import app components */
 import DialogPage from "../components/DialogPage";
+import LoadingNav from "../components/LoadingNav";
 
 function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
   const {
@@ -23,6 +24,7 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
   const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
   const routeTo = option => {
     if (option === route.close) {
       setDialogOpen(false);
@@ -62,7 +64,12 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
       .catch(error => {
         console.log("ERROR: ", error);
       });
-    parentRouteTo(route.close);
+      
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+         parentRouteTo(route.close);
+      }, 2000);
   };
 
   /* CSS Styles */
@@ -74,6 +81,9 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
     width: "100%"
   };
 
+  if (isLoading) {
+    return <LoadingNav />;
+  }
   return (
     <>
       <MuiThemeProvider theme={theme}>

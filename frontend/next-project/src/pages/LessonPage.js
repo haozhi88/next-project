@@ -7,6 +7,7 @@ import axios from "axios";
 /* Import app components */
 import DialogPage from "../components/DialogPage";
 import LessonInfoPage from "../pages/LessonInfoPage";
+import LoadingNav from "../components/LoadingNav";
 
 /* CSS Styles */
 const ContainerStyles = {
@@ -23,6 +24,7 @@ export default function LessonPage({ parentRouteArgs }) {
   const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
   const routeTo = option => {
     if (option === route.close) {
       setDialogOpen(false);
@@ -43,6 +45,7 @@ export default function LessonPage({ parentRouteArgs }) {
       .get(`${getApiRoute("bookmarks/")}${parentRouteArgs.lesson.id}`, config)
       .then(result => {
         setBookmark(result.data.data);
+        setIsLoading(false)
       })
       .catch(error => {
         console.log(error);
@@ -57,6 +60,7 @@ export default function LessonPage({ parentRouteArgs }) {
       })
       .then(result => {
         setEvent(result.data);
+        setIsLoading(false)
       })
       .catch(error => {
         console.log(error);
@@ -108,7 +112,10 @@ export default function LessonPage({ parentRouteArgs }) {
         console.log(error);
       });
   };
-
+  
+  if(isLoading){
+    return <LoadingNav />
+  }
   function actionButton() {
     if (parentRouteArgs.showAction) {
       return (

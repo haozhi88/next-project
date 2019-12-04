@@ -78,7 +78,7 @@ export default function EventOwnerCard({
         <ButtonGroup fullWidth aria-label="full width button group">
           <Button
             style={{
-              backgroundColor: "ff0000",
+              backgroundColor: "#ff0000",
               color: "#FFFFFF",
               fontSize: "18px",
               borderRadius: "0 0 0 0",

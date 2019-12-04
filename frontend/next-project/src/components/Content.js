@@ -165,7 +165,7 @@ function Content() {
             </FeaturedPage>
             <FeaturedPage>
               <img
-                src={require("../media/fea3.png")}
+                src={require("../media/fea3.1.png")}
                 style={{
                   width: "100%",
                   height: "100%"

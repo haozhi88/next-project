@@ -175,7 +175,7 @@ function Content() {
             </FeaturedPage>
           </Slider>
           <HeaderTitle style={{ paddingTop: "25px", color: "#1589FF" }}>
-            Learn
+            What would you like to teach?
           </HeaderTitle>
           <div style={{ backgroundColor: "#e2e2e2" }}>
             <Slider {...Cardsettings}>
@@ -200,8 +200,7 @@ function Content() {
             </Slider>
           </div>
           <HeaderTitle style={{ paddingTop: "45px", color: "#1589FF" }}>
-            {" "}
-            Teach
+            What would you like to learn?
           </HeaderTitle>
           <div style={{ backgroundColor: "#e2e2e2" }}>
             <Slider {...Cardsettings}>

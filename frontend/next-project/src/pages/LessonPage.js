@@ -18,8 +18,8 @@ const ContainerStyles = {
 };
 
 export default function LessonPage({ parentRouteArgs }) {
-  const [bookmark, setBookmark] = useState(null);
-  const [event, setEvent] = useState(null);
+  const [bookmark, setBookmark] = useState(false);
+  const [event, setEvent] = useState(false);
   const [routeArgs, setRouteArgs] = useState([]);
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -103,7 +103,7 @@ export default function LessonPage({ parentRouteArgs }) {
         },
         config
       )
-      .then(setBookmark(null))
+      .then(setBookmark(false))
       .catch(error => {
         console.log(error);
       });
@@ -197,7 +197,9 @@ export default function LessonPage({ parentRouteArgs }) {
                 Request
               </Button>
             </>
-          ) : null}
+          ) : (
+            <></>
+          )}
         </>
       );
     } else {

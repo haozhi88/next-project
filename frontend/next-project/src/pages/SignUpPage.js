@@ -45,12 +45,14 @@ export default function SignUpPage({ parentRouteTo }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const handleSignUp = () => {
+    var success = false;
     // console.log(userSignUp);
     axios
       .post(`${getApiRoute("users/signup")}`, userSignUp)
       .then(result => {
         // console.log(result);
         console.log("sign up successfully");
+        success = true;
       })
       .catch(error => {
         console.log("ERROR: ", error);
@@ -63,7 +65,9 @@ export default function SignUpPage({ parentRouteTo }) {
       });
     setIsLoading(true);
     setTimeout(() => {
-      parentRouteTo(route.close);
+      if (success) {
+        parentRouteTo(route.close);
+      }
       setIsLoading(false);
     }, 2000);
   };

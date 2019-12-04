@@ -67,6 +67,10 @@ export default function LessonPage({ parentRouteArgs }) {
       });
   }, []);
 
+  const handleSubmit =()=>{
+    setEvent(true)
+  }
+
   const createBookmark = e => {
     e.preventDefault();
     const token = localStorage.getItem("userToken");
@@ -154,7 +158,7 @@ export default function LessonPage({ parentRouteArgs }) {
                 onClick={() => {
                   setRouteArgs({
                     lesson: parentRouteArgs.lesson,
-                    setEvent: setEvent
+                    handleSubmit: handleSubmit
                   });
                   routeTo(route.createEventPage);
                 }}
@@ -196,7 +200,7 @@ export default function LessonPage({ parentRouteArgs }) {
                 onClick={() => {
                   setRouteArgs({
                     lesson: parentRouteArgs.lesson,
-                    setEvent: setEvent
+                    handleSubmit: handleSubmit
                   });
                   routeTo(route.createEventPage);
                 }}

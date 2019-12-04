@@ -46,6 +46,7 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
   });
 
   const handleCreate = () => {
+    const handleSubmit = parentRouteArgs.handleSubmit
     const lesson = parentRouteArgs.lesson;
     axios
       .post(
@@ -58,7 +59,7 @@ function CreateEventPage({ parentRouteTo, parentRouteArgs }) {
         getToken()
       )
       .then(result => {
-        // console.log(result);
+        handleSubmit()
         console.log("create event successfully");
       })
       .catch(error => {

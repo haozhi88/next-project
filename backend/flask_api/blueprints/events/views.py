@@ -299,7 +299,7 @@ def check_for_event():
         return error_401('Unauthorized action!')
 
     lesson = request.args['lesson_id']
-    event_query = Event.get_or_none((Event.user_id == user.id) and (Event.lesson_id == lesson))
+    event_query = Event.get_or_none((Event.lesson_id == lesson) and (Event.user_id == user.id))
     if event_query:
         data=True
     else:
